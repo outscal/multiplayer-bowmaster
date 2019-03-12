@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 
-namespace Player
+namespace PlayerSystem
 {
-    public class PlayerService
+    public interface IPlayerService
     {
-        public PlayerService()
-        {
 
-        }
     }
 }

@@ -15,7 +15,7 @@ namespace MultiplayerSystem
 
         public void SendNewInput(InputData inputData)
         {
-            //throw new System.NotImplementedException();
+            
         }
     }
 }

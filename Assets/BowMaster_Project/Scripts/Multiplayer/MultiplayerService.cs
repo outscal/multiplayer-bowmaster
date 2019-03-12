@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 
-namespace UI
+namespace MultiplayerSystem
 {
     public class MultiplayerService
     {

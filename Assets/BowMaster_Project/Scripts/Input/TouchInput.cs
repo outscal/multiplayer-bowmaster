@@ -5,9 +5,14 @@ using UnityEngine;
 
 namespace InputSystem
 {
-    public class InputService :IInputService
+    public class TouchInput :IInputComponent
     {
-        public InputService()
+        public TouchInput()
+        {
+
+        }
+
+        private void DetectTap()
         {
 
         }

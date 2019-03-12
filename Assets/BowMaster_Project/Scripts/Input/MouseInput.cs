@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace InputSystem
 {
-    public class InputService :IInputService
+    public class MouseInput :IInputComponent
     {
-        public InputService()
+        public MouseInput()
         {
 
         }

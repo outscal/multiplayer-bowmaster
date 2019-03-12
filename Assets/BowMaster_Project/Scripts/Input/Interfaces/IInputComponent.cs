@@ -5,11 +5,8 @@ using UnityEngine;
 
 namespace InputSystem
 {
-    public class InputService :IInputService
+    public interface IInputComponent
     {
-        public InputService()
-        {
 
-        }
     }
 }

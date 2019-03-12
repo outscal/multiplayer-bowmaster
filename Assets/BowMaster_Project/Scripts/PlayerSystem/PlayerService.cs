@@ -5,11 +5,16 @@ using UnityEngine;
 
 namespace PlayerSystem
 {
-    public class PlayerService
+    public class PlayerService:IPlayerService
     {
         public PlayerService()
         {
 
+        }
+
+        public int GetLocalPlayerID()
+        {            
+            return 0;
         }
     }
 }

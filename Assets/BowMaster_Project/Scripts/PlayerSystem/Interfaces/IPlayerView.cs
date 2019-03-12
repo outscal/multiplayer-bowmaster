@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace PlayerSystem
 {
-    public interface IPlayerService
+    public interface IPlayerView
     {
-        int GetLocalPlayerID();
+        int GetCharacterID();
     }
 }

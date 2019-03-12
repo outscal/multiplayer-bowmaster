@@ -3,7 +3,7 @@ using TMPro;
 
 namespace PlayerSystem
 {
-    public class PlayerCharacterView : MonoBehaviour, ICharacterView
+    public class PlayerCharacterView : MonoBehaviour, IPlayerView
     {
         [SerializeField] private GameObject displayHolder;
         [SerializeField] private TextMeshProUGUI powerText, angleText;

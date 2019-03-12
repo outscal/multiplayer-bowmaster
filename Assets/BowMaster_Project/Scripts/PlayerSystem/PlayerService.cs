@@ -16,9 +16,10 @@ namespace PlayerSystem
         {
             this.signalBus = signalBus;
             this.scriptableObjPlayer = scriptableObjPlayer;
+            SpawnPlayer();
         }
 
-        void SpawnPlayer()
+        public void SpawnPlayer()
         {
             playerController = new PlayerController(2, this); 
         }

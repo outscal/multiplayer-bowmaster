@@ -13,6 +13,7 @@ namespace Commons
     {
         public override void InstallBindings()
         {
+            SignalBusInstaller.Install(Container);
             Container.Bind<IPlayerService>().
                 To<PlayerService>().
                 AsSingle().

@@ -31,7 +31,7 @@ namespace InputSystem
             {
                 startMousePosition = Input.mousePosition;
                 endMousePosition = Input.mousePosition;
-                CalculateParameters(startMousePosition, endMousePosition);
+              //  CalculateParameters(startMousePosition, endMousePosition);
             }
             if(Input.GetMouseButton(0))
             {
@@ -42,6 +42,7 @@ namespace InputSystem
             {
                 endMousePosition = Input.mousePosition;
                 CalculateParameters(startMousePosition, endMousePosition);
+
             }
         }
 

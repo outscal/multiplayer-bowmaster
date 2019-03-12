@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 
-namespace UI
+namespace UISystem
 {
-    public class UIService
+    public class UIService : IUIService
     {
         public UIService()
         {

@@ -8,14 +8,7 @@ using System;
 
 namespace InputSystem
 {
-    public struct InputData
-    {
-        public float powerValue;
-        public float angleValue;
-        public int localPlayerID;
-        public int characterID;
-
-    }
+   
     public class TouchInput :IInputComponent
     {
         private IInputService inputService;

@@ -8,6 +8,15 @@ using Zenject;
 
 namespace InputSystem
 {
+    public struct InputData
+    {
+        public float powerValue;
+        public float angleValue;
+        public int localPlayerID;
+        public int characterID;
+
+    }
+
     public class InputService : IInputService, ITickable
     {
         private IUIService uiService;
@@ -65,6 +74,10 @@ namespace InputSystem
         public int GetLocalPlayerID()
         {
             return playerService.GetLocalPlayerID();
+        }
+        public void SendPlayerData(InputData inputData)
+        {
+            playerService.SetPlayerData(inputData);
         }
     }
 }

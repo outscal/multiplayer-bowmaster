@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 
-namespace InputSystem
+namespace PlayerSystem
 {
-    public interface IInputComponent
+    public interface IPlayerView
     {
-        void OnTick();
+        int GetCharacterID();
     }
 }

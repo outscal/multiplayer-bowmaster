@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UISystem
 {
-    public class UIService
+    public class UIService:IUIService
     {
         public UIService()
         {

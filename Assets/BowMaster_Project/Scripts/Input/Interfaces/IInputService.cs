@@ -7,6 +7,8 @@ namespace InputSystem
 {
     public interface IInputService
     {
-
+        bool CheckForCharacterPresence(Vector2 position);
+        int GetSelectedCharacterID();
+        int GetLocalPlayerID();
     }
 }

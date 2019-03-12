@@ -7,6 +7,6 @@ namespace PlayerSystem
 {
     public interface IPlayerService
     {
-
+        void SetPlayerData(InputData inputData);
     }
 }

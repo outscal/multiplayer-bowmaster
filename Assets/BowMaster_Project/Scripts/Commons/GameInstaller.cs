@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
+using PlayerSystem;
 
 namespace Commons
 {
@@ -9,7 +10,7 @@ namespace Commons
     {
         public override void InstallBindings()
         {
-
+            Container.Bind<IPlayerService>().To<PlayerService>().AsSingle().NonLazy();
         }
     }
 }

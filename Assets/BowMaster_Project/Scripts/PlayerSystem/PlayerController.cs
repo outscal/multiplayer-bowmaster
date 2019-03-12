@@ -19,7 +19,9 @@ namespace PlayerSystem
 
             for (int i = 0; i < 3; i++)
             {
-                PlayerCharacterController playerCharacterController = new PlayerCharacterController(i, this);
+                PlayerCharacterController playerCharacterController = new PlayerCharacterController(
+                        i, this, playerService.ReturnPlayerScriptableObj()
+                    );
                 playerCharacterControllerList.Add(playerCharacterController);
             }
         }

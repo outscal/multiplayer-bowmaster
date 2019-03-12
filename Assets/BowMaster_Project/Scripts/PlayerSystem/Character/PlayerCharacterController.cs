@@ -8,11 +8,20 @@ namespace PlayerSystem
     {
         private int characterID;
         private PlayerController playerController;
+        private PlayerCharacterView playerCharacterView;
+        private ScriptableObjPlayer scriptableObjPlayer;
 
-        public PlayerCharacterController(int characterID, PlayerController playerController)
+        public PlayerCharacterController(int characterID, PlayerController playerController,
+        ScriptableObjPlayer scriptableObjPlayer)
         {
+            this.scriptableObjPlayer = scriptableObjPlayer;
             this.characterID = characterID;
             this.playerController = playerController;
+            GameObject playerObj = GameObject.Instantiate<GameObject>(
+                        scriptableObjPlayer.characterViews[0].gameObject
+                );
+            playerCharacterView = playerObj.GetComponent<PlayerCharacterView>();
+            playerCharacterView.SetCharacterController(this);
         }
 
         public int GetCharacterID()

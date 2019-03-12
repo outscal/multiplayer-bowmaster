@@ -8,6 +8,7 @@ namespace PlayerSystem
 {
     public interface IPlayerService
     {
+        void SpawnPlayer();
         void SetPlayerData(InputData inputData);
         int GetLocalPlayerID();
     }

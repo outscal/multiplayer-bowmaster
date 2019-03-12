@@ -69,14 +69,17 @@ namespace InputSystem
         //calculate angle and current distance
         private void CalculateParameters(Vector2 startPos, Vector2 endPos)
         {
-            float currentDistance=Vector2.Distance(startPos, endPos)/Screen.width;
-            if(currentDistance>maxDragDistance)
+            Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
+            Vector2 vectorB = new Vector2(endPos.x - startPos.x, 0);
+            float currentDistance = Vector2.SqrMagnitude(vectorA);
+            currentDistance = Mathf.Sqrt(currentDistance);
+            power = currentDistance;
+            Debug.Log("MAGNITUDE :" + power);
+            if (power > maxDragDistance)
             {
-                currentDistance = 10f;
+                power = 100f;
             }
-            power = currentDistance*10;
-            float tangent = (endPos.y - startPos.y) / (endPos.x-startPos.x);
-            angle = Mathf.Atan(tangent);
+            angle = Vector2.Angle(vectorA, vectorB);
         }
     }
 }

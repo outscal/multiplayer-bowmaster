@@ -48,21 +48,21 @@ namespace InputSystem
 
         public bool CheckForCharacterPresence(Vector2 position)
         {
-            GameObject hitObject = null;
             if (cam != null)
             {
-                Ray ray = cam.ScreenPointToRay(position);
-                RaycastHit hitInfo;
-                if (Physics.Raycast(ray, out hitInfo,500f))
+                Ray hitRay = Camera.main.ScreenPointToRay(position);
+                RaycastHit2D hitInfo = Physics2D.GetRayIntersection(hitRay, 100);
+                if (hitInfo.collider != null)
                 {
-                    hitObject = hitInfo.collider.gameObject;
-                    if (hitObject.GetComponent<IPlayerView>()!=null)
+                    if (hitInfo.collider.GetComponent<IPlayerView>() != null)
                     {
-                        selectedCharacterID= hitObject.GetComponent<IPlayerView>().GetCharacterID();
+                        selectedCharacterID = hitInfo.collider.GetComponent<IPlayerView>().GetCharacterID();
+                        
                         return true;
                     }
                 }
             }
+            
             return false;
         }
            

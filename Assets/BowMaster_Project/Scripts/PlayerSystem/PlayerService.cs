@@ -19,7 +19,7 @@ namespace PlayerSystem
             SpawnPlayer();
         }
 
-        void SpawnPlayer()
+        public void SpawnPlayer()
         {
             playerController = new PlayerController(2, this); 
         }

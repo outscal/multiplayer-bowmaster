@@ -74,7 +74,7 @@ namespace InputSystem
             {
                 currentDistance = 10f;
             }
-            power = currentDistance;
+            power = currentDistance*10;
             float tangent = (endPos.y - startPos.y) / (endPos.x-startPos.x);
             angle = Mathf.Atan(tangent);
         }

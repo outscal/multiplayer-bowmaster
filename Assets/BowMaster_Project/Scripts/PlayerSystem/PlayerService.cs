@@ -8,14 +8,15 @@ namespace PlayerSystem
 {
     public class PlayerService : IPlayerService
     {
-        readonly SignalBus signalBus;
+       // readonly SignalBus signalBus;
         private PlayerController playerController;
         private ScriptableObjPlayer scriptableObjPlayer;
 
-        public PlayerService(SignalBus signalBus, ScriptableObjPlayer scriptableObjPlayer)
+        public PlayerService(ScriptableObjPlayer scriptableObjPlayer)//SignalBus signalBus, ScriptableObjPlayer scriptableObjPlayer)
         {
-            this.signalBus = signalBus;
+           // this.signalBus = signalBus;
             this.scriptableObjPlayer = scriptableObjPlayer;
+            SpawnPlayer();
         }
 
         void SpawnPlayer()

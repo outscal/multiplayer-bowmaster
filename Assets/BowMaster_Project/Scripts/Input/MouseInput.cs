@@ -17,7 +17,7 @@ namespace InputSystem
 
         private float power;
         private float angle;
-        private float maxDragDistance = Screen.width * 15 / 100;
+        private float maxDragDistance = Screen.width * 0.02f;
 
         private int characterID;
         private int localPlayerID;
@@ -40,12 +40,7 @@ namespace InputSystem
                 {
                     characterID = inputService.GetSelectedCharacterID();
                 }
-            }
-            if (Input.GetMouseButton(0))
-            {
-                startMousePosition = Input.mousePosition;
-                CalculateParameters(startMousePosition, endMousePosition);
-            }
+            }          
             if (Input.GetMouseButtonUp(0))
             {
                 endMousePosition = Input.mousePosition;
@@ -57,6 +52,7 @@ namespace InputSystem
                 inputData.localPlayerID = localPlayerID;
 
                 inputService.SendPlayerData(inputData);
+                Debug.Log("SENDING PLAYER DATA");
 
             }
         }
@@ -64,14 +60,23 @@ namespace InputSystem
         //calculate angle and current distance
         private void CalculateParameters(Vector2 startPos, Vector2 endPos)
         {
-            float currentDistance = Vector2.Distance(startPos, endPos) / Screen.width;
-            if (currentDistance > maxDragDistance)
-            {
-                currentDistance = 10f;
-            }
+            Debug.Log("MAX DRAG DISTANCE"+ maxDragDistance);
+         
+            float currentDistance = Vector2.Distance(startPos, endPos);
+            //if (currentDistance >= maxDragDistance)
+            //{
+            //    currentDistance = 10f;
+            //}
             power = currentDistance;
-            float tangent = (endPos.y - startPos.y) / (endPos.x - startPos.x);
-            angle = Mathf.Atan(tangent);
+
+            float slope1 = (endPos.y - startPos.y) / (endPos.x - startPos.x);
+            Debug.Log("Slope1 "+ slope1);
+            
+            float slope2 = (endPos.y) / (endPos.x - startPos.x);
+            Debug.Log("Slope2 "+ slope2);
+
+            float angleInRadian = (slope1-slope2) * Mathf.PI / 180;
+            angle = Mathf.Atan(angleInRadian);
         }
 
     }

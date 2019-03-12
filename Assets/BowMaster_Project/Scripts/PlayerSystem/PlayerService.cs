@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
+using InputSystem;
 
 namespace PlayerSystem
 {
-    public struct InputData
-    {
-        public float powerValue;
-        public float angle;
-        public int cahracterID; 
-    }
-
     public class PlayerService : IPlayerService
     {
         readonly SignalBus signalBus;
@@ -37,6 +31,11 @@ namespace PlayerSystem
         public ScriptableObjPlayer ReturnPlayerScriptableObj()
         {
             return scriptableObjPlayer;
+        }
+
+        public int GetLocalPlayerID()
+        {
+            return playerController.ReturnPlayerID();
         }
     }
 }

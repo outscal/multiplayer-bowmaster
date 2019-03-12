@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Zenject;
-using MultiplayerSystem;
+﻿using MultiplayerSystem;
 using PlayerSystem;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace InputSystem
 {
@@ -19,29 +19,45 @@ namespace InputSystem
         private float angle;
         private float maxDragDistance = Screen.width * 15 / 100;
 
+        private int characterID;
+        private int localPlayerID;
+
         public MouseInput(IInputService inputService, IMultiplayerService multiplayerService)
         {
             this.inputService = inputService;
             this.multiplayerService = multiplayerService;
+            localPlayerID = inputService.GetLocalPlayerID();
         }
 
         public void OnTick()
         {
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 startMousePosition = Input.mousePosition;
                 endMousePosition = Input.mousePosition;
-                CalculateParameters(startMousePosition, endMousePosition);
+                //  CalculateParameters(startMousePosition, endMousePosition);
+                if (inputService.CheckForCharacterPresence(startMousePosition))
+                {
+                    characterID = inputService.GetSelectedCharacterID();
+                }
             }
-            if(Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
             {
                 startMousePosition = Input.mousePosition;
                 CalculateParameters(startMousePosition, endMousePosition);
             }
-            if(Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 endMousePosition = Input.mousePosition;
                 CalculateParameters(startMousePosition, endMousePosition);
+                InputData inputData = new InputData();
+                inputData.angleValue = angle;
+                inputData.powerValue = power;
+                inputData.characterID = characterID;
+                inputData.localPlayerID = localPlayerID;
+
+                inputService.SendPlayerData(inputData);
+
             }
         }
 

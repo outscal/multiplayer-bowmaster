@@ -10,5 +10,6 @@ namespace InputSystem
         bool CheckForCharacterPresence(Vector2 position);
         int GetSelectedCharacterID();
         int GetLocalPlayerID();
+        void SendPlayerData(InputData inputData);
     }
 }

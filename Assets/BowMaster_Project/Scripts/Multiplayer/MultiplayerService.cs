@@ -6,7 +6,7 @@ using InputSystem;
 
 namespace MultiplayerSystem
 {
-    public class MultiplayerService : IMultiplayerService
+    public class MultiplayerService:IMultiplayerService
     {
         public MultiplayerService()
         {
@@ -15,7 +15,7 @@ namespace MultiplayerSystem
 
         public void SendNewInput(InputData inputData)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

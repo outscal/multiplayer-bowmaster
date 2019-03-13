@@ -7,8 +7,9 @@ using InputSystem;
 namespace PlayerSystem
 {
     public interface IPlayerService
-    {
-        void SpawnPlayer(string playerID);
+    { 
+        void SetLocalPlayerID(string localPlayerID);
+        void PlayerConnected(PlayerSpawnData playerSpawnData);
         void SetPlayerData(InputData inputData);
         string GetLocalPlayerID();
     }

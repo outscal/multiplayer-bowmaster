@@ -12,22 +12,25 @@ namespace PlayerSystem
         private List<PlayerCharacterController> playerCharacterControllerList;
         private PlayerService playerService;
         private IWeaponService weaponService;
+        private Vector2 spawnCharacterPos;
 
         public PlayerController(string playerID, PlayerService playerService
-        , IWeaponService weaponSystem)
+        , IWeaponService weaponSystem, Vector2 spawnPos)
         {
             this.playerService = playerService;
             this.weaponService = weaponSystem;
             this.playerID = playerID;
+            spawnCharacterPos = spawnPos;
             playerCharacterControllerList = new List<PlayerCharacterController>();
 
             for (int i = 0; i < 3; i++)
             {
                 PlayerCharacterController playerCharacterController = new PlayerCharacterController(
                         i, this, playerService.ReturnPlayerScriptableObj()
-                        , weaponService
+                        , weaponService, spawnCharacterPos
                     );
                 playerCharacterControllerList.Add(playerCharacterController);
+                spawnCharacterPos.x += 2;
             }
         }
 

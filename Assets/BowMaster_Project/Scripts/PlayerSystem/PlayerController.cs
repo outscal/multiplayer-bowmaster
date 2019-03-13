@@ -39,9 +39,14 @@ namespace PlayerSystem
             return playerID;
         }
 
-        public void SetShootInfo(float power, float angle, int characterID)
+        public void SetShootInfo(float power, float angle, int characterID, bool gettingInput)
         {
-            playerCharacterControllerList[characterID].SetShootInfo(power, angle);
+            playerCharacterControllerList[characterID].SetShootInfo(power, angle, gettingInput);
+        }
+
+        public void EndInput(int characterID)
+        {
+             
         }
     }
 }

@@ -10,7 +10,7 @@ namespace PlayerSystem
     { 
         void SetLocalPlayerID(string localPlayerID);
         void PlayerConnected(PlayerSpawnData playerSpawnData);
-        void SetPlayerData(InputData inputData);
+        void SetPlayerData(InputData inputData, bool gettingInput);
         string GetLocalPlayerID();
     }
 }

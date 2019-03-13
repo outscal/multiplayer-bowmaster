@@ -34,10 +34,10 @@ namespace InputSystem
 
         public void OnTick()
         {
-            if(gameService.GetGameState()!=GameStateEnum.GAME_PLAY)
-            {
-                return;
-            }
+            //if(gameService.GetGameState()!=GameStateEnum.GAME_PLAY)
+            //{
+            //    return;
+            //}
             if (Input.GetMouseButtonDown(0))
             {
                 startMousePosition = Input.mousePosition;
@@ -57,8 +57,8 @@ namespace InputSystem
                 inputData.powerValue = power;
                 inputData.characterID = characterID;
                 inputData.localPlayerID = localPlayerID;
-                multiplayerService.SendNewInput(inputData);
-                //inputService.SendPlayerData(inputData);              
+                //multiplayerService.SendNewInput(inputData);
+                inputService.SendPlayerData(inputData);              
 
             }
         }

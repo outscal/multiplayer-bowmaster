@@ -12,6 +12,7 @@ namespace MultiplayerSystem
         IPlayerService playerService;
         PlayerName playerServerName;
         Launcher launch;
+        CommunicationManager communicationManager;
 
         public MultiplayerService(IPlayerService playerService)
         {
@@ -28,9 +29,17 @@ namespace MultiplayerSystem
 
         public void SendNewInput(InputData inputData)
         {
-            throw new System.NotImplementedException();
+            communicationManager.SendInputData(inputData);
         }
 
+        public void SetCommunicationManager(CommunicationManager communicationManager)
+        {
+            this.communicationManager = communicationManager;
+        }
+        public void SendInputDataToPlayer(InputData inputData)
+        {
+            playerService.SetPlayerData(inputData, false);
+        }
         public void SetLocalPlayerID(string localID)
         {
             playerService.SetLocalPlayerID(localID);

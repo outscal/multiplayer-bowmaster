@@ -7,7 +7,7 @@ namespace InputSystem
     {
         public float powerValue;
         public float angleValue;
-        public string localPlayerID;
+        public string playerID;
         public int characterID;
 
     }

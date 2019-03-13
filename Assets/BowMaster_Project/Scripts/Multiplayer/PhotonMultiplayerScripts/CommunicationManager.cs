@@ -24,6 +24,7 @@ namespace MultiplayerSystem
         public void SavePlayerSpawnData(PlayerSpawnData spawnData)
         {
             spData = spawnData;
+            multiplayerService.SetCommunicationManager(this);
         }
         public void NotifyAllAboutPlayerSpawn(PlayerSpawnData spawnData)
         {
@@ -44,10 +45,8 @@ namespace MultiplayerSystem
         }
         public void SendInputData(InputData data)
         {            
-            data.localPlayerID = PhotonNetwork.LocalPlayer.UserId;
-            Debug.Log("userId:" + PhotonNetwork.LocalPlayer.UserId);
             byte evCode = 1;
-            object[] content = new object[] { data.localPlayerID, data.localPlayerID };
+            object[] content = new object[] { data.playerID,data.characterID,data.powerValue,data.angleValue};
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(evCode, content, raiseEventOptions, sendOptions);
@@ -60,9 +59,16 @@ namespace MultiplayerSystem
             if (eventCode == 1)
             {
                 object[] data = (object[])photonEvent.CustomData;
-                Vector2 targetPosition = (Vector2)data[0];
+                InputData playerInputData = new InputData();
+                playerInputData.playerID= (string)data[0];
+                playerInputData.characterID = (int)data[1];
+                playerInputData.powerValue = (float)data[2];
+                playerInputData.angleValue = (float)data[3];
+                multiplayerService.SendInputDataToPlayer(playerInputData);
+
                 //Debug.Log("Spawn Recieved from: " + (string)data[1]);
-            }else if (eventCode == 2)
+            }
+            else if (eventCode == 2)
             {
                 PlayerSpawnData spawnData = new PlayerSpawnData();
                 object[] data = (object[])photonEvent.CustomData;

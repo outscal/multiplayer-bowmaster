@@ -19,6 +19,7 @@ namespace InputSystem
         private IMultiplayerService multiplayerService;
         private IGameService gameService; 
         private int selectedCharacterID;
+        private Vector2 forwardCharacterDirection;
         private Camera cam;
 
         public InputService(IUIService uiService,IPlayerService playerService,IMultiplayerService multiplayerService, IGameService gameService)
@@ -53,7 +54,7 @@ namespace InputSystem
                     if (hitInfo.collider.GetComponent<IPlayerView>() != null)
                     {
                         selectedCharacterID = hitInfo.collider.GetComponent<IPlayerView>().GetCharacterID();
-                        
+                        forwardCharacterDirection = hitInfo.collider.GetComponent<IPlayerView>().GetForwardDirection();
                         return true;
                     }
                 }
@@ -76,6 +77,11 @@ namespace InputSystem
         {         
             playerService.SetPlayerData(inputData,recieveInput);
             //multiplayerService.SendNewInput(inputData);
+        }
+
+        public Vector2 GetCharacterForwardDirection()
+        {
+            return forwardCharacterDirection;
         }
     }
 }

@@ -18,7 +18,8 @@ namespace InputSystem
         
         private Vector2 startTouchPos;
         private Vector2 endTouchPos;
-      
+        private Vector2 forwardPosition;
+
         private float angle;
         private float power;
         private int selectedID;
@@ -46,6 +47,7 @@ namespace InputSystem
                 if(inputService.CheckForCharacterPresence(touch.position))
                 {
                     selectedID = inputService.GetSelectedCharacterID();
+                    forwardPosition = inputService.GetCharacterForwardDirection();
                 }
                 else
                 {
@@ -93,7 +95,7 @@ namespace InputSystem
         private void CalculateParameters(Vector2 startPos, Vector2 endPos)
         {
             Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
-            Vector2 vectorB = new Vector2(endPos.x - startPos.x, 0);
+           // Vector2 vectorB = new Vector2(endPos.x - startPos.x, 0);
 
             float currentDistance = Vector2.SqrMagnitude(vectorA);
             power = Mathf.Sqrt(currentDistance);
@@ -103,7 +105,16 @@ namespace InputSystem
             {
                 power = 100f;
             }
-            angle = Vector2.Angle(vectorA, vectorB);
+            angle = Vector2.SignedAngle(vectorA, forwardPosition);
+            if (angle >= 0)
+            {
+                angle = 180 - angle;
+            }
+            else
+            {
+                angle = -(180 + angle);
+            }
+
         }
 
 

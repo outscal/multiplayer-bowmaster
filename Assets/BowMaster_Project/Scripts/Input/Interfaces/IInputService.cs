@@ -11,5 +11,6 @@ namespace InputSystem
         int GetSelectedCharacterID();
         string GetLocalPlayerID();
         void SendPlayerData(InputData inputData, bool recieveInput);
+        Vector2 GetCharacterForwardDirection();
     }
 }

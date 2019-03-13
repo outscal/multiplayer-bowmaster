@@ -46,13 +46,15 @@ namespace PlayerSystem
 
         public void SetPlayerData(InputData inputData)
         {
-            Debug.Log("[PlayerService] Power:" + inputData.powerValue +
-            "\n Angle:" + inputData.angleValue +
-            "\n PlayerID:" + inputData.localPlayerID);
-
-            playerControllerDictionary[inputData.localPlayerID].SetShootInfo(inputData.powerValue
-            , inputData.angleValue
-            , inputData.characterID);
+            if (playerControllerDictionary.Count>0)
+            {
+                Debug.Log("[PlayerService] Power:" + inputData.powerValue +
+                "\n Angle:" + inputData.angleValue +
+                "\n PlayerID:" + inputData.localPlayerID);
+                playerControllerDictionary[inputData.localPlayerID].SetShootInfo(inputData.powerValue
+                , inputData.angleValue
+                , inputData.characterID);
+            }
         }
 
         public ScriptableObjPlayer ReturnPlayerScriptableObj()

@@ -8,13 +8,12 @@ namespace UISystem
 {
     public class UIService : IUIService
     {
-        private IMultiplayerService multiplayerService;
+        
         private UILobbyView lobbyView;
 
-        public UIService(IMultiplayerService multiplayerService)
+        public UIService()
         {
-            this.multiplayerService = multiplayerService;
-            //GameObject.FindObjectOfType<UILobbyView>().multiplayerService = multiplayerService;
+                        //GameObject.FindObjectOfType<UILobbyView>().multiplayerService = multiplayerService;
         }
     }
 }

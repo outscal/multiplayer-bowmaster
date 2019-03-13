@@ -20,7 +20,7 @@ namespace UISystem
             lobbypanal.SetActive(false);
         }
         public void Update()
-        {
+        { 
             connectedText.SetActive(multiplayerService.CheckConnection());
         }
     }

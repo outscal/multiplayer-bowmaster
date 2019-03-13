@@ -4,22 +4,29 @@ using Zenject;
 using UnityEngine;
 using InputSystem;
 using PlayerSystem;
+using GameSystem;
 
 namespace MultiplayerSystem
 {
     public class MultiplayerService : IMultiplayerService
     {
         IPlayerService playerService;
+        IGameService gameService;
         PlayerName playerServerName;
-        Launcher launch;
+        LauncherManager launch;
         bool connected = false;
         CommunicationManager communicationManager;
         public void SetConnected()
         {
             connected = true;
         }
-        public MultiplayerService(IPlayerService playerService)
+        public void ChangeToGamePlayState()
         {
+            gameService.ChangeToGamePlayState();
+        }
+        public MultiplayerService(IPlayerService playerService,IGameService gameService)
+        {
+            this.gameService = gameService;
             playerServerName = new PlayerName();
             //launch = GameObject.FindObjectOfType<Launcher>();
             this.playerService = playerService;
@@ -58,6 +65,16 @@ namespace MultiplayerSystem
         public void SpawnPlayer(PlayerSpawnData playerSpawnData)
         {
             playerService.PlayerConnected(playerSpawnData);
+        }
+
+        public void ChangeToGameDisconnectedState()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ChangeToLobbyState()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

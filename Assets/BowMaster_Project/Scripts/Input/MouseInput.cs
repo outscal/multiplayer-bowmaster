@@ -42,12 +42,16 @@ namespace InputSystem
             {
                 startMousePosition = Input.mousePosition;
                 endMousePosition = Input.mousePosition;
-                InputData inputData = CreateInputData();
-                inputService.SendPlayerData(inputData,true);
                 if (inputService.CheckForCharacterPresence(startMousePosition))
                 {
                     characterID = inputService.GetSelectedCharacterID();
                 }
+                else
+                {
+                    return;
+                }
+                InputData inputData = CreateInputData();
+                inputService.SendPlayerData(inputData,true);
             }
             if (Input.GetMouseButton(0))
             {

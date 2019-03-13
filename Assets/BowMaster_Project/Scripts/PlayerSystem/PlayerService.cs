@@ -24,8 +24,8 @@ namespace PlayerSystem
             playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
 
-            //SpawnPlayer("YoYo", new Vector2(-5f, 0f));
-            //localPlayerID = "YoYo";
+            SpawnPlayer("YoYo", new Vector2(-5f, 0f));
+            localPlayerID = "YoYo";
         }
 
         public void SetLocalPlayerID(string localPlayerID)

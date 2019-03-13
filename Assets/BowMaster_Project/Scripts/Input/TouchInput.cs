@@ -18,7 +18,7 @@ namespace InputSystem
         
         private Vector2 startTouchPos;
         private Vector2 endTouchPos;
-        private float maxDragDistance = Screen.width *15/100;
+      
         private float angle;
         private float power;
         private int selectedID;
@@ -69,7 +69,8 @@ namespace InputSystem
                 {
                     endTouchPos = touch.position;
                     InputData inputData=  CreateInputData();
-                    multiplayerService.SendNewInput(inputData);
+                   // multiplayerService.SendNewInput(inputData);
+                    inputService.SendPlayerData(inputData, false);
 
                 }
                 
@@ -93,11 +94,12 @@ namespace InputSystem
         {
             Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
             Vector2 vectorB = new Vector2(endPos.x - startPos.x, 0);
+
             float currentDistance = Vector2.SqrMagnitude(vectorA);
-            currentDistance = Mathf.Sqrt(currentDistance);
-            power = currentDistance;
+            power = Mathf.Sqrt(currentDistance);
+            
            
-            if (power > maxDragDistance)
+            if (power > 100)
             {
                 power = 100f;
             }

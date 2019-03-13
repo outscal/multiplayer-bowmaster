@@ -28,7 +28,7 @@ namespace MultiplayerSystem
 
         public void SendNewInput(InputData inputData)
         {
-            throw new System.NotImplementedException();
+        
         }
 
         public void SetLocalPlayerID(string localID)

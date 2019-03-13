@@ -19,7 +19,7 @@ namespace InputSystem
 
         private float power;
         private float angle;
-        private float maxDragDistance = Screen.width * 0.1f;
+      
 
         private int characterID;
         private string localPlayerID;
@@ -63,8 +63,8 @@ namespace InputSystem
             {
                 endMousePosition = Input.mousePosition;
                 InputData inputData= CreateInputData();
-                multiplayerService.SendNewInput(inputData);
-                //inputService.SendPlayerData(inputData,false);
+               // multiplayerService.SendNewInput(inputData);
+                inputService.SendPlayerData(inputData,false);
             }
         }
 
@@ -89,7 +89,7 @@ namespace InputSystem
             currentDistance=Mathf.Sqrt(currentDistance);
             power = currentDistance;
             
-            if(power>maxDragDistance)
+            if(power>100)
             {
                 power = 100f;
             }

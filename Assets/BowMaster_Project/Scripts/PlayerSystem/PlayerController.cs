@@ -6,12 +6,12 @@ namespace PlayerSystem
 {
     public class PlayerController : IPlayerController
     {
-        private int playerID;
+        private string playerID;
 
         private List<PlayerCharacterController> playerCharacterControllerList;
         private PlayerService playerService;
 
-        public PlayerController(int playerID, PlayerService playerService)
+        public PlayerController(string playerID, PlayerService playerService)
         {
             this.playerService = playerService;
             this.playerID = playerID;
@@ -26,9 +26,14 @@ namespace PlayerSystem
             }
         }
 
-        public int ReturnPlayerID()
+        public string ReturnPlayerID()
         {
             return playerID;
+        }
+
+        public void SetShootInfo(float power, float angle, int characterID)
+        {
+            playerCharacterControllerList[characterID].SetShootInfo(power, angle);
         }
     }
 }

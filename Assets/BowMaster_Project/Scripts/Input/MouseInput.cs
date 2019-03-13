@@ -20,7 +20,7 @@ namespace InputSystem
         private float maxDragDistance = Screen.width * 15 / 100;
 
         private int characterID;
-        private int localPlayerID;
+        private string localPlayerID;
 
         public MouseInput(IInputService inputService, IMultiplayerService multiplayerService)
         {

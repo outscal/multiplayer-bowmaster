@@ -28,5 +28,10 @@ namespace PlayerSystem
         {
             return characterID;
         }
+
+        public void SetShootInfo(float power, float angle)
+        {
+            playerCharacterView.SetShootInfo(power, angle);
+        }
     }
 }

@@ -34,5 +34,10 @@ namespace PlayerSystem
                 displayHolder.SetActive(false); 
             }
         }
+
+        public Vector2 GetForwardDirection()
+        {
+            return this.transform.right;
+        }
     }
 }

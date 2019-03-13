@@ -51,8 +51,8 @@ namespace PlayerSystem
             {
                 Debug.Log("[PlayerService] Power:" + inputData.powerValue +
                 "\n Angle:" + inputData.angleValue +
-                "\n PlayerID:" + inputData.localPlayerID);
-                playerControllerDictionary[inputData.localPlayerID].SetShootInfo(inputData.powerValue
+                "\n PlayerID:" + inputData.playerID);
+                playerControllerDictionary[inputData.playerID].SetShootInfo(inputData.powerValue
                 , inputData.angleValue
                 , inputData.characterID
                 , gettingInput);

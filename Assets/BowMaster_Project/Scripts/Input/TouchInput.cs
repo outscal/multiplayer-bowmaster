@@ -18,11 +18,13 @@ namespace InputSystem
         
         private Vector2 startTouchPos;
         private Vector2 endTouchPos;
-        private float maxDragDistance = Screen.width *15/100;
+        private Vector2 forwardPosition;
+
         private float angle;
         private float power;
         private int selectedID;
         private string localPlayerID;
+        private InputStatus inputStatus = InputStatus.INVALID;
 
         public TouchInput(IInputService inputService,IMultiplayerService multiplayerService,IGameService gameService)
         {
@@ -40,53 +42,70 @@ namespace InputSystem
             {
                 return;
             }
+
             if (Input.touchCount >= 1)
             {
                 Touch touch = Input.GetTouch(0);
                 if(inputService.CheckForCharacterPresence(touch.position))
                 {
+                     inputStatus = InputStatus.VALID;
                     selectedID = inputService.GetSelectedCharacterID();
+                    forwardPosition = inputService.GetCharacterForwardDirection();
                 }
-
-                if (touch.phase == TouchPhase.Began)
+                else
+                {
+                    return;
+                }
+                if (touch.phase == TouchPhase.Began && inputStatus == InputStatus.VALID)
                 {
                     startTouchPos = touch.position;
                     endTouchPos = touch.position;
-                    CalculateParameters(startTouchPos, endTouchPos);
+                    InputData inputData=CreateInputData();
+                    inputService.SendPlayerData(inputData, true);
                 }
-                else if (touch.phase == TouchPhase.Ended)
+                if(touch.phase==TouchPhase.Moved && inputStatus == InputStatus.VALID)
                 {
                     endTouchPos = touch.position;
-                    CalculateParameters(startTouchPos, endTouchPos);
-                    InputData inputData = new InputData();
-                    inputData.angleValue = angle;
-                    inputData.powerValue = power;
-                    inputData.localPlayerID = inputService.GetLocalPlayerID();
-                    inputData.characterID =selectedID;
-                    multiplayerService.SendNewInput(inputData);
-                   
+                    InputData inputData = CreateInputData();
+                    inputService.SendPlayerData(inputData, true);
                 }
-                if(touch.position!=touch.position)
+                if (touch.phase == TouchPhase.Ended && inputStatus==InputStatus.VALID)
                 {
-                    CalculateParameters(startTouchPos, endTouchPos);
+                    endTouchPos = touch.position;
+                    InputData inputData=  CreateInputData();
+                   // multiplayerService.SendNewInput(inputData);
+                    inputService.SendPlayerData(inputData, false);
+                    inputStatus = InputStatus.INVALID;
+
                 }
+                
             }
+        }
+
+        private InputData CreateInputData()
+        {
+            CalculateParameters(startTouchPos, endTouchPos);
+            InputData inputData = new InputData();
+            inputData.angleValue = angle;
+            inputData.powerValue = power;
+            inputData.playerID = inputService.GetLocalPlayerID();
+            inputData.characterID = selectedID;
+            return inputData;          
         }
 
         //calculate angle and current distance
         private void CalculateParameters(Vector2 startPos, Vector2 endPos)
         {
-            Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
-            Vector2 vectorB = new Vector2(endPos.x - startPos.x, 0);
+            Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);         
             float currentDistance = Vector2.SqrMagnitude(vectorA);
-            currentDistance = Mathf.Sqrt(currentDistance);
-            power = currentDistance;
-            Debug.Log("MAGNITUDE :" + power);
-            if (power > maxDragDistance)
+            power = Mathf.Sqrt(currentDistance);                       
+            if (power > 100)
             {
                 power = 100f;
             }
-            angle = Vector2.Angle(vectorA, vectorB);
+            angle = Vector2.SignedAngle(vectorA, forwardPosition);
+            angle = angle >= 0 ? 180 - angle : -(180 + angle);
+
         }
 
 

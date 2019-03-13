@@ -8,5 +8,6 @@ namespace PlayerSystem
     public interface IPlayerView
     {
         int GetCharacterID();
+        Vector2 GetForwardDirection();
     }
 }

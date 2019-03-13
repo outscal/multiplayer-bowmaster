@@ -1,9 +1,9 @@
-﻿using MultiplayerSystem;
+﻿using GameSystem;
+using MultiplayerSystem;
 using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using GameSystem;
 using Zenject;
 
 namespace InputSystem
@@ -16,15 +16,18 @@ namespace InputSystem
 
         private Vector2 startMousePosition;
         private Vector2 endMousePosition;
+        private Vector2 forwardPosition;
 
         private float power;
         private float angle;
-        private float maxDragDistance = Screen.width * 0.1f;
+
 
         private int characterID;
         private string localPlayerID;
 
-        public MouseInput(IInputService inputService, IMultiplayerService multiplayerService,IGameService gameService)
+        private InputStatus inputStatus=InputStatus.INVALID;
+
+        public MouseInput(IInputService inputService, IMultiplayerService multiplayerService, IGameService gameService)
         {
             this.inputService = inputService;
             this.multiplayerService = multiplayerService;
@@ -34,65 +37,64 @@ namespace InputSystem
 
         public void OnTick()
         {
-            //if(gameService.GetGameState()!=GameStateEnum.GAME_PLAY)
-            //{
-            //    return;
-            //}
-            if (Input.GetMouseButtonDown(0))
+            if (gameService.GetGameState() != GameStateEnum.GAME_PLAY)
             {
+                return;
+            }
+            if (Input.GetMouseButtonDown(0) && inputService.CheckForCharacterPresence(Input.mousePosition))
+            {
+                inputStatus =InputStatus.VALID;
                 startMousePosition = Input.mousePosition;
                 endMousePosition = Input.mousePosition;
-                if (inputService.CheckForCharacterPresence(startMousePosition))
-                {
-                    characterID = inputService.GetSelectedCharacterID();
-                }
-                else
-                {
-                    return;
-                }
-                InputData inputData = CreateInputData();
-                inputService.SendPlayerData(inputData,true);
+                characterID = inputService.GetSelectedCharacterID();
+                forwardPosition = inputService.GetCharacterForwardDirection();
+                InputData inputData = CreateInputData(startMousePosition, endMousePosition);
+                inputService.SendPlayerData(inputData, true);
+
             }
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && inputStatus == InputStatus.VALID)
             {
                 endMousePosition = Input.mousePosition;
-                InputData inputData = CreateInputData();
-                inputService.SendPlayerData(inputData,true);
+                InputData inputData = CreateInputData(startMousePosition, endMousePosition);
+                inputService.SendPlayerData(inputData, true);
             }
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && inputStatus == InputStatus.VALID)
             {
                 endMousePosition = Input.mousePosition;
-                InputData inputData= CreateInputData();  
-                inputService.SendPlayerData(inputData,false);
+                InputData inputData = CreateInputData(startMousePosition, endMousePosition);
+                inputService.SendPlayerData(inputData, false);
+                inputStatus = InputStatus.INVALID;
+                // multiplayerService.SendNewInput(inputData);
             }
+
         }
 
-        private InputData CreateInputData()
+        private InputData CreateInputData(Vector2 startPos, Vector2 endPos)
         {
-            CalculateParameters(startMousePosition, endMousePosition);
+            CalculateParameters(startPos, endPos);
             InputData inputData = new InputData();
             inputData.angleValue = angle;
             inputData.powerValue = power;
             inputData.characterID = characterID;
-            inputData.localPlayerID = localPlayerID;
+            inputData.playerID = localPlayerID;
             //multiplayerService.SendNewInput(inputData);
             return inputData;
         }
 
         //calculate angle and current distance
         private void CalculateParameters(Vector2 startPos, Vector2 endPos)
-        {                  
-            Vector2 vectorA = new Vector2(endPos.x-startPos.x,endPos.y-startPos.y);
-            Vector2 vectorB = new Vector2(endPos.x-startPos.x,0);
+        {
+            Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
             float currentDistance = Vector2.SqrMagnitude(vectorA);
-            currentDistance=Mathf.Sqrt(currentDistance);
+            currentDistance = Mathf.Sqrt(currentDistance);
             power = currentDistance;
-            
-            if(power>maxDragDistance)
+
+            if (power > 100)
             {
                 power = 100f;
             }
-            angle = -Vector2.SignedAngle(vectorA, vectorB);
+            angle = Vector2.SignedAngle(vectorA, forwardPosition);
+            angle = angle >= 0 ? 180 - angle : -(180 + angle);
         }
 
     }

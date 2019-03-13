@@ -15,7 +15,7 @@ namespace MultiplayerSystem
 
         public MultiplayerService(IPlayerService playerService)
         {
-            //playerServerName = new PlayerName();
+            playerServerName = new PlayerName();
             launch = GameObject.FindObjectOfType<Launcher>();
             this.playerService = playerService;
             //this.inputService = inputService;
@@ -23,7 +23,7 @@ namespace MultiplayerSystem
 
         public void Connect(string name)
         {
-            launch.Connect();
+            playerServerName.SetPlayerName(name);
         }
 
         public void SendNewInput(InputData inputData)

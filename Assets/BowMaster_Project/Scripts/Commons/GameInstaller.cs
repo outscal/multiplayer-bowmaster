@@ -20,7 +20,11 @@ namespace Commons
                 To<PlayerService>().
                 AsSingle().
                 NonLazy();
-        
+            Container.Bind<CommunicationManager>().
+                To<CommunicationManager>().
+                AsSingle().
+                NonLazy();
+
             Container.Bind<IUIService>().
                 To<UIService>().
                 AsSingle().

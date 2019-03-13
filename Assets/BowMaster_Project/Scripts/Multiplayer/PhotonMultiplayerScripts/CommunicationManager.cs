@@ -10,6 +10,7 @@ namespace MultiplayerSystem
 {
     public class CommunicationManager : IOnEventCallback
     {
+        PlayerSpawnData spData;
         IMultiplayerService multiplayerService;
         public CommunicationManager(IMultiplayerService multiplayerService)
         {
@@ -20,6 +21,10 @@ namespace MultiplayerSystem
         {
             PhotonNetwork.RemoveCallbackTarget(this);
         }
+        public void SavePlayerSpawnData(PlayerSpawnData spawnData)
+        {
+            spData = spawnData;
+        }
         public void NotifyAllAboutPlayerSpawn(PlayerSpawnData spawnData)
         {
             byte evCode = 2;
@@ -27,7 +32,15 @@ namespace MultiplayerSystem
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(evCode, content, raiseEventOptions, sendOptions);
-            Debug.Log("Trying to send Event");
+            Debug.Log("Sending SpawnPositions");
+        }
+        public void GameStarted()
+        {
+            byte evCode = 3;
+            object[] content = new object[] { };
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+            SendOptions sendOptions = new SendOptions { Reliability = true };
+            PhotonNetwork.RaiseEvent(evCode, content, raiseEventOptions, sendOptions);
         }
         public void SendInputData(InputData data)
         {            
@@ -57,7 +70,9 @@ namespace MultiplayerSystem
                 spawnData.playerID = (string)data[0];
                 Debug.Log("Spawn Recieved from: " + (string)data[0]);
                 multiplayerService.SpawnPlayer(spawnData);
-
+            }else if (eventCode == 3)
+            {
+                NotifyAllAboutPlayerSpawn(spData);
             }
         }
     }

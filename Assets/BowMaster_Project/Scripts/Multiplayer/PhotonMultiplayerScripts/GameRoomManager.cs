@@ -12,33 +12,33 @@ namespace MultiplayerSystem
     public class GameRoomManager : MonoBehaviourPunCallbacks
     {
         [Inject] IMultiplayerService multiplayerService;
-        CommunicationManager communicationManager;
+        [Inject]CommunicationManager communicationManager;
         #region Private Methods
 
         #endregion
-        public void Start()
-        {
-            communicationManager = new CommunicationManager(multiplayerService);
-        }
         #region Photon Callbacks
         public override void OnJoinedRoom()
         {
             Vector2 pos;
-            Debug.Log("You Joined a room YourName is " + PhotonNetwork.LocalPlayer.NickName + "RoomNameIs " + PhotonNetwork.CurrentRoom.Name+" PlayersInRoom "+PhotonNetwork.CurrentRoom.PlayerCount);
+            Debug.Log("You Joined a room YourName is " + PhotonNetwork.LocalPlayer.NickName + " RoomNameIs " + PhotonNetwork.CurrentRoom.Name+" PlayersInRoom "+PhotonNetwork.CurrentRoom.PlayerCount);
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
-                pos = new Vector2(-10, 0);
+                pos = new Vector2(0, 2);
             }
             else
             {
-                pos = new Vector2(10, 0);
+                pos = new Vector2(0, -2);
             }
            
             multiplayerService.SetLocalPlayerID(PhotonNetwork.LocalPlayer.UserId);
             PlayerSpawnData spawn = new PlayerSpawnData();
             spawn.playerID = PhotonNetwork.LocalPlayer.UserId;
             spawn.playerPosition = pos;
-            //communicationManager.NotifyAllAboutPlayerSpawn(spawn);
+            communicationManager.SavePlayerSpawnData(spawn);
+            if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            {
+                communicationManager.GameStarted();
+            }
         }
         public override void OnLeftRoom()
         {

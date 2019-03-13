@@ -12,6 +12,6 @@ namespace MultiplayerSystem
         void SendNewInput(InputData inputData);
         void SpawnPlayer(PlayerSpawnData playerSpawnData);
         void SetLocalPlayerID(string localID);
-        void Connect();
+        void Connect(string name);
     }
 }

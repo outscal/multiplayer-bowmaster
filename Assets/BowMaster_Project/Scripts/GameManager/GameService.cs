@@ -5,8 +5,9 @@ using UnityEngine;
 
 namespace GameSystem
 {
-    public class GameService:IGameService
+    public class GameService:IGameService,IInitializable
     {
+        private IGameStateMachine gameStateMachine;
         public GameService()
         {
 
@@ -19,11 +20,12 @@ namespace GameSystem
 
         public void ChangeToGameStartState()
         {
-            
+            gameStateMachine.ChangeGameState(GameStateEnum.GAME_START);
         }
 
-        public void ChangeToGameState()
+        public void ChangeToGamePlayState()
         {
+            gameStateMachine.ChangeGameState(GameStateEnum.GAME_PLAY);
             
         }
 
@@ -35,6 +37,12 @@ namespace GameSystem
         public void ChangeToLobbyState()
         {
            
+        }
+
+        public void Initialize()
+        {
+            gameStateMachine = new GameStateMachine();
+            ChangeToGameStartState();
         }
     }
 }

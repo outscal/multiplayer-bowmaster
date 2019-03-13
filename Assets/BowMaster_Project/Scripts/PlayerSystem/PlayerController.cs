@@ -6,12 +6,12 @@ namespace PlayerSystem
 {
     public class PlayerController : IPlayerController
     {
-        private int playerID;
+        private string playerID;
 
         private List<PlayerCharacterController> playerCharacterControllerList;
         private PlayerService playerService;
 
-        public PlayerController(int playerID, PlayerService playerService)
+        public PlayerController(string playerID, PlayerService playerService)
         {
             this.playerService = playerService;
             this.playerID = playerID;
@@ -26,7 +26,7 @@ namespace PlayerSystem
             }
         }
 
-        public int ReturnPlayerID()
+        public string ReturnPlayerID()
         {
             return playerID;
         }

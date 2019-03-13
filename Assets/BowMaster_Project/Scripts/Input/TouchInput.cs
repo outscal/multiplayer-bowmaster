@@ -20,7 +20,7 @@ namespace InputSystem
         private float angle;
         private float power;
         private int selectedID;
-        private int localPlayerID;
+        private string localPlayerID;
 
         public TouchInput(IInputService inputService,IMultiplayerService multiplayerService)
         {
@@ -54,7 +54,7 @@ namespace InputSystem
                     InputData inputData = new InputData();
                     inputData.angleValue = angle;
                     inputData.powerValue = power;
-                    inputData.localPlayerID = 
+                    inputData.localPlayerID = inputService.GetLocalPlayerID();
                     inputData.characterID =selectedID;
                     multiplayerService.SendNewInput(inputData);
                    

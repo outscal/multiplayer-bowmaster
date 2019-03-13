@@ -21,7 +21,7 @@ namespace PlayerSystem
 
         public void SpawnPlayer()
         {
-            playerController = new PlayerController(2, this); 
+            playerController = new PlayerController(2.ToString(), this); 
         }
 
         public void SetPlayerData(InputData inputData)
@@ -34,7 +34,7 @@ namespace PlayerSystem
             return scriptableObjPlayer;
         }
 
-        public int GetLocalPlayerID()
+        public string GetLocalPlayerID()
         {
             return playerController.ReturnPlayerID();
         }

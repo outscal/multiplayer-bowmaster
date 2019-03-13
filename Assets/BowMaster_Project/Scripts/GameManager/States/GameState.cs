@@ -7,7 +7,7 @@ namespace GameSystem
     {
         public GameStateEnum GetState()
         {
-            return GameStateEnum.GAME;
+            return GameStateEnum.GAME_PLAY;
         }
 
         public void OnStateEnter()

@@ -6,6 +6,6 @@ namespace PlayerSystem
 {
     public interface IPlayerController
     {
-        int ReturnPlayerID();
+        string ReturnPlayerID();
     }
 }

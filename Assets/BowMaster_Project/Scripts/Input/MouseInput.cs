@@ -37,10 +37,10 @@ namespace InputSystem
 
         public void OnTick()
         {
-            if (gameService.GetGameState() != GameStateEnum.GAME_PLAY)
-            {
-                return;
-            }
+            //if (gameService.GetGameState() != GameStateEnum.GAME_PLAY)
+            //{
+            //    return;
+            //}
             if (Input.GetMouseButtonDown(0) && inputService.CheckForCharacterPresence(Input.mousePosition))
             {
                 inputStatus =InputStatus.VALID;
@@ -62,9 +62,9 @@ namespace InputSystem
             {
                 endMousePosition = Input.mousePosition;
                 InputData inputData = CreateInputData(startMousePosition, endMousePosition);
-                inputService.SendPlayerData(inputData, false);
+               // inputService.SendPlayerData(inputData, false);
                 inputStatus = InputStatus.INVALID;
-                // multiplayerService.SendNewInput(inputData);
+                multiplayerService.SendNewInput(inputData);
             }
 
         }

@@ -51,7 +51,7 @@ namespace MultiplayerSystem
         #region Public Methods
         public void Connect()
         {
-            PhotonNetwork.CreateRoom("testing2", new RoomOptions { MaxPlayers = 2 });
+            //PhotonNetwork.CreateRoom("testing2", new RoomOptions { MaxPlayers = 2 });
             //Room rooms = PhotonNetwork.;
             Debug.Log("Connecting to room total rooms present " + PhotonNetwork.CountOfRooms);
             if (PhotonNetwork.CountOfRooms == 0)

@@ -73,8 +73,8 @@ namespace InputSystem
                 {
                     endTouchPos = touch.position;
                     InputData inputData=  CreateInputData();
-                   // multiplayerService.SendNewInput(inputData);
-                    inputService.SendPlayerData(inputData, false);
+                    multiplayerService.SendNewInput(inputData);
+                    //inputService.SendPlayerData(inputData, false);
                     inputStatus = InputStatus.INVALID;
 
                 }

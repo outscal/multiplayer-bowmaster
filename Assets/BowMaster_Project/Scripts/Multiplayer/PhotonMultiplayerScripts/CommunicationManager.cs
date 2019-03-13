@@ -18,8 +18,7 @@ namespace MultiplayerSystem
             PhotonNetwork.RemoveCallbackTarget(this);
         }
         public void SetData(InputData data)
-        {
-            
+        {            
             data.localPlayerID = PhotonNetwork.LocalPlayer.UserId;
             Debug.Log("userId:" + PhotonNetwork.LocalPlayer.UserId);
             byte evCode = 1;

@@ -12,5 +12,6 @@ namespace GameSystem
         void ChangeToLobbyState();
         void ChangeToGameOverState();
         void ChangeToGamePlayState();
+        GameStateEnum GetGameState();
     }
 }

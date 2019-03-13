@@ -33,6 +33,10 @@ namespace InputSystem
 
         public void OnTick()
         {
+            if (gameService.GetGameState() != GameStateEnum.GAME_PLAY)
+            {
+                return;
+            }
             if (Input.touchCount >= 1)
             {
                 Touch touch = Input.GetTouch(0);

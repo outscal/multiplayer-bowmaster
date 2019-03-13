@@ -10,23 +10,25 @@ namespace MultiplayerSystem
     public class MultiplayerService : IMultiplayerService
     {
         IPlayerService playerService;
+        PlayerName playerServerName;
         Launcher launch;
 
         public MultiplayerService(IPlayerService playerService)
         {
+            playerServerName = new PlayerName();
             launch = GameObject.FindObjectOfType<Launcher>();
             this.playerService = playerService;
             //this.inputService = inputService;
         }
 
-        public void Connect()
+        public void Connect(string name)
         {
-            launch.Connect();
+            playerServerName.SetPlayerName(name);
         }
 
         public void SendNewInput(InputData inputData)
         {
-
+            throw new System.NotImplementedException();
         }
 
         public void SetLocalPlayerID(string localID)

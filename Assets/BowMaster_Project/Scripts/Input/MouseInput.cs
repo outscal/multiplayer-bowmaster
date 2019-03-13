@@ -43,7 +43,7 @@ namespace InputSystem
                 startMousePosition = Input.mousePosition;
                 endMousePosition = Input.mousePosition;
                 InputData inputData = CreateInputData();
-                inputService.SendPlayerData(inputData);
+                inputService.SendPlayerData(inputData,true);
                 if (inputService.CheckForCharacterPresence(startMousePosition))
                 {
                     characterID = inputService.GetSelectedCharacterID();
@@ -53,13 +53,13 @@ namespace InputSystem
             {
                 endMousePosition = Input.mousePosition;
                 InputData inputData = CreateInputData();
-                inputService.SendPlayerData(inputData);
+                inputService.SendPlayerData(inputData,true);
             }
             if (Input.GetMouseButtonUp(0))
             {
                 endMousePosition = Input.mousePosition;
                InputData inputData= CreateInputData();  
-              inputService.SendPlayerData(inputData);
+              inputService.SendPlayerData(inputData,false);
 
             }
         }

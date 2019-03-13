@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
 using PlayerSystem;
+using GameSystem;
 using MultiplayerSystem;
 using System;
 
@@ -13,6 +14,7 @@ namespace InputSystem
     {
         private IInputService inputService;
         private IMultiplayerService multiplayerService;
+        private IGameService gameService;
         
         private Vector2 startTouchPos;
         private Vector2 endTouchPos;
@@ -22,10 +24,11 @@ namespace InputSystem
         private int selectedID;
         private string localPlayerID;
 
-        public TouchInput(IInputService inputService,IMultiplayerService multiplayerService)
+        public TouchInput(IInputService inputService,IMultiplayerService multiplayerService,IGameService gameService)
         {
             this.inputService = inputService;
-            this.multiplayerService = multiplayerService;          
+            this.multiplayerService = multiplayerService;
+            this.gameService = gameService;
             localPlayerID=inputService.GetLocalPlayerID();
         }
       

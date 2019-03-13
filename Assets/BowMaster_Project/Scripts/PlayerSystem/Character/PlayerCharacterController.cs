@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WeaponSystem;
 
 namespace PlayerSystem
 {
@@ -10,12 +11,14 @@ namespace PlayerSystem
         private PlayerController playerController;
         private PlayerCharacterView playerCharacterView;
         private ScriptableObjPlayer scriptableObjPlayer;
+        private IWeaponService weaponService;
 
         public PlayerCharacterController(int characterID, PlayerController playerController,
-        ScriptableObjPlayer scriptableObjPlayer)
+        ScriptableObjPlayer scriptableObjPlayer, IWeaponService weaponService)
         {
             this.scriptableObjPlayer = scriptableObjPlayer;
             this.characterID = characterID;
+            this.weaponService = weaponService;
             this.playerController = playerController;
             GameObject playerObj = GameObject.Instantiate<GameObject>(
                         scriptableObjPlayer.characterViews[0].gameObject
@@ -27,6 +30,12 @@ namespace PlayerSystem
         public int GetCharacterID()
         {
             return characterID;
+        }
+
+        public void SetShootInfo(float power, float angle)
+        {
+            playerCharacterView.SetShootInfo(power, angle);
+            weaponService.SpawnWeapon(power, angle, playerCharacterView.ShootPos);
         }
     }
 }

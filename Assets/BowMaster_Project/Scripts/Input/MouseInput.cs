@@ -62,9 +62,8 @@ namespace InputSystem
             if (Input.GetMouseButtonUp(0))
             {
                 endMousePosition = Input.mousePosition;
-               InputData inputData= CreateInputData();  
-              inputService.SendPlayerData(inputData,false);
-
+                InputData inputData= CreateInputData();  
+                inputService.SendPlayerData(inputData,false);
             }
         }
 

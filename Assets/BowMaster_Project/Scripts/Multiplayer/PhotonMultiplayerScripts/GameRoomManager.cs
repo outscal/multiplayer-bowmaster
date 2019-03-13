@@ -4,11 +4,14 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using Zenject;
+using PlayerSystem;
 
 namespace MultiplayerSystem
 {
     public class GameRoomManager : MonoBehaviourPunCallbacks
     {
+        [Inject] MultiplayerService multiplayerService;
         #region Private Methods
         
         #endregion
@@ -25,6 +28,10 @@ namespace MultiplayerSystem
             {
                 pos = new Vector2(10, 0);
             }
+            PlayerSpawnData spawn = new PlayerSpawnData();
+            spawn.playerID = PhotonNetwork.LocalPlayer.UserId;
+            spawn.playerPosition = pos;
+            multiplayerService.SpawnPlayer(spawn);
         }
         public override void OnLeftRoom()
         {

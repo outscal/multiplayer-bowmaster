@@ -23,13 +23,24 @@ namespace PlayerSystem
             this.scriptableObjPlayer = scriptableObjPlayer;
             playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
-            SpawnPlayer("YoYo");
-            localPlayerID = "YoYo";
+            //SpawnPlayer("YoYo");
+            //localPlayerID = "YoYo";
         }
 
-        public void SpawnPlayer(string playerID)
+        public void SetLocalPlayerID(string localPlayerID)
         {
-            PlayerController playerController = new PlayerController(playerID, this, weaponService);
+            this.localPlayerID = localPlayerID;
+        }
+
+        public void PlayerConnected(PlayerSpawnData playerSpawnData)
+        {
+            SpawnPlayer(playerSpawnData.playerID, playerSpawnData.playerPosition);
+        }
+
+        void SpawnPlayer(string playerID, Vector2 spawnPos)
+        {
+            PlayerController playerController = new PlayerController(playerID, this
+            , weaponService, spawnPos);
             playerControllerDictionary.Add(playerID, playerController);
         }
 
@@ -53,6 +64,5 @@ namespace PlayerSystem
         {
             return localPlayerID;
         }
-
     }
 }

@@ -14,7 +14,8 @@ namespace PlayerSystem
         private IWeaponService weaponService;
 
         public PlayerCharacterController(int characterID, PlayerController playerController,
-        ScriptableObjPlayer scriptableObjPlayer, IWeaponService weaponService)
+        ScriptableObjPlayer scriptableObjPlayer, IWeaponService weaponService,
+            Vector2 spawnPos)
         {
             this.scriptableObjPlayer = scriptableObjPlayer;
             this.characterID = characterID;
@@ -23,6 +24,7 @@ namespace PlayerSystem
             GameObject playerObj = GameObject.Instantiate<GameObject>(
                         scriptableObjPlayer.characterViews[0].gameObject
                 );
+            playerObj.transform.position = spawnPos;
             playerCharacterView = playerObj.GetComponent<PlayerCharacterView>();
             playerCharacterView.SetCharacterController(this);
         }

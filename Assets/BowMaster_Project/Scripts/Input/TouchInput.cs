@@ -24,6 +24,7 @@ namespace InputSystem
         private float power;
         private int selectedID;
         private string localPlayerID;
+        private InputStatus inputStatus = InputStatus.INVALID;
 
         public TouchInput(IInputService inputService,IMultiplayerService multiplayerService,IGameService gameService)
         {
@@ -37,15 +38,17 @@ namespace InputSystem
 
         public void OnTick()
         {
-            //if (gameService.GetGameState() != GameStateEnum.GAME_PLAY)
-            //{
-            //    return;
-            //}
+            if (gameService.GetGameState() != GameStateEnum.GAME_PLAY)
+            {
+                return;
+            }
+
             if (Input.touchCount >= 1)
             {
                 Touch touch = Input.GetTouch(0);
                 if(inputService.CheckForCharacterPresence(touch.position))
                 {
+                     inputStatus = InputStatus.VALID;
                     selectedID = inputService.GetSelectedCharacterID();
                     forwardPosition = inputService.GetCharacterForwardDirection();
                 }
@@ -53,26 +56,26 @@ namespace InputSystem
                 {
                     return;
                 }
-
-                if (touch.phase == TouchPhase.Began)
+                if (touch.phase == TouchPhase.Began && inputStatus == InputStatus.VALID)
                 {
                     startTouchPos = touch.position;
                     endTouchPos = touch.position;
                     InputData inputData=CreateInputData();
                     inputService.SendPlayerData(inputData, true);
                 }
-                if(touch.phase==TouchPhase.Moved)
+                if(touch.phase==TouchPhase.Moved && inputStatus == InputStatus.VALID)
                 {
                     endTouchPos = touch.position;
                     InputData inputData = CreateInputData();
                     inputService.SendPlayerData(inputData, true);
                 }
-                if (touch.phase == TouchPhase.Ended)
+                if (touch.phase == TouchPhase.Ended && inputStatus==InputStatus.VALID)
                 {
                     endTouchPos = touch.position;
                     InputData inputData=  CreateInputData();
                    // multiplayerService.SendNewInput(inputData);
                     inputService.SendPlayerData(inputData, false);
+                    inputStatus = InputStatus.INVALID;
 
                 }
                 
@@ -87,33 +90,21 @@ namespace InputSystem
             inputData.powerValue = power;
             inputData.playerID = inputService.GetLocalPlayerID();
             inputData.characterID = selectedID;
-            return inputData;
-           // inputService.SendPlayerData(inputData, true);
+            return inputData;          
         }
 
         //calculate angle and current distance
         private void CalculateParameters(Vector2 startPos, Vector2 endPos)
         {
-            Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
-           // Vector2 vectorB = new Vector2(endPos.x - startPos.x, 0);
-
+            Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);         
             float currentDistance = Vector2.SqrMagnitude(vectorA);
-            power = Mathf.Sqrt(currentDistance);
-            
-           
+            power = Mathf.Sqrt(currentDistance);                       
             if (power > 100)
             {
                 power = 100f;
             }
             angle = Vector2.SignedAngle(vectorA, forwardPosition);
-            if (angle >= 0)
-            {
-                angle = 180 - angle;
-            }
-            else
-            {
-                angle = -(180 + angle);
-            }
+            angle = angle >= 0 ? 180 - angle : -(180 + angle);
 
         }
 

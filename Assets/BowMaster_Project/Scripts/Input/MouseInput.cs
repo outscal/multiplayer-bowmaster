@@ -17,7 +17,7 @@ namespace InputSystem
 
         private float power;
         private float angle;
-        private float maxDragDistance = Screen.width * 15 / 100;
+        private float maxDragDistance = Screen.width * 0.1f;
 
         private int characterID;
         private string localPlayerID;
@@ -40,12 +40,7 @@ namespace InputSystem
                 {
                     characterID = inputService.GetSelectedCharacterID();
                 }
-            }
-            if (Input.GetMouseButton(0))
-            {
-                startMousePosition = Input.mousePosition;
-                CalculateParameters(startMousePosition, endMousePosition);
-            }
+            }          
             if (Input.GetMouseButtonUp(0))
             {
                 endMousePosition = Input.mousePosition;
@@ -56,22 +51,25 @@ namespace InputSystem
                 inputData.characterID = characterID;
                 inputData.localPlayerID = localPlayerID;
 
-                inputService.SendPlayerData(inputData);
+                inputService.SendPlayerData(inputData);              
 
             }
         }
 
         //calculate angle and current distance
         private void CalculateParameters(Vector2 startPos, Vector2 endPos)
-        {
-            float currentDistance = Vector2.Distance(startPos, endPos) / Screen.width;
-            if (currentDistance > maxDragDistance)
-            {
-                currentDistance = 10f;
-            }
+        {                  
+            Vector2 vectorA = new Vector2(endPos.x-startPos.x,endPos.y-startPos.y);
+            Vector2 vectorB = new Vector2(endPos.x-startPos.x,0);
+            float currentDistance = Vector2.SqrMagnitude(vectorA);
+            currentDistance=Mathf.Sqrt(currentDistance);
             power = currentDistance;
-            float tangent = (endPos.y - startPos.y) / (endPos.x - startPos.x);
-            angle = Mathf.Atan(tangent);
+            Debug.Log("MAGNITUDE :" +power);
+            if(power>maxDragDistance)
+            {
+                power = 100f;
+            }
+            angle = Vector2.Angle(vectorA, vectorB);
         }
 
     }

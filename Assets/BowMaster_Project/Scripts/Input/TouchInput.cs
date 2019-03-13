@@ -20,7 +20,7 @@ namespace InputSystem
         private float angle;
         private float power;
         private int selectedID;
-        private int localPlayerID;
+        private string localPlayerID;
 
         public TouchInput(IInputService inputService,IMultiplayerService multiplayerService)
         {
@@ -54,7 +54,7 @@ namespace InputSystem
                     InputData inputData = new InputData();
                     inputData.angleValue = angle;
                     inputData.powerValue = power;
-                    inputData.localPlayerID = 
+                    inputData.localPlayerID = inputService.GetLocalPlayerID();
                     inputData.characterID =selectedID;
                     multiplayerService.SendNewInput(inputData);
                    
@@ -69,14 +69,17 @@ namespace InputSystem
         //calculate angle and current distance
         private void CalculateParameters(Vector2 startPos, Vector2 endPos)
         {
-            float currentDistance=Vector2.Distance(startPos, endPos)/Screen.width;
-            if(currentDistance>maxDragDistance)
-            {
-                currentDistance = 10f;
-            }
+            Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
+            Vector2 vectorB = new Vector2(endPos.x - startPos.x, 0);
+            float currentDistance = Vector2.SqrMagnitude(vectorA);
+            currentDistance = Mathf.Sqrt(currentDistance);
             power = currentDistance;
-            float tangent = (endPos.y - startPos.y) / (endPos.x-startPos.x);
-            angle = Mathf.Atan(tangent);
+            Debug.Log("MAGNITUDE :" + power);
+            if (power > maxDragDistance)
+            {
+                power = 100f;
+            }
+            angle = Vector2.Angle(vectorA, vectorB);
         }
     }
 }

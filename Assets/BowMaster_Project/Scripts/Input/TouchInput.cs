@@ -36,10 +36,10 @@ namespace InputSystem
 
         public void OnTick()
         {
-            if (gameService.GetGameState() != GameStateEnum.GAME_PLAY)
-            {
-                return;
-            }
+            //if (gameService.GetGameState() != GameStateEnum.GAME_PLAY)
+            //{
+            //    return;
+            //}
             if (Input.touchCount >= 1)
             {
                 Touch touch = Input.GetTouch(0);
@@ -47,30 +47,45 @@ namespace InputSystem
                 {
                     selectedID = inputService.GetSelectedCharacterID();
                 }
+                else
+                {
+                    return;
+                }
 
                 if (touch.phase == TouchPhase.Began)
                 {
                     startTouchPos = touch.position;
                     endTouchPos = touch.position;
-                    CalculateParameters(startTouchPos, endTouchPos);
+                    InputData inputData=CreateInputData();
+                    inputService.SendPlayerData(inputData, true);
                 }
-                else if (touch.phase == TouchPhase.Ended)
+                if(touch.phase==TouchPhase.Moved)
                 {
                     endTouchPos = touch.position;
-                    CalculateParameters(startTouchPos, endTouchPos);
-                    InputData inputData = new InputData();
-                    inputData.angleValue = angle;
-                    inputData.powerValue = power;
-                    inputData.localPlayerID = inputService.GetLocalPlayerID();
-                    inputData.characterID =selectedID;
-                    multiplayerService.SendNewInput(inputData);
-                   
+                    InputData inputData = CreateInputData();
+                    inputService.SendPlayerData(inputData, true);
                 }
-                if(touch.position!=touch.position)
+                if (touch.phase == TouchPhase.Ended)
                 {
-                    CalculateParameters(startTouchPos, endTouchPos);
+                    endTouchPos = touch.position;
+                    InputData inputData=  CreateInputData();
+                    multiplayerService.SendNewInput(inputData);
+
                 }
+                
             }
+        }
+
+        private InputData CreateInputData()
+        {
+            CalculateParameters(startTouchPos, endTouchPos);
+            InputData inputData = new InputData();
+            inputData.angleValue = angle;
+            inputData.powerValue = power;
+            inputData.playerID = inputService.GetLocalPlayerID();
+            inputData.characterID = selectedID;
+            return inputData;
+           // inputService.SendPlayerData(inputData, true);
         }
 
         //calculate angle and current distance
@@ -81,7 +96,7 @@ namespace InputSystem
             float currentDistance = Vector2.SqrMagnitude(vectorA);
             currentDistance = Mathf.Sqrt(currentDistance);
             power = currentDistance;
-            Debug.Log("MAGNITUDE :" + power);
+           
             if (power > maxDragDistance)
             {
                 power = 100f;

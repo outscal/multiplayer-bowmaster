@@ -19,10 +19,10 @@ namespace MultiplayerSystem
         }
         public void SetData(InputData data)
         {            
-            data.localPlayerID = PhotonNetwork.LocalPlayer.UserId;
+            data.playerID = PhotonNetwork.LocalPlayer.UserId;
             Debug.Log("userId:" + PhotonNetwork.LocalPlayer.UserId);
             byte evCode = 1;
-            object[] content = new object[] { data.localPlayerID, data.localPlayerID };
+            object[] content = new object[] { data.playerID, data.playerID };
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(evCode, content, raiseEventOptions, sendOptions);

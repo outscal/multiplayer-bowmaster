@@ -77,7 +77,7 @@ namespace InputSystem
             Debug.Log("PLAYER DATA Recieved");
             Debug.Log("PLAYER DATA: POWER : :" + inputData.powerValue);
             Debug.Log("PLAYER DATA: ANGLE : :" + inputData.angleValue.ToString());
-            Debug.Log("PLAYER DATA: LocalID : :" + inputData.localPlayerID);
+            Debug.Log("PLAYER DATA: LocalID : :" + inputData.playerID);
             playerService.SetPlayerData(inputData,recieveInput);
             //multiplayerService.SendNewInput(inputData);
         }

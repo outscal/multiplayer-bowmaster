@@ -27,6 +27,10 @@ namespace MultiplayerSystem
             Debug.Log("Connected To Server");
             Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
         }
+        public void PrintPlayerCout()
+        {
+            Debug.Log("TotalConnected Players " + PhotonNetwork.CountOfPlayers);
+        }
 
         public override void OnDisconnected(DisconnectCause cause)
         {

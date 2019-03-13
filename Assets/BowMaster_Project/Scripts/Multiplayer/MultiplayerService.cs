@@ -29,12 +29,14 @@ namespace MultiplayerSystem
 
         public void SendNewInput(InputData inputData)
         {
-            communicationManager.SendInputData(inputData);
+            if (communicationManager != null)
+                communicationManager.SendInputData(inputData);
         }
 
         public void SetCommunicationManager(CommunicationManager communicationManager)
         {
-            this.communicationManager = communicationManager;
+            
+                this.communicationManager = communicationManager;
         }
         public void SendInputDataToPlayer(InputData inputData)
         {

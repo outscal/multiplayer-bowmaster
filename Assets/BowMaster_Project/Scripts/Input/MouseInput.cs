@@ -62,8 +62,9 @@ namespace InputSystem
             if (Input.GetMouseButtonUp(0))
             {
                 endMousePosition = Input.mousePosition;
-                InputData inputData= CreateInputData();  
-                inputService.SendPlayerData(inputData,false);
+                InputData inputData= CreateInputData();
+                multiplayerService.SendNewInput(inputData);
+                //inputService.SendPlayerData(inputData,false);
             }
         }
 
@@ -74,7 +75,7 @@ namespace InputSystem
             inputData.angleValue = angle;
             inputData.powerValue = power;
             inputData.characterID = characterID;
-            inputData.localPlayerID = localPlayerID;
+            inputData.playerID = inputService.GetLocalPlayerID(); 
             //multiplayerService.SendNewInput(inputData);
             return inputData;
         }

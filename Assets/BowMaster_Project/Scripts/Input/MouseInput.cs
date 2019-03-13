@@ -92,7 +92,7 @@ namespace InputSystem
             {
                 power = 100f;
             }
-            angle = Vector2.Angle(vectorA, vectorB);
+            angle = -Vector2.SignedAngle(vectorA, vectorB);
         }
 
     }

@@ -19,8 +19,11 @@ namespace WeaponSystem
 
         public void SpawnWeapon(float power, float angle, Vector2 spawnPos)
         {
-            Vector2 direction = new Vector2((float)Mathf.Cos(180 - angle),
-                                            (float)Mathf.Sin(180 - angle));
+            Debug.Log("[WeaponService] Angle:" + angle);
+
+            Vector2 direction = new Vector2((float)Mathf.Cos((angle) * Mathf.Deg2Rad),
+                                            (float)Mathf.Sin((angle) * Mathf.Deg2Rad));
+            Debug.Log("[WeaponService] Direction:" + direction);
             weaponController = new WeaponController(this, power, direction, spawnPos);
         }
 

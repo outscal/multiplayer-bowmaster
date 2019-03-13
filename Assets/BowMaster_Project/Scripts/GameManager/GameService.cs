@@ -14,6 +14,7 @@ namespace GameSystem
         public GameService(IUIService uIService)
         {
             this.uIService = uIService;
+            Initialize();
         }
 
         public void ChangeToGameOverState()

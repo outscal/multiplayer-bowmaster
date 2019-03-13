@@ -2,8 +2,8 @@
 using System.Collections;
 using Photon.Pun;
 using Photon.Realtime;
-using InputSystem;
 using ExitGames.Client.Photon;
+using InputSystem;
 
 namespace MultiplayerSystem
 {
@@ -23,7 +23,7 @@ namespace MultiplayerSystem
             data.localPlayerID = PhotonNetwork.LocalPlayer.UserId;
             Debug.Log("userId:" + PhotonNetwork.LocalPlayer.UserId);
             byte evCode = 1;
-            object[] content = new object[] { data.angleValue, data.localPlayerID };
+            object[] content = new object[] { data.localPlayerID, data.localPlayerID };
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(evCode, content, raiseEventOptions, sendOptions);

@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc7cf751ae07c4dfb9540fa2c4967616, type: 3}
-  m_Name: PlayerScriptableObj
+  m_Script: {fileID: 11500000, guid: f376cd99c89b642628553502e2eee435, type: 3}
+  m_Name: WeaponList
   m_EditorClassIdentifier: 
-  characterViews:
-  - {fileID: 2246417186617559647, guid: 88fd7a92ebe9e422c87a14eadabd62e7, type: 3}
+  weaponList:
+  - {fileID: 7153460522279765322, guid: d585440db7fac4ef692ecccac2314196, type: 3}

@@ -7,7 +7,8 @@ namespace GameSystem
     {
         LOADING,
         LOBBY,
-        GAME,
+        GAME_PLAY,
+        GAME_START,
         GAME_OVER
     }
 }

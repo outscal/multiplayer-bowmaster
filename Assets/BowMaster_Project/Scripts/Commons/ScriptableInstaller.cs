@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using PlayerSystem;
+using WeaponSystem;
 
 namespace Common
 {
@@ -10,10 +11,12 @@ namespace Common
     public class ScriptableInstaller : ScriptableObjectInstaller
     {
         public ScriptableObjPlayer scriptableObjPlayer;
+        public ScriptableObjWeapon scriptableObjWeapon;
 
         public override void InstallBindings()
         {
             Container.BindInstances(scriptableObjPlayer);
+            Container.BindInstances(scriptableObjWeapon);
         }
     }
 }

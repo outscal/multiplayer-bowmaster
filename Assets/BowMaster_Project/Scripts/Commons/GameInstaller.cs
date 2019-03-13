@@ -6,6 +6,7 @@ using MultiplayerSystem;
 using PlayerSystem;
 using UISystem;
 using UnityEngine;
+using WeaponSystem;
 
 namespace Commons
 {
@@ -31,6 +32,11 @@ namespace Commons
                 To<InputService>().
                 AsSingle().
                 NonLazy();
+
+            Container.Bind(typeof(IWeaponService))
+                .To<WeaponService>()
+                .AsSingle()
+                .NonLazy();
 
         }
     }

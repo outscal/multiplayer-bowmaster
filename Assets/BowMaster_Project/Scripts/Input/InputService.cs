@@ -8,14 +8,7 @@ using Zenject;
 
 namespace InputSystem
 {
-    public struct InputData
-    {
-        public float powerValue;
-        public float angleValue;
-        public int localPlayerID;
-        public int characterID;
-
-    }
+   
 
     public class InputService : IInputService, ITickable
     {
@@ -71,19 +64,19 @@ namespace InputSystem
             return selectedCharacterID;
         }
 
-        public int GetLocalPlayerID()
+        public string GetLocalPlayerID()
         {
             return playerService.GetLocalPlayerID();
         }
 
         public void SendPlayerData(InputData inputData)
         {
-            Debug.Log("PLAYER DATA Recieved");
-            Debug.Log("PLAYER DATA: POWER : :"+inputData.powerValue);
-            Debug.Log("PLAYER DATA: ANGLE : :"+inputData.angleValue.ToString());
-            Debug.Log("PLAYER DATA: LocalID : :"+inputData.localPlayerID);
-
+            //Debug.Log("PLAYER DATA Recieved");
+            //Debug.Log("PLAYER DATA: POWER : :"+inputData.powerValue);
+            //Debug.Log("PLAYER DATA: ANGLE : :"+inputData.angleValue.ToString());
+            //Debug.Log("PLAYER DATA: LocalID : :"+inputData.localPlayerID);
             playerService.SetPlayerData(inputData);
+            multiplayerService.SendNewInput(inputData);
         }
     }
 }

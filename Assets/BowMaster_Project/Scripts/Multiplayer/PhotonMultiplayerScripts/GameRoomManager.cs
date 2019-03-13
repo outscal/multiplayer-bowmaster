@@ -11,16 +11,21 @@ namespace MultiplayerSystem
 {
     public class GameRoomManager : MonoBehaviourPunCallbacks
     {
-        [Inject] IMultiplayerService multiplayerService; 
+        [Inject] IMultiplayerService multiplayerService;
+        CommunicationManager communicationManager;
         #region Private Methods
-        
+
         #endregion
+        public void Start()
+        {
+            communicationManager = new CommunicationManager(multiplayerService);
+        }
         #region Photon Callbacks
         public override void OnJoinedRoom()
         {
             Vector2 pos;
-            Debug.Log("You Joined a room YourName is" + PhotonNetwork.LocalPlayer.NickName + "RoomNameIs " + PhotonNetwork.CurrentRoom.Name+" PlayersInRoom "+PhotonNetwork.CurrentRoom.PlayerCount);
-            if (PhotonNetwork.CurrentRoom.PlayerCount == 0)
+            Debug.Log("You Joined a room YourName is " + PhotonNetwork.LocalPlayer.NickName + "RoomNameIs " + PhotonNetwork.CurrentRoom.Name+" PlayersInRoom "+PhotonNetwork.CurrentRoom.PlayerCount);
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
                 pos = new Vector2(-10, 0);
             }
@@ -28,10 +33,12 @@ namespace MultiplayerSystem
             {
                 pos = new Vector2(10, 0);
             }
+           
+            multiplayerService.SetLocalPlayerID(PhotonNetwork.LocalPlayer.UserId);
             PlayerSpawnData spawn = new PlayerSpawnData();
             spawn.playerID = PhotonNetwork.LocalPlayer.UserId;
             spawn.playerPosition = pos;
-            multiplayerService.SpawnPlayer(spawn);
+            //communicationManager.NotifyAllAboutPlayerSpawn(spawn);
         }
         public override void OnLeftRoom()
         {
@@ -39,11 +46,11 @@ namespace MultiplayerSystem
         }
         public override void OnPlayerEnteredRoom(Player other)
         {
-            Debug.LogFormat("A Player Entered Room With Name:" + other.NickName);
+            Debug.LogFormat("A Player Entered Room With Name: " + other.NickName);
         }
         public override void OnPlayerLeftRoom(Player other)
         {
-            Debug.LogFormat("A Player Left Room:"+ other.NickName);
+            Debug.LogFormat("A Player Left Room: "+ other.NickName);
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);

@@ -33,7 +33,6 @@ namespace MultiplayerSystem
         }
         public void SetPlayerName(string name)
         {
-
             // #Important
             if (string.IsNullOrEmpty(name))
             {

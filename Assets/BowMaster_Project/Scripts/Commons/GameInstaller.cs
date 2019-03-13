@@ -20,6 +20,7 @@ namespace Commons
                 To<PlayerService>().
                 AsSingle().
                 NonLazy();
+        
             Container.Bind<IUIService>().
                 To<UIService>().
                 AsSingle().

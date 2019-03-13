@@ -21,19 +21,24 @@ namespace PlayerSystem
         {
             this.signalBus = signalBus;
             this.scriptableObjPlayer = scriptableObjPlayer;
+            playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
             SpawnPlayer("YoYo");
+            localPlayerID = "YoYo";
         }
 
         public void SpawnPlayer(string playerID)
         {
-            playerControllerDictionary.Add(playerID, new PlayerController(playerID, this));
+            PlayerController playerController = new PlayerController(playerID, this, weaponService);
+            playerControllerDictionary.Add(playerID, playerController);
         }
 
         public void SetPlayerData(InputData inputData)
         {
             Debug.Log("[PlayerService] Power:" + inputData.powerValue +
-            "/n Angle:" + inputData.angleValue);
+            "\n Angle:" + inputData.angleValue +
+            "\n PlayerID:" + inputData.localPlayerID);
+
             playerControllerDictionary[inputData.localPlayerID].SetShootInfo(inputData.powerValue
             , inputData.angleValue
             , inputData.characterID);
@@ -48,5 +53,6 @@ namespace PlayerSystem
         {
             return localPlayerID;
         }
+
     }
 }

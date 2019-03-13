@@ -17,6 +17,8 @@ namespace WeaponSystem
 
         public void Shoot(float force, Vector2 direction)
         {
+            if (force > 30)
+                force = 30;
             rb.AddForce(force * direction, ForceMode2D.Impulse);
         }
     }

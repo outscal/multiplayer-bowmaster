@@ -8,6 +8,7 @@ namespace PlayerSystem
         [SerializeField] private GameObject displayHolder, shootPos;
         [SerializeField] private TextMeshProUGUI powerText, angleText;
 
+        public Vector2 ShootPos { get { return shootPos.transform.position; } }
         private PlayerCharacterController playerCharacterController;
 
         public void SetCharacterController(PlayerCharacterController playerCharacterController)
@@ -22,8 +23,9 @@ namespace PlayerSystem
 
         public void SetShootInfo(float power, float angle)
         {
-            powerText.text = power + " /nPower";
-            angleText.text = angle + " /nAngle"; 
+            powerText.text = power + " \n Power";
+            angleText.text = angle + " \n Angle";
+            displayHolder.SetActive(true);
         }
     }
 }

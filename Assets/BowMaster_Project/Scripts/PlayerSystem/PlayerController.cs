@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WeaponSystem;
 
 namespace PlayerSystem
 {
@@ -10,10 +11,13 @@ namespace PlayerSystem
 
         private List<PlayerCharacterController> playerCharacterControllerList;
         private PlayerService playerService;
+        private IWeaponService weaponService;
 
-        public PlayerController(string playerID, PlayerService playerService)
+        public PlayerController(string playerID, PlayerService playerService
+        , IWeaponService weaponSystem)
         {
             this.playerService = playerService;
+            this.weaponService = weaponSystem;
             this.playerID = playerID;
             playerCharacterControllerList = new List<PlayerCharacterController>();
 
@@ -21,6 +25,7 @@ namespace PlayerSystem
             {
                 PlayerCharacterController playerCharacterController = new PlayerCharacterController(
                         i, this, playerService.ReturnPlayerScriptableObj()
+                        , weaponService
                     );
                 playerCharacterControllerList.Add(playerCharacterController);
             }

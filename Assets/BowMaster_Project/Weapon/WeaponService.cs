@@ -17,11 +17,11 @@ namespace WeaponSystem
             this.scriptableObjWeapon = scriptableObjWeapon;
         }
 
-        public void SpawnWeapon(float power, float angle)
+        public void SpawnWeapon(float power, float angle, Vector2 spawnPos)
         {
             Vector2 direction = new Vector2((float)Mathf.Cos(angle * Mathf.PI),
                                             (float)Mathf.Sin(angle * Mathf.PI));
-            weaponController = new WeaponController(this, power, direction);
+            weaponController = new WeaponController(this, power, direction, spawnPos);
         }
 
         public ScriptableObjWeapon ReturnWeaponScriptable()

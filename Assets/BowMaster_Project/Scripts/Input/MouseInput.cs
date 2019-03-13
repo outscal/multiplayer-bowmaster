@@ -3,6 +3,7 @@ using PlayerSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameSystem;
 using Zenject;
 
 namespace InputSystem
@@ -11,6 +12,7 @@ namespace InputSystem
     {
         private IInputService inputService;
         private IMultiplayerService multiplayerService;
+        private IGameService gameService;
 
         private Vector2 startMousePosition;
         private Vector2 endMousePosition;
@@ -22,15 +24,20 @@ namespace InputSystem
         private int characterID;
         private string localPlayerID;
 
-        public MouseInput(IInputService inputService, IMultiplayerService multiplayerService)
+        public MouseInput(IInputService inputService, IMultiplayerService multiplayerService,IGameService gameService)
         {
             this.inputService = inputService;
             this.multiplayerService = multiplayerService;
+            this.gameService = gameService;
             localPlayerID = inputService.GetLocalPlayerID();
         }
 
         public void OnTick()
         {
+            if(gameService.GetGameState()!=GameStateEnum.GAME_PLAY)
+            {
+                return;
+            }
             if (Input.GetMouseButtonDown(0))
             {
                 startMousePosition = Input.mousePosition;
@@ -50,8 +57,8 @@ namespace InputSystem
                 inputData.powerValue = power;
                 inputData.characterID = characterID;
                 inputData.localPlayerID = localPlayerID;
-
-                inputService.SendPlayerData(inputData);              
+                multiplayerService.SendNewInput(inputData);
+                //inputService.SendPlayerData(inputData);              
 
             }
         }

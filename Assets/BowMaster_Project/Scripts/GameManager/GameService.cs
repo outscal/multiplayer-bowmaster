@@ -49,5 +49,10 @@ namespace GameSystem
             gameStateMachine = new GameStateMachine(uIService);
             ChangeToGameStartState();
         }
+
+        public GameStateEnum GetGameState()
+        {
+            return gameStateMachine.GetGameState();
+        }
     }
 }

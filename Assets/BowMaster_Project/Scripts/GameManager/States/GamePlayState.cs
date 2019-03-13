@@ -12,7 +12,8 @@ namespace GameSystem
 
         public void OnStateEnter()
         {
-           
+           //UIStartPlayerUI
+           //saveSystem.count
         }
 
         public void OnStateExit()

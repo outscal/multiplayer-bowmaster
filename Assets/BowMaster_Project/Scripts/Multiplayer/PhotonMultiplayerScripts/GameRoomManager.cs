@@ -28,7 +28,7 @@ namespace MultiplayerSystem
         }
         public override void OnLeftRoom()
         {
-            GameObject.FindObjectOfType<testingUI>().ExitRoom();
+
         }
         public override void OnPlayerEnteredRoom(Player other)
         {

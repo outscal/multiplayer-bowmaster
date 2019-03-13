@@ -3,6 +3,7 @@ using System.Collections;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
+using InputSystem;
 
 namespace MultiplayerSystem
 {
@@ -16,13 +17,13 @@ namespace MultiplayerSystem
         {
             PhotonNetwork.RemoveCallbackTarget(this);
         }
-        public void setData(InputData data)
+        public void SetData(InputData data)
         {
             
             data.localPlayerID = PhotonNetwork.LocalPlayer.UserId;
             Debug.Log("userId:" + PhotonNetwork.LocalPlayer.UserId);
             byte evCode = 1;
-            object[] content = new object[] { data.spos, data.localPlayerID };
+            object[] content = new object[] { data.localPlayerID, data.localPlayerID };
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(evCode, content, raiseEventOptions, sendOptions);

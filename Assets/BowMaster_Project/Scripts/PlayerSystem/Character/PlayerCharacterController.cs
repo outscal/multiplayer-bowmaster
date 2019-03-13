@@ -34,10 +34,12 @@ namespace PlayerSystem
             return characterID;
         }
 
-        public void SetShootInfo(float power, float angle)
+        public void SetShootInfo(float power, float angle, bool gettingInput)
         {
-            playerCharacterView.SetShootInfo(power, angle);
-            weaponService.SpawnWeapon(power, angle, playerCharacterView.ShootPos);
+            playerCharacterView.SetShootInfo(power, angle,gettingInput);
+
+            if (gettingInput == false)
+                weaponService.SpawnWeapon(power, angle, playerCharacterView.ShootPos);
         }
     }
 }

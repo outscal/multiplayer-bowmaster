@@ -23,7 +23,8 @@ namespace PlayerSystem
             this.scriptableObjPlayer = scriptableObjPlayer;
             playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
-            SpawnPlayer("YoYo",new Vector2 (-5f,1f));
+
+            SpawnPlayer("YoYo", new Vector2(-5f, 0f));
             localPlayerID = "YoYo";
         }
 
@@ -44,7 +45,7 @@ namespace PlayerSystem
             playerControllerDictionary.Add(playerID, playerController);
         }
 
-        public void SetPlayerData(InputData inputData)
+        public void SetPlayerData(InputData inputData, bool gettingInput)
         {
             if (playerControllerDictionary.Count>0)
             {
@@ -53,7 +54,8 @@ namespace PlayerSystem
                 "\n PlayerID:" + inputData.localPlayerID);
                 playerControllerDictionary[inputData.localPlayerID].SetShootInfo(inputData.powerValue
                 , inputData.angleValue
-                , inputData.characterID);
+                , inputData.characterID
+                , gettingInput);
             }
         }
 
@@ -65,6 +67,11 @@ namespace PlayerSystem
         public string GetLocalPlayerID()
         {
             return localPlayerID;
+        }
+
+        public void EndInput(string playerID, int characterID)
+        {
+
         }
     }
 }

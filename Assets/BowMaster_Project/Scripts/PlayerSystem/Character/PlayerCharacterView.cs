@@ -21,11 +21,18 @@ namespace PlayerSystem
             return playerCharacterController.GetCharacterID();
         }
 
-        public void SetShootInfo(float power, float angle)
+        public void SetShootInfo(float power, float angle, bool gettingInput)
         {
-            powerText.text = power + " \n Power";
-            angleText.text = angle + " \n Angle";
-            displayHolder.SetActive(true);
+            if (gettingInput == true)
+            {
+                powerText.text = power + " \n Power";
+                angleText.text = angle + " \n Angle";
+                displayHolder.SetActive(true);
+            }
+            else
+            {
+                displayHolder.SetActive(false); 
+            }
         }
     }
 }

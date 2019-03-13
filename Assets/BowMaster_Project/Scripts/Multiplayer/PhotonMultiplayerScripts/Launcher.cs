@@ -24,8 +24,8 @@ namespace MultiplayerSystem
 
         public override void OnConnectedToMaster()
         {
-            Debug.Log("OnConnected Callback");
-            Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
+            Debug.Log("Connected To Server");
+            //Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -46,6 +46,7 @@ namespace MultiplayerSystem
             }
             else if (PhotonNetwork.IsConnected)
             {
+                Debug.Log("Room joined with Room name testing");
                 PhotonNetwork.JoinRoom("testing");
             }
         }

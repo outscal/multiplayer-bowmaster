@@ -10,7 +10,6 @@ namespace MultiplayerSystem
     public class MultiplayerService : IMultiplayerService
     {
         IPlayerService playerService;
-        IInputService inputService;
         Launcher launch;
 
         public MultiplayerService(IPlayerService playerService)

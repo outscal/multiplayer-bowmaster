@@ -19,7 +19,7 @@ namespace MultiplayerSystem
         public override void OnJoinedRoom()
         {
             Vector2 pos;
-            Debug.Log("now this client is in a room total = " + PhotonNetwork.LocalPlayer.NickName + " " + PhotonNetwork.CurrentRoom.Name);
+            Debug.Log("You Joined a room YourName is" + PhotonNetwork.LocalPlayer.NickName + "RoomNameIs " + PhotonNetwork.CurrentRoom.Name+" PlayersInRoom "+PhotonNetwork.CurrentRoom.PlayerCount);
             if (PhotonNetwork.CurrentRoom.PlayerCount == 0)
             {
                 pos = new Vector2(-10, 0);
@@ -35,15 +35,15 @@ namespace MultiplayerSystem
         }
         public override void OnLeftRoom()
         {
-
+            Debug.Log("You Left Room");
         }
         public override void OnPlayerEnteredRoom(Player other)
         {
-            Debug.LogFormat("Player Entered Room NickName:" + other.NickName+ " UserId:" + other.UserId+ " IsMasterClient:" + other.IsMasterClient);
+            Debug.LogFormat("A Player Entered Room With Name:" + other.NickName);
         }
         public override void OnPlayerLeftRoom(Player other)
         {
-            Debug.LogFormat("Player Left Room:"+ other.NickName);
+            Debug.LogFormat("A Player Left Room:"+ other.NickName);
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);

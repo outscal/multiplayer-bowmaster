@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using PlayerSystem;
 using UISystem;
 using MultiplayerSystem;
+using GameSystem;
 using UnityEngine;
 using Zenject;
 
@@ -16,20 +17,22 @@ namespace InputSystem
         private IPlayerService playerService;
         private IInputComponent inputComponent;
         private IMultiplayerService multiplayerService;
+        private IGameService gameService; 
         private int selectedCharacterID;
         private Camera cam;
 
-        public InputService(IUIService uiService,IPlayerService playerService,IMultiplayerService multiplayerService)
+        public InputService(IUIService uiService,IPlayerService playerService,IMultiplayerService multiplayerService, IGameService gameService)
         {
             this.uiService = uiService;
             this.playerService = playerService;
             this.multiplayerService = multiplayerService;
+            this.gameService = gameService;
             cam = Camera.main;
 
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
-            inputComponent = new TouchInput(this, multiplayerService);
+            inputComponent = new TouchInput(this, multiplayerService,gameService);
 #elif UNITY_EDITOR || UNITY_STANDALONE
-            inputComponent = new MouseInput(this,multiplayerService);
+            inputComponent = new MouseInput(this,multiplayerService,gameService);
 #endif
 
         }

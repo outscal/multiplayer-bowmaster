@@ -25,6 +25,7 @@ namespace MultiplayerSystem
         public override void OnConnectedToMaster()
         {
             Debug.Log("OnConnected Callback");
+           // Debug.Log(PhotonNetwork.CountOfPlayers);
             Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
         }
 
@@ -38,19 +39,18 @@ namespace MultiplayerSystem
         #region Public Methods
         public void Connect()
         {
-            Debug.Log("Connecting to room");
-            if (PhotonNetwork.CountOfRooms == 0)
-            {
-                Debug.Log("Room created with name testing");
-                PhotonNetwork.CreateRoom("testing", new RoomOptions { MaxPlayers = 4 });
-            }
-            else if (PhotonNetwork.IsConnected)
-            {
-                PhotonNetwork.JoinRoom("testing");
-            }
+            Debug.Log("Player Count "+PhotonNetwork.CountOfPlayers);
+            //Debug.Log("Connecting to room");
+            //if (PhotonNetwork.CountOfRooms == 0)
+            //{
+            //    Debug.Log("Room created with name testing");
+            //    PhotonNetwork.CreateRoom("testing", new RoomOptions { MaxPlayers = 4 });
+            //}
+            //else if (PhotonNetwork.IsConnected)
+            //{
+            //    PhotonNetwork.JoinRoom("testing");
+            //}
         }
-
-
         #endregion
 
 

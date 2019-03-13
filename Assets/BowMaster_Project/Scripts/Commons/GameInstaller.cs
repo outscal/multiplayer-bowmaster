@@ -20,14 +20,17 @@ namespace Commons
                 To<PlayerService>().
                 AsSingle().
                 NonLazy();
+
             Container.Bind<IUIService>().
                 To<UIService>().
                 AsSingle().
                 NonLazy();
+
             Container.Bind<IMultiplayerService>().
                 To<MultiplayerService>().
                 AsSingle().
                 NonLazy();
+
             Container.Bind<IGameService>().
                 To<GameService>().
                 AsSingle().

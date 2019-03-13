@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Zenject;
 using UISystem;
+using PlayerSystem;
 using UnityEngine;
 
 namespace GameSystem
@@ -10,10 +11,13 @@ namespace GameSystem
     {
         private IGameStateMachine gameStateMachine;
         private IUIService uIService;
+        private IPlayerService playerService;
 
-        public GameService(IUIService uIService)
+        //public GameService(IUIService uIService)
+        public GameService(IUIService uIService,IPlayerService playerService)
         {
             this.uIService = uIService;
+            this.playerService = playerService;
             Initialize();
         }
 
@@ -47,7 +51,7 @@ namespace GameSystem
 
         public void Initialize()
         {
-            gameStateMachine = new GameStateMachine(uIService);
+            gameStateMachine = new GameStateMachine(uIService,playerService);
             ChangeToGameStartState();
         }
 

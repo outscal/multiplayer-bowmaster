@@ -23,8 +23,8 @@ namespace PlayerSystem
             this.scriptableObjPlayer = scriptableObjPlayer;
             playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
-            //SpawnPlayer("YoYo");
-            //localPlayerID = "YoYo";
+            SpawnPlayer("YoYo",new Vector2 (-5f,1f));
+            localPlayerID = "YoYo";
         }
 
         public void SetLocalPlayerID(string localPlayerID)

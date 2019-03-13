@@ -34,33 +34,46 @@ namespace InputSystem
 
         public void OnTick()
         {
-            if(gameService.GetGameState()!=GameStateEnum.GAME_PLAY)
-            {
-                return;
-            }
+            //if(gameService.GetGameState()!=GameStateEnum.GAME_PLAY)
+            //{
+            //    return;
+            //}
             if (Input.GetMouseButtonDown(0))
             {
                 startMousePosition = Input.mousePosition;
                 endMousePosition = Input.mousePosition;
-                //  CalculateParameters(startMousePosition, endMousePosition);
+                InputData inputData = CreateInputData();
+                inputService.SendPlayerData(inputData);
                 if (inputService.CheckForCharacterPresence(startMousePosition))
                 {
                     characterID = inputService.GetSelectedCharacterID();
                 }
-            }          
+            }
+            if (Input.GetMouseButton(0))
+            {
+                endMousePosition = Input.mousePosition;
+                InputData inputData = CreateInputData();
+                inputService.SendPlayerData(inputData);
+            }
             if (Input.GetMouseButtonUp(0))
             {
                 endMousePosition = Input.mousePosition;
-                CalculateParameters(startMousePosition, endMousePosition);
-                InputData inputData = new InputData();
-                inputData.angleValue = angle;
-                inputData.powerValue = power;
-                inputData.characterID = characterID;
-                inputData.localPlayerID = localPlayerID;
-                multiplayerService.SendNewInput(inputData);
-                //inputService.SendPlayerData(inputData);              
+               InputData inputData= CreateInputData();  
+              inputService.SendPlayerData(inputData);
 
             }
+        }
+
+        private InputData CreateInputData()
+        {
+            CalculateParameters(startMousePosition, endMousePosition);
+            InputData inputData = new InputData();
+            inputData.angleValue = angle;
+            inputData.powerValue = power;
+            inputData.characterID = characterID;
+            inputData.localPlayerID = localPlayerID;
+            //multiplayerService.SendNewInput(inputData);
+            return inputData;
         }
 
         //calculate angle and current distance
@@ -71,7 +84,7 @@ namespace InputSystem
             float currentDistance = Vector2.SqrMagnitude(vectorA);
             currentDistance=Mathf.Sqrt(currentDistance);
             power = currentDistance;
-            Debug.Log("MAGNITUDE :" +power);
+            
             if(power>maxDragDistance)
             {
                 power = 100f;

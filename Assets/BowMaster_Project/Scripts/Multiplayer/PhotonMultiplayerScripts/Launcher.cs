@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Zenject;
+
 namespace MultiplayerSystem
 {
     public class Launcher : MonoBehaviourPunCallbacks
@@ -12,7 +14,7 @@ namespace MultiplayerSystem
         #endregion
         #region Private Fields
         string gameVersion = "1";
-
+        [Inject] IMultiplayerService multiplayerService;
         #endregion
         #region MonoBehaviour CallBacks
         void Awake()
@@ -25,7 +27,9 @@ namespace MultiplayerSystem
         public override void OnConnectedToMaster()
         {
             Debug.Log("Connected To Server");
-            Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
+            multiplayerService.SetConnected();
+            //Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
+            
         }
         public void PrintPlayerCout()
         {

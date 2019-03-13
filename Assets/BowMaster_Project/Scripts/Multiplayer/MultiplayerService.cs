@@ -12,12 +12,16 @@ namespace MultiplayerSystem
         IPlayerService playerService;
         PlayerName playerServerName;
         Launcher launch;
+        bool connected = false;
         CommunicationManager communicationManager;
-
+        public void SetConnected()
+        {
+            connected = true;
+        }
         public MultiplayerService(IPlayerService playerService)
         {
             playerServerName = new PlayerName();
-            launch = GameObject.FindObjectOfType<Launcher>();
+            //launch = GameObject.FindObjectOfType<Launcher>();
             this.playerService = playerService;
             //this.inputService = inputService;
         }
@@ -25,6 +29,10 @@ namespace MultiplayerSystem
         public void Connect(string name)
         {
             playerServerName.SetPlayerName(name);
+        }
+        public bool CheckConnection()
+        {
+            return connected;
         }
 
         public void SendNewInput(InputData inputData)

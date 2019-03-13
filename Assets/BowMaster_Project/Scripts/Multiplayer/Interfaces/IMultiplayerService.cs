@@ -13,6 +13,8 @@ namespace MultiplayerSystem
         void SpawnPlayer(PlayerSpawnData playerSpawnData);
         void SetLocalPlayerID(string localID);
         void Connect(string name);
+        bool CheckConnection();
+        void SetConnected();
         void SetCommunicationManager(CommunicationManager communicationManager);
         void SendInputDataToPlayer(InputData inputData);
     }

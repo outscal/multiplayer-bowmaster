@@ -11,13 +11,17 @@ namespace UISystem
     {
         [Inject] IMultiplayerService multiplayerService;
         public InputField inputName;
-        public GameObject lobbypanal;
+        public GameObject lobbypanal,connectedText;
         
 
         public void ConnectBtn()
         {
             multiplayerService.Connect(inputName.text);
             lobbypanal.SetActive(false);
+        }
+        public void Update()
+        {
+            connectedText.SetActive(multiplayerService.CheckConnection());
         }
     }
 }

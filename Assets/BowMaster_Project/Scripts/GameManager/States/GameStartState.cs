@@ -3,11 +3,11 @@ using System.Collections;
 
 namespace GameSystem
 {
-    public class GameState : IGameState
+    public class GameStartState : IGameState
     {
         public GameStateEnum GetState()
         {
-            return GameStateEnum.GAME_PLAY;
+            return GameStateEnum.GAME_START;
         }
 
         public void OnStateEnter()

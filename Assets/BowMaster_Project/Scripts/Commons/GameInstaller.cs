@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Zenject;
 using InputSystem;
 using MultiplayerSystem;
+using GameSystem;
 using PlayerSystem;
 using UISystem;
 using UnityEngine;
@@ -25,6 +26,10 @@ namespace Commons
                 NonLazy();
             Container.Bind<IMultiplayerService>().
                 To<MultiplayerService>().
+                AsSingle().
+                NonLazy();
+            Container.Bind<IGameService>().
+                To<GameService>().
                 AsSingle().
                 NonLazy();
 

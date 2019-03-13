@@ -13,11 +13,11 @@ namespace MultiplayerSystem
         IInputService inputService;
         Launcher launch;
 
-        public MultiplayerService(IPlayerService playerService, IInputService inputService)
+        public MultiplayerService(IPlayerService playerService)
         {
             launch = GameObject.FindObjectOfType<Launcher>();
             this.playerService = playerService;
-            this.inputService = inputService;
+            //this.inputService = inputService;
         }
 
         public void Connect()

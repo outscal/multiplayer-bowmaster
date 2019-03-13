@@ -11,7 +11,7 @@ namespace MultiplayerSystem
 {
     public class GameRoomManager : MonoBehaviourPunCallbacks
     {
-        [Inject] MultiplayerService multiplayerService;
+        [Inject] IMultiplayerService multiplayerService; 
         #region Private Methods
         
         #endregion

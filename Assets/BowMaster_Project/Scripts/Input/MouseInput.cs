@@ -50,8 +50,8 @@ namespace InputSystem
                 inputData.powerValue = power;
                 inputData.characterID = characterID;
                 inputData.localPlayerID = localPlayerID;
-
-                inputService.SendPlayerData(inputData);              
+                multiplayerService.SendNewInput(inputData);
+                //inputService.SendPlayerData(inputData);              
 
             }
         }

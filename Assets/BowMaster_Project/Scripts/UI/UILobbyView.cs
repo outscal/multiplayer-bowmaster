@@ -8,13 +8,9 @@ namespace UISystem
 {
     public class UILobbyView : MonoBehaviour
     {
-        IMultiplayerService multiplayerService;
+        [Inject] IMultiplayerService multiplayerService;
 
-        [Inject]
-        public UILobbyView(IMultiplayerService mService)
-        {
-            multiplayerService = mService;
-        }
+        
 
         public void ConnectBtn()
         {

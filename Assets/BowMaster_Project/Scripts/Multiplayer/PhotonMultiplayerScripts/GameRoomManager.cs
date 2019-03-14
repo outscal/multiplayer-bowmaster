@@ -78,13 +78,13 @@ namespace MultiplayerSystem
             {
                 names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
                 names.Add(PhotonNetwork.CurrentRoom.Players[2].NickName);
-             Debug.Log("[Game manager] names"+ PhotonNetwork.CurrentRoom.Players[2].NickName);
+           
             }
             else
             {
                 names.Add(PhotonNetwork.CurrentRoom.Players[2].NickName);
                 names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
-                Debug.Log("[Game manager] names"+ PhotonNetwork.CurrentRoom.Players[1].NickName);
+                
             }
             return names;
         }

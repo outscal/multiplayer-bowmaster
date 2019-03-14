@@ -9,5 +9,8 @@ namespace PlayerSystem
         public string playerID;
         public string playerName;
         public Vector2 playerPosition;
+        public float char1Health;
+        public float char2Health;
+        public float char3Health;
     }
 }

@@ -85,7 +85,7 @@ namespace PlayerSystem
             return localPlayerID;
         }
 
-        public void SetTurnID(string nextTurnID)
+        public void SetTurnId(string nextTurnID)
         {
             turnID = nextTurnID;
         }

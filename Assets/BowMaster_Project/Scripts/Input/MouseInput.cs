@@ -59,8 +59,8 @@ namespace InputSystem
             if (Input.GetMouseButtonUp(0) && inputStatus == InputStatus.VALID)
             {
                 endMousePosition = Input.mousePosition;
-                InputData inputData = CreateInputData(startMousePosition, endMousePosition);
-                inputService.SendPlayerData(inputData, false);
+                InputData inputData = CreateInputData(startMousePosition, endMousePosition);                
+                inputService.SendPlayerDataToServer(inputData);
                 inputStatus = InputStatus.INVALID;
                
             }

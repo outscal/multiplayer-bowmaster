@@ -84,6 +84,9 @@ namespace PlayerSystem
             return localPlayerID;
         }
 
-       
+        public void SendInputDataToServer(InputData inputData)
+        {
+           
+        }
     }
 }

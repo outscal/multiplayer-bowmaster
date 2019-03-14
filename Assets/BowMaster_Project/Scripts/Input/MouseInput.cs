@@ -10,8 +10,7 @@ namespace InputSystem
 {
     public class MouseInput : IInputComponent
     {
-        private IInputService inputService;
-        private IMultiplayerService multiplayerService;
+        private IInputService inputService;        
         private IGameService gameService;
 
         private Vector2 startMousePosition;
@@ -27,10 +26,9 @@ namespace InputSystem
 
         private InputStatus inputStatus=InputStatus.INVALID;
 
-        public MouseInput(IInputService inputService, IMultiplayerService multiplayerService, IGameService gameService)
+        public MouseInput(IInputService inputService,  IGameService gameService)
         {
-            this.inputService = inputService;
-            this.multiplayerService = multiplayerService;
+            this.inputService = inputService;            
             this.gameService = gameService;
             localPlayerID = inputService.GetLocalPlayerID();
         }
@@ -62,9 +60,9 @@ namespace InputSystem
             {
                 endMousePosition = Input.mousePosition;
                 InputData inputData = CreateInputData(startMousePosition, endMousePosition);
-               // inputService.SendPlayerData(inputData, false);
+                inputService.SendPlayerData(inputData, false);
                 inputStatus = InputStatus.INVALID;
-                multiplayerService.SendNewInput(inputData);
+               
             }
 
         }

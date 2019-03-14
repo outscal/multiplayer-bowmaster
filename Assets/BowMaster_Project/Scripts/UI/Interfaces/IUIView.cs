@@ -10,8 +10,7 @@ namespace UISystem
         void ShowPlayerUI(GameObject playerCard);
         void ShowLobbyUI();
         void ShowConnectedUI(PopUpController popUpController);
-        void ShowDisconnectedUI();
-        void ShowVictoryUI();
-        void ShowGameOverUI();
+       // void ShowDisconnectedUI();        
+        void ShowGameOverUI(string reason,PopUpController popUpController);
     }
 }

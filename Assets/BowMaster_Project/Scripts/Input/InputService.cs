@@ -20,25 +20,23 @@ namespace InputSystem
     {
         private IUIService uiService;
         private IPlayerService playerService;
-        private IInputComponent inputComponent;
-        private IMultiplayerService multiplayerService;
+        private IInputComponent inputComponent;        
         private IGameService gameService;
         private int selectedCharacterID;
         private Vector2 forwardCharacterDirection;
         private Camera cam;
 
-        public InputService(IUIService uiService, IPlayerService playerService, IMultiplayerService multiplayerService, IGameService gameService)
+        public InputService(IUIService uiService, IPlayerService playerService, IGameService gameService)
         {
             this.uiService = uiService;
-            this.playerService = playerService;
-            this.multiplayerService = multiplayerService;
+            this.playerService = playerService;            
             this.gameService = gameService;
             cam = Camera.main;
 
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
-            inputComponent = new TouchInput(this, multiplayerService,gameService);
+            inputComponent = new TouchInput(this, gameService);
 #elif UNITY_EDITOR || UNITY_STANDALONE
-            inputComponent = new MouseInput(this, multiplayerService, gameService);
+            inputComponent = new MouseInput(this, gameService);
 #endif
 
         }

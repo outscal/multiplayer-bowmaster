@@ -7,6 +7,11 @@ namespace UISystem
 {
     public interface IUIService
     {
-
+        void ShowPlayerUI();
+        void ShowLobbyUI();
+        void ShowConnectedUI();
+        void ShowDisconnectedUI();
+        void ShowVictoryUI();
+        void ShowGameOverUI();
     }
 }

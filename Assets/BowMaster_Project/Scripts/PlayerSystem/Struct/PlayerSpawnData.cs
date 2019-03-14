@@ -7,6 +7,7 @@ namespace PlayerSystem
     public struct PlayerSpawnData
     {
         public string playerID;
+        public string playerName;
         public Vector2 playerPosition;
     }
 }

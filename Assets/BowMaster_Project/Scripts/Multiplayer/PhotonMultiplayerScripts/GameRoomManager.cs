@@ -34,10 +34,11 @@ namespace MultiplayerSystem
             PlayerSpawnData spawn = new PlayerSpawnData();
             spawn.playerID = PhotonNetwork.LocalPlayer.UserId;
             spawn.playerPosition = pos;
+            spawn.playerName = PhotonNetwork.LocalPlayer.NickName;
             communicationManager.SavePlayerSpawnData(spawn);
             if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
-                communicationManager.GameStarted();
+                communicationManager.NotifyGameStarted();
             }
         }
         public override void OnLeftRoom()

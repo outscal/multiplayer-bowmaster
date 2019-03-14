@@ -71,18 +71,17 @@ namespace InputSystem
 
         private InputData CreateInputData(Vector2 startPos, Vector2 endPos)
         {
-            CalculateParameters(startPos, endPos);
+            CalculateAngleAndPower(startPos, endPos);
             InputData inputData = new InputData();
             inputData.angleValue = angle;
             inputData.powerValue = power;
             inputData.characterID = characterID;
-            inputData.playerID = inputService.GetLocalPlayerID(); 
-            //multiplayerService.SendNewInput(inputData);
+            inputData.playerID = inputService.GetLocalPlayerID();            
             return inputData;
         }
 
         //calculate angle and current distance
-        private void CalculateParameters(Vector2 startPos, Vector2 endPos)
+        private void CalculateAngleAndPower(Vector2 startPos, Vector2 endPos)
         {
             Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
             float currentDistance = Vector2.SqrMagnitude(vectorA);

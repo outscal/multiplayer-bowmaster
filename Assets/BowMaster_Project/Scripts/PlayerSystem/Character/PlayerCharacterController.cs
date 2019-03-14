@@ -14,6 +14,7 @@ namespace PlayerSystem
         protected IWeaponService weaponService;
         protected PlayerCharacterType playerCharacterType;
         protected WeaponType weaponType;
+        protected PlayerService playerService;
 
         public int GetCharacterID()
         {
@@ -45,6 +46,16 @@ namespace PlayerSystem
         public void SetHealthBarFirst(float health)
         {
             playerCharacterView.SetHealthBarLimits(0, health);
+        }
+
+        public void SetHealth(float health)
+        {
+            playerCharacterView.SetBarHealth(health); 
+        }
+
+        public virtual void SendDamageInfoToServer(float damage)
+        {
+            playerController.GetPlayerService().SendPlayerDamageDataToServer(damage, characterID);
         }
     }
 }

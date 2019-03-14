@@ -62,11 +62,7 @@ namespace InputSystem
             {
                 endMousePosition = Input.mousePosition;
                 InputData inputData = CreateInputData(startMousePosition, endMousePosition);
-<<<<<<< HEAD
-                //inputService.SendPlayerData(inputData, false);
-=======
                // inputService.SendPlayerData(inputData, false);
->>>>>>> 663140e16c331b52d60b8d8e21720edbaada4587
                 inputStatus = InputStatus.INVALID;
                 multiplayerService.SendNewInput(inputData);
             }

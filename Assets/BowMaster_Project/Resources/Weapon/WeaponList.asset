@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: WeaponList
   m_EditorClassIdentifier: 
   weaponList:
-  - playerName: WeaponAir
+  - playerName: Air
     weaponType: 0
     weaponView: {fileID: 3879486440962263131, guid: 3ffa38328bfe8472bb5918a1af80c0d6,
       type: 3}
-  - playerName: WeaponFire
+  - playerName: Fire
     weaponType: 1
     weaponView: {fileID: 7116902170214591090, guid: e04d7347b6adf4c61bebd07e6fecd16d,
       type: 3}
-  - playerName: WeaponWater
+  - playerName: Water
     weaponType: 2
     weaponView: {fileID: 5048666143004395842, guid: 1d7f70273c5cb46e7ba78381fbe5e0be,
       type: 3}

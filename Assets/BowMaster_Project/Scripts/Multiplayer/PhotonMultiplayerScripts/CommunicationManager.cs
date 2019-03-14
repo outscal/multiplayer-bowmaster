@@ -26,6 +26,7 @@ namespace MultiplayerSystem
         {
             
             spData = spawnData;
+            spData.playerName = spawnData.playerName;
             multiplayerService.SetCommunicationManager(this);
         }
         public void NotifyAllAboutPlayerSpawn(PlayerSpawnData spawnData)
@@ -84,6 +85,7 @@ namespace MultiplayerSystem
             else if (eventCode == 3)
             {
                 Debug.Log("game Started");
+                multiplayerService.ChangeToGamePlayState();
                 NotifyAllAboutPlayerSpawn(spData);
             }
         }

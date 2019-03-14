@@ -28,7 +28,7 @@ namespace UISystem
 
         }
 
-        public void ShowConnectingUI() => uiView.ShowConnectedUI();       
+        public void ShowConnectingUI() => uiView.ShowConnectedUI(uIScriptableObj.popUpPrefab);       
 
         public void ShowDisconnectedUI()
         {

@@ -9,7 +9,7 @@ namespace UISystem
     {
         void ShowPlayerUI(GameObject playerCard);
         void ShowLobbyUI();
-        void ShowConnectedUI();
+        void ShowConnectedUI(PopUpController popUpController);
         void ShowDisconnectedUI();
         void ShowVictoryUI();
         void ShowGameOverUI();

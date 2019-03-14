@@ -9,5 +9,6 @@ namespace UISystem
     {
         public UIView mainUICanvas;
         public GameObject playerCard;
+        public PopUpController popUpPrefab;
     }
 }

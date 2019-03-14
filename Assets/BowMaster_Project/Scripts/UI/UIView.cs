@@ -17,7 +17,7 @@ namespace UISystem
         [SerializeField]
         private GameObject gameOverPanel;
 
-       
+        private GameObject popupInstance;
 
         private List<GameObject> panelList = new List<GameObject>();
         private void Start()
@@ -25,16 +25,18 @@ namespace UISystem
             panelList.Add(lobbyPanel);
             panelList.Add(connectingPanel);
             panelList.Add(gamePanel);
-
-            lobbyPanel.SetActive(false);
-            connectingPanel.SetActive(false);
-            gamePanel.SetActive(false);
+            panelList.Add(gameOverPanel);
+           
         }
 
-        public void ShowConnectedUI()
+        public void ShowConnectedUI(PopUpController popUpController)
         {
-            connectingPanel.SetActive(true);            
             DeactivateOtherPanels(connectingPanel);
+            connectingPanel.SetActive(true);
+            popupInstance = GameObject.Instantiate(popUpController.gameObject);
+            popupInstance.SetActive(true);
+            popupInstance.transform.SetParent(connectingPanel.transform);
+            popUpController.SetText("Connecting To Server.  .  .  .");
         }
 
         public void ShowDisconnectedUI()
@@ -44,7 +46,15 @@ namespace UISystem
 
         public void ShowGameOverUI()
         {
-           
+            gameOverPanel.SetActive(true);
+        }
+
+        public void ShowWaitingUI()
+        {
+            DeactivateOtherPanels(connectingPanel);
+            connectingPanel.SetActive(true);
+           popupInstance.GetComponent<PopUpController>().SetText("Waiting for players to join . .  .  .  .");
+
         }
 
         public void ShowLobbyUI()

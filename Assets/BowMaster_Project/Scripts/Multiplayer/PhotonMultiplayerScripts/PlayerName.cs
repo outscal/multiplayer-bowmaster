@@ -10,7 +10,7 @@ namespace MultiplayerSystem
         #region Private Serializable Fields
 
         [SerializeField]
-        Launcher launch;
+        LauncherManager launch;
         #endregion
         #region Private Constants
         const string playerNamePrefKey = "PlayerName";
@@ -22,7 +22,7 @@ namespace MultiplayerSystem
         #region Public Methods
         public PlayerName()
         {
-            launch = GameObject.FindObjectOfType<Launcher>();
+            launch = GameObject.FindObjectOfType<LauncherManager>();
             string defaultName = string.Empty;
             if (PlayerPrefs.HasKey(playerNamePrefKey))
             {

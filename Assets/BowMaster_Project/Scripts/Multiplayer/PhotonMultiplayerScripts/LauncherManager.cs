@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Zenject;
+using System.Collections.Generic;
+
 namespace MultiplayerSystem
 {
-    public class Launcher : MonoBehaviourPunCallbacks
+    public class LauncherManager : MonoBehaviourPunCallbacks
     {
         #region Private Serializable Fields
         [SerializeField]
@@ -12,7 +15,7 @@ namespace MultiplayerSystem
         #endregion
         #region Private Fields
         string gameVersion = "1";
-
+        [Inject] IMultiplayerService multiplayerService;
         #endregion
         #region MonoBehaviour CallBacks
         void Awake()
@@ -21,11 +24,20 @@ namespace MultiplayerSystem
             PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }
-
         public override void OnConnectedToMaster()
         {
             Debug.Log("Connected To Server");
-            Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
+            multiplayerService.SetConnected();
+            //PhotonNetwork.JoinLobby();
+            //Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
+        }
+        //public override void OnJoinedLobby()
+        //{
+        //    PhotonNetwork.GetCustomRoomList(TypedLobby.Default, "");
+        //}
+        public void PrintPlayerCout()
+        {
+            Debug.Log("TotalConnected Players " + PhotonNetwork.CountOfPlayers);
         }
 
         public override void OnDisconnected(DisconnectCause cause)
@@ -34,10 +46,13 @@ namespace MultiplayerSystem
         }
 
 
+
         #endregion
         #region Public Methods
         public void Connect()
         {
+            //PhotonNetwork.CreateRoom("testing2", new RoomOptions { MaxPlayers = 2 });
+            //Room rooms = PhotonNetwork.;
             Debug.Log("Connecting to room total rooms present " + PhotonNetwork.CountOfRooms);
             if (PhotonNetwork.CountOfRooms == 0)
             {
@@ -48,11 +63,6 @@ namespace MultiplayerSystem
             {
                 Debug.Log("Room joined with Room name testing");
                 PhotonNetwork.JoinRoom("testing");
-                //if (PhotonNetwork.IsConnected)
-                //{
-                //    Debug.Log("Room created or joined with name testing");
-                //    PhotonNetwork.JoinOrCreateRoom("testing", new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
-                //}
             }
         }
         #endregion

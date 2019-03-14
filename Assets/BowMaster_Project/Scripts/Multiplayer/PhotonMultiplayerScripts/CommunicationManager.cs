@@ -82,6 +82,9 @@ namespace MultiplayerSystem
         {
             spData = spawnData;
             spData.playerName = spawnData.playerName;
+            spData.char1Health = spawnData.char1Health;
+            spData.char2Health = spawnData.char2Health;
+            spData.char3Health = spawnData.char3Health;
             multiplayerService.SetLocalPlayerID(PhotonNetwork.LocalPlayer.UserId);
             multiplayerService.SetCommunicationManager(this);
         }

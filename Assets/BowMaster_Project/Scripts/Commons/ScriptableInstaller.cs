@@ -4,6 +4,7 @@ using UnityEngine;
 using Zenject;
 using PlayerSystem;
 using WeaponSystem;
+using UISystem;
 
 namespace Common
 {
@@ -12,11 +13,13 @@ namespace Common
     {
         public ScriptableObjPlayer scriptableObjPlayer;
         public ScriptableObjWeapon scriptableObjWeapon;
+        public UIScriptableObj uIScriptableObj;
 
         public override void InstallBindings()
         {
             Container.BindInstances(scriptableObjPlayer);
             Container.BindInstances(scriptableObjWeapon);
+            Container.BindInstances(uIScriptableObj);
         }
     }
 }

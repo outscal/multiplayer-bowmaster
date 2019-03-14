@@ -16,8 +16,6 @@ namespace InputSystem
         VALID
     }
 
-
-
     public class InputService : IInputService, ITickable
     {
         private IUIService uiService;

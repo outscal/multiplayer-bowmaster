@@ -30,6 +30,7 @@ namespace GameSystem
         public void ChangeToGameStartState()
         {
             gameStateMachine.ChangeGameState(GameStateEnum.GAME_START);
+            uIService.ShowConnectingUI();
         }
 
         public void ChangeToGamePlayState()
@@ -47,6 +48,7 @@ namespace GameSystem
         public void ChangeToLobbyState()
         {
             gameStateMachine.ChangeGameState(GameStateEnum.LOBBY);
+            uIService.ShowLobbyUI();
            
         }
 

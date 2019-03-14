@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace UISystem
 {
-    public interface IUIService
+    public interface IUIView
     {
-        void ShowPlayerUI();
+        void ShowPlayerUI(GameObject playerCard);
         void ShowLobbyUI();
-        void ShowConnectingUI();
+        void ShowConnectedUI();
         void ShowDisconnectedUI();
         void ShowVictoryUI();
         void ShowGameOverUI();

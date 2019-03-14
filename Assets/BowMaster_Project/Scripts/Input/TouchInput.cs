@@ -84,7 +84,7 @@ namespace InputSystem
 
         private InputData CreateInputData()
         {
-            CalculateParameters(startTouchPos, endTouchPos);
+            CalculateAngleAndPower(startTouchPos, endTouchPos);
             InputData inputData = new InputData();
             inputData.angleValue = angle;
             inputData.powerValue = power;
@@ -94,7 +94,7 @@ namespace InputSystem
         }
 
         //calculate angle and current distance
-        private void CalculateParameters(Vector2 startPos, Vector2 endPos)
+        private void CalculateAngleAndPower(Vector2 startPos, Vector2 endPos)
         {
             Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);         
             float currentDistance = Vector2.SqrMagnitude(vectorA);

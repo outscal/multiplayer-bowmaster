@@ -13,6 +13,7 @@ namespace PlayerSystem
         private PlayerService playerService;
         private IWeaponService weaponService;
         private Vector2 spawnCharacterPos;
+        private string turnID;
 
         public PlayerController(string playerID, PlayerService playerService
         , IWeaponService weaponSystem, Vector2 spawnPos)
@@ -28,7 +29,7 @@ namespace PlayerSystem
                 if (i == 0)
                 {
                     PlayerCharacterController playerCharacterController = new CharacterAirController(
-                            i, this, playerService.ReturnPlayerScriptableObj()
+                            i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Air)
                             , weaponService, spawnCharacterPos
                         );
                     playerCharacterControllerList.Add(playerCharacterController);
@@ -36,7 +37,7 @@ namespace PlayerSystem
                 else if (i == 1)
                 {
                     PlayerCharacterController playerCharacterController = new CharacterWaterController(
-                            i, this, playerService.ReturnPlayerScriptableObj()
+                            i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Water)
                             , weaponService, spawnCharacterPos
                         );
                     playerCharacterControllerList.Add(playerCharacterController);
@@ -44,13 +45,18 @@ namespace PlayerSystem
                 else if (i == 2)
                 {
                     PlayerCharacterController playerCharacterController = new CharacterFireController(
-                            i, this, playerService.ReturnPlayerScriptableObj()
+                            i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Fire)
                             , weaponService, spawnCharacterPos
                         );
                     playerCharacterControllerList.Add(playerCharacterController);
                 }
                 spawnCharacterPos.x += 2;
             }
+        }
+
+        public void SetTurnId(string turnID)
+        {
+            this.turnID = turnID;
         }
 
         public string ReturnPlayerID()
@@ -63,9 +69,5 @@ namespace PlayerSystem
             playerCharacterControllerList[characterID].SetShootInfo(power, angle, gettingInput);
         }
 
-        public void EndInput(int characterID)
-        {
-             
-        }
     }
 }

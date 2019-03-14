@@ -4,6 +4,7 @@ using Zenject;
 using UnityEngine;
 using InputSystem;
 using WeaponSystem;
+using MultiplayerSystem;
 
 namespace PlayerSystem
 {
@@ -11,31 +12,34 @@ namespace PlayerSystem
     {
         readonly SignalBus signalBus;
         private Dictionary<string, PlayerController> playerControllerDictionary;
-        private ScriptableObjPlayer scriptableObjPlayer;
+        private ScriptableObjCharacterList playerList;
         private IWeaponService weaponService;
+        private IMultiplayerService multiplayerService;
 
         private string localPlayerID;
 
-        public PlayerService(SignalBus signalBus, ScriptableObjPlayer scriptableObjPlayer,
+        public PlayerService(SignalBus signalBus, ScriptableObjCharacterList playerList,
         IWeaponService weaponService)
         {
             this.signalBus = signalBus;
-            this.scriptableObjPlayer = scriptableObjPlayer;
+            this.playerList = playerList;
             playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
-            //SpawnPlayer("YoYo", new Vector2(-5, 0));
+            SpawnPlayer("YoYo", new Vector2(-5, 0));
+            localPlayerID = "YoYo";
             //SetLocalPlayerID("YoYo");
         }
 
-        public void SetLocalPlayerID(string localPlayerID)
+        public void SetLocalPlayerID(string localPlayerID, IMultiplayerService multiplayerService)
         {
+            this.multiplayerService = multiplayerService;
             this.localPlayerID = localPlayerID;
             Debug.Log("this is the Localplayer Id that Player Service Recieved " + localPlayerID);
         }
 
         public void PlayerConnected(PlayerSpawnData playerSpawnData)
         {
-            SpawnPlayer(playerSpawnData.playerID, playerSpawnData.playerPosition);
+            //SpawnPlayer(playerSpawnData.playerID, playerSpawnData.playerPosition);
         }
 
         void SpawnPlayer(string playerID, Vector2 spawnPos)
@@ -64,9 +68,15 @@ namespace PlayerSystem
             }
         }
 
-        public ScriptableObjPlayer ReturnPlayerScriptableObj()
+        public ScriptableObjCharacter ReturnPlayerScriptableObj(PlayerCharacterType playerCharacterType)
         {
-            return scriptableObjPlayer;
+            for (int i = 0; i < playerList.playerObject.Count; i++)
+            {
+                if (playerCharacterType == playerList.playerObject[i].playerType)
+                    return playerList.playerObject[i];
+            }
+
+            return null;
         }
 
         public string GetLocalPlayerID()

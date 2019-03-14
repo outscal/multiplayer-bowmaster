@@ -8,7 +8,6 @@ namespace PlayerSystem
     {
         [SerializeField] protected GameObject displayHolder, shootPos;
         [SerializeField] protected TextMeshProUGUI powerText, angleText;
-        [SerializeField] protected WeaponType weaponType;
 
         public Vector2 ShootPos { get { return shootPos.transform.position; } }
         private PlayerCharacterController playerCharacterController;

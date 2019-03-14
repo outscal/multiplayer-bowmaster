@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace PlayerSystem
 {
-    public interface IPlayerController
+    public enum PlayerSpawnSide
     {
-        string ReturnPlayerID();
-        Vector2 GetSpawnPos();
+        LEFTSIDE,
+        RIGHTSIDE
     }
 }

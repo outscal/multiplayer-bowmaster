@@ -26,8 +26,8 @@ namespace PlayerSystem
             this.playerList = playerList;
             playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
-            SpawnPlayer("YoYo", new Vector2(-5, 0));
-            localPlayerID = "YoYo";
+            //SpawnPlayer("YoYo", new Vector2(-5, 0));
+            //localPlayerID = "YoYo";
             //SetLocalPlayerID("YoYo");
         }
 
@@ -40,15 +40,26 @@ namespace PlayerSystem
 
         public void PlayerConnected(PlayerSpawnData playerSpawnData)
         {
-            //SpawnPlayer(playerSpawnData.playerID, playerSpawnData.playerPosition);
+            SpawnPlayer(playerSpawnData);
         }
 
-        void SpawnPlayer(string playerID, Vector2 spawnPos)
+        public PlayerSpawnSide GetLocalPlayerSide()
         {
-            PlayerController playerController = new PlayerController(playerID, this
-            , weaponService, spawnPos);
-            Debug.Log("this is the player Id that Player Service Recieved to add" + playerID);
-            playerControllerDictionary.Add(playerID, playerController);
+            if(playerControllerDictionary[localPlayerID].GetSpawnPos().x < 0)
+            {
+                return PlayerSpawnSide.LEFTSIDE; 
+            }
+
+            return PlayerSpawnSide.RIGHTSIDE;
+        }
+
+        void SpawnPlayer(PlayerSpawnData playerSpawnData)
+        {
+            PlayerController playerController = new PlayerController(playerSpawnData.playerID, this
+            , weaponService, playerSpawnData.playerPosition);
+            Debug.Log("this is the player Id that Player Service Recieved to add" 
+            + playerSpawnData.playerID);
+            playerControllerDictionary.Add(playerSpawnData.playerID, playerController);
         }
 
         public void SetPlayerData(InputData inputData, bool gettingInput)

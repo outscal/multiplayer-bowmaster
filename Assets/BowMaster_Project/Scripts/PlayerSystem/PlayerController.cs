@@ -14,6 +14,7 @@ namespace PlayerSystem
         private IWeaponService weaponService;
         private Vector2 spawnCharacterPos;
         private string turnID;
+        private Vector2 fixedPos;
 
         public PlayerController(string playerID, PlayerService playerService
         , IWeaponService weaponSystem, Vector2 spawnPos)
@@ -22,6 +23,7 @@ namespace PlayerSystem
             this.weaponService = weaponSystem;
             this.playerID = playerID;
             spawnCharacterPos = spawnPos;
+            fixedPos = spawnPos;
             playerCharacterControllerList = new List<PlayerCharacterController>();
 
             for (int i = 0; i < 3; i++)
@@ -75,6 +77,11 @@ namespace PlayerSystem
             {
                 playerCharacterControllerList[i].DeactivateInfoPanel();
             }
+        }
+
+        public Vector2 GetSpawnPos()
+        {
+            return fixedPos;
         }
 
     }

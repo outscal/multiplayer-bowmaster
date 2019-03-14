@@ -12,6 +12,7 @@ namespace GameSystem
         private IGameStateMachine gameStateMachine;
         private IUIService uIService;
         private IPlayerService playerService;
+        private string localPlayerID;
 
         //public GameService(IUIService uIService)
         public GameService(IUIService uIService,IPlayerService playerService)
@@ -21,7 +22,7 @@ namespace GameSystem
             Initialize();
         }
 
-        public void ChangeToGameOverState()
+        public void ChangeToGameOverState(GameOverInfo gameOverInfo)
         {
             gameStateMachine.ChangeGameState(GameStateEnum.GAME_OVER);            
         }
@@ -60,6 +61,11 @@ namespace GameSystem
         public GameStateEnum GetGameState()
         {
             return gameStateMachine.GetGameState();
+        }
+
+        public void SetLocalPlayerID(string ID)
+        {
+            localPlayerID = ID;
         }
     }
 }

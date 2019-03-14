@@ -13,4 +13,15 @@ MonoBehaviour:
   m_Name: PlayerList
   m_EditorClassIdentifier: 
   characterViews:
-  - {fileID: 2246417186617559647, guid: 88fd7a92ebe9e422c87a14eadabd62e7, type: 3}
+  - playerName: CharacterAir
+    playerType: 0
+    playerView: {fileID: 2704757299935903561, guid: e2fa623eb58b04c5b87115b2e2cccd1b,
+      type: 3}
+  - playerName: CharacterWater
+    playerType: 1
+    playerView: {fileID: 7005507320438267944, guid: 254adf049015d4fd8bb5dcb498cb3387,
+      type: 3}
+  - playerName: CharacterFire
+    playerType: 2
+    playerView: {fileID: 4077643094928376053, guid: e86f895b8cc5148d0a727f12bd16a9f5,
+      type: 3}

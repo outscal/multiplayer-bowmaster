@@ -6,20 +6,24 @@ namespace WeaponSystem
 {
     public class WeaponController
     {
-        private WeaponService weaponService;
-        private WeaponView weaponView;
+        protected WeaponService weaponService;
+        protected WeaponView weaponView;
+        protected WeaponType weaponType;
 
-        public WeaponController(WeaponService weaponService, float force
-        , Vector2 direction
-            , Vector2 spawnPos)
+        protected virtual void SetWeaponType()
         {
-            this.weaponService = weaponService;
-            GameObject weapon = GameObject.Instantiate<GameObject>(
-            weaponService.ReturnWeaponScriptable().weaponList[0].gameObject);
-            weapon.transform.position = spawnPos;
-            weaponView = weapon.GetComponent<WeaponView>();
-            weaponView.SetController(this);
-            weaponView.Shoot(force, direction);
+            weaponType = WeaponType.Air;
+        }
+
+        protected WeaponView GetWeaponView()
+        {
+            for (int i = 0; i < weaponService.ReturnWeaponScriptable().weaponList.Count; i++)
+            {
+                if (weaponType == weaponService.ReturnWeaponScriptable().weaponList[i].weaponType)
+                    return weaponService.ReturnWeaponScriptable().weaponList[i].weaponView;
+            }
+
+            return null;
         }
     }
 }

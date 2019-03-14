@@ -10,8 +10,8 @@ namespace UISystem
         void ShowPlayerUI();
         void ShowLobbyUI();
         void ShowConnectingUI();
-        void ShowDisconnectedUI();
-        void ShowVictoryUI();
-        void ShowGameOverUI();
+       // void ShowDisconnectedUI();        
+        void ShowGameOverUI(string reason);
+        void SetLocalPlayerID(string id);
     }
 }

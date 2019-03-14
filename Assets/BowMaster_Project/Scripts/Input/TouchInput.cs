@@ -12,8 +12,7 @@ namespace InputSystem
    
     public class TouchInput :IInputComponent
     {
-        private IInputService inputService;
-        private IMultiplayerService multiplayerService;
+        private IInputService inputService;        
         private IGameService gameService;
         
         private Vector2 startTouchPos;
@@ -26,10 +25,9 @@ namespace InputSystem
         private string localPlayerID;
         private InputStatus inputStatus = InputStatus.INVALID;
 
-        public TouchInput(IInputService inputService,IMultiplayerService multiplayerService,IGameService gameService)
+        public TouchInput(IInputService inputService,IGameService gameService)
         {
-            this.inputService = inputService;
-            this.multiplayerService = multiplayerService;
+            this.inputService = inputService;            
             this.gameService = gameService;
             localPlayerID=inputService.GetLocalPlayerID();
         }
@@ -72,9 +70,8 @@ namespace InputSystem
                 if (touch.phase == TouchPhase.Ended && inputStatus==InputStatus.VALID)
                 {
                     endTouchPos = touch.position;
-                    InputData inputData=  CreateInputData();
-                    multiplayerService.SendNewInput(inputData);
-                    //inputService.SendPlayerData(inputData, false);
+                    InputData inputData=  CreateInputData();                    
+                    inputService.SendPlayerData(inputData, false);
                     inputStatus = InputStatus.INVALID;
 
                 }

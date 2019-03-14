@@ -35,6 +35,7 @@ namespace PlayerSystem
                             , weaponService, spawnCharacterPos
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char1Health);
+                    Debug.Log("[PlayerController] health:" + playerSpawnData.char1Health);
                     playerCharacterControllerList.Add(playerCharacterController);
                 }
                 else if (i == 1)
@@ -44,6 +45,7 @@ namespace PlayerSystem
                             , weaponService, spawnCharacterPos
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char2Health);
+                    Debug.Log("[PlayerController] health:" + playerSpawnData.char2Health);
                     playerCharacterControllerList.Add(playerCharacterController);
                 }
                 else if (i == 2)
@@ -53,6 +55,7 @@ namespace PlayerSystem
                             , weaponService, spawnCharacterPos
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char3Health);
+                    Debug.Log("[PlayerController] health:" + playerSpawnData.char3Health);
                     playerCharacterControllerList.Add(playerCharacterController);
                 }
                 spawnCharacterPos.x += 2;

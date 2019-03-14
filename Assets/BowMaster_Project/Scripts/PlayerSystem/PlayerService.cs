@@ -25,8 +25,8 @@ namespace PlayerSystem
             this.playerList = playerList;
             playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
-            //SpawnPlayer("YoYo", new Vector2(-5, 0));
-            //localPlayerID = "YoYo";
+            SpawnPlayer("YoYo", new Vector2(-5, 0));
+            localPlayerID = "YoYo";
             //SetLocalPlayerID("YoYo");
         }
 
@@ -39,7 +39,7 @@ namespace PlayerSystem
 
         public void PlayerConnected(PlayerSpawnData playerSpawnData)
         {
-            SpawnPlayer(playerSpawnData.playerID, playerSpawnData.playerPosition);
+            //SpawnPlayer(playerSpawnData.playerID, playerSpawnData.playerPosition);
         }
 
         void SpawnPlayer(string playerID, Vector2 spawnPos)

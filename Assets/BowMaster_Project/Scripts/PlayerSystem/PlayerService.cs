@@ -23,14 +23,12 @@ namespace PlayerSystem
             this.scriptableObjPlayer = scriptableObjPlayer;
             playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
-
-            //SpawnPlayer("YoYo", new Vector2(-5f, 0f));
-            //localPlayerID = "YoYo";
         }
 
         public void SetLocalPlayerID(string localPlayerID)
         {
             this.localPlayerID = localPlayerID;
+            Debug.Log("this is the Localplayer Id that Player Service Recieved " + localPlayerID);
         }
 
         public void PlayerConnected(PlayerSpawnData playerSpawnData)
@@ -42,16 +40,21 @@ namespace PlayerSystem
         {
             PlayerController playerController = new PlayerController(playerID, this
             , weaponService, spawnPos);
+            Debug.Log("this is the player Id that Player Service Recieved to add" + playerID);
             playerControllerDictionary.Add(playerID, playerController);
         }
 
         public void SetPlayerData(InputData inputData, bool gettingInput)
         {
-            if (playerControllerDictionary.Count>0)
+            if (!gettingInput)
             {
-                Debug.Log("[PlayerService] Power:" + inputData.powerValue +
-                "\n Angle:" + inputData.angleValue +
-                "\n PlayerID:" + inputData.playerID);
+                Debug.Log("this is the player Id that Player Service Recieved to move" + inputData.playerID);
+            }
+            if (playerControllerDictionary.Count > 0 && playerControllerDictionary.ContainsKey(inputData.playerID) )
+            {
+                //Debug.Log("[PlayerService] Power:" + inputData.powerValue +
+                //"\n Angle:" + inputData.angleValue +
+                //"\n PlayerID:" + inputData.playerID);
                 playerControllerDictionary[inputData.playerID].SetShootInfo(inputData.powerValue
                 , inputData.angleValue
                 , inputData.characterID
@@ -67,11 +70,6 @@ namespace PlayerSystem
         public string GetLocalPlayerID()
         {
             return localPlayerID;
-        }
-
-        public void EndInput(string playerID, int characterID)
-        {
-
         }
     }
 }

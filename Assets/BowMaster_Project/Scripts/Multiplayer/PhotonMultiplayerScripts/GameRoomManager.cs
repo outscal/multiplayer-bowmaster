@@ -23,11 +23,11 @@ namespace MultiplayerSystem
             Debug.Log("You Joined a room YourName is " + PhotonNetwork.LocalPlayer.NickName + " RoomNameIs " + PhotonNetwork.CurrentRoom.Name+" PlayersInRoom "+PhotonNetwork.CurrentRoom.PlayerCount);
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
-                pos = new Vector2(5, 0);
+                pos = new Vector2(15, 0);
             }
             else
             {
-                pos = new Vector2(-5,0);
+                pos = new Vector2(-15,0);
             }
            
             multiplayerService.SetLocalPlayerID(PhotonNetwork.LocalPlayer.UserId);

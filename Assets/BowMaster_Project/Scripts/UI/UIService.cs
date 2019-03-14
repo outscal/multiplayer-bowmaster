@@ -1,24 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Zenject;
-using UnityEngine;
+﻿using MultiplayerSystem;
 using PlayerSystem;
-using MultiplayerSystem;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Zenject;
 
 namespace UISystem
 {
     public class UIService : IUIService
     {
-        
+
         private IUIView uiView;
         private IPlayerService playerService;
         private IMultiplayerService multiplayerService;
         private UIScriptableObj uIScriptableObj;
         private string localPlayerID;
         private GameObject mainCanvas;
+        private GameObject playerCard;
+        private GameObject opponentCard;
 
-
-        public UIService(IPlayerService playerService , IMultiplayerService multiplayerService,  UIScriptableObj uIScriptableObj)
+        public UIService(IPlayerService playerService, IMultiplayerService multiplayerService, UIScriptableObj uIScriptableObj)
         {
             this.uIScriptableObj = uIScriptableObj;
             this.uiView = uIScriptableObj.mainUICanvas;
@@ -41,11 +42,17 @@ namespace UISystem
         }
 
         public void ShowConnectingUI() => uiView.ShowConnectedUI(uIScriptableObj.popUpPrefab);
-        public void ShowGameOverUI(string reason) => uiView.ShowGameOverUI(reason,uIScriptableObj.popUpPrefab);        
-        public void ShowLobbyUI() => uiView.ShowLobbyUI();        
-        public void ShowPlayerUI() => uiView.ShowPlayerUI(uIScriptableObj.playerCard);
+        public void ShowGameOverUI(string reason) => uiView.ShowGameOverUI(reason, uIScriptableObj.popUpPrefab);
+        public void ShowLobbyUI() => uiView.ShowLobbyUI();
+        public void ShowPlayerUI()
+        {
+            uiView.ShowPlayerUI(uIScriptableObj.playerCard);
+            playerCard = GameObject.Instantiate(uIScriptableObj.playerCard);
 
-       // public void ShowDisconnectedUI() => uiView.ShowDisconnectedUI();       
-       
+            //playerCard.GetComponent<>
+        }
+
+        // public void ShowDisconnectedUI() => uiView.ShowDisconnectedUI();       
+
     }
 }

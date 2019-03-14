@@ -8,25 +8,20 @@ namespace PlayerSystem
     public class CharacterFireController : PlayerCharacterController
     {
         public CharacterFireController(int characterID, PlayerController playerController,
-        ScriptableObjPlayer scriptableObjPlayer, IWeaponService weaponService,
+        ScriptableObjCharacter scriptableObjPlayer, IWeaponService weaponService,
             Vector2 spawnPos)
         {
-            SetPlayerType();
             this.scriptableObjPlayer = scriptableObjPlayer;
             this.characterID = characterID;
             this.weaponService = weaponService;
             this.playerController = playerController;
+            this.playerCharacterType = scriptableObjPlayer.playerType;
             GameObject playerObj = GameObject.Instantiate<GameObject>(
-                        ReturnPlayerView().gameObject
+                        scriptableObjPlayer.playerView.gameObject
                 );
             playerObj.transform.position = spawnPos;
             playerCharacterView = playerObj.GetComponent<CharacterFireView>();
             playerCharacterView.SetCharacterController(this);
-        }
-
-        protected override void SetPlayerType()
-        {
-            playerCharacterType = PlayerCharacterType.Fire;
         }
 
         public override void SetShootInfo(float power, float angle, bool gettingInput)
@@ -36,7 +31,7 @@ namespace PlayerSystem
             if (gettingInput == false)
                 weaponService.SpawnWeapon(power, angle
                 , playerCharacterView.ShootPos
-                    ,WeaponType.Fire);
+                    , scriptableObjPlayer.weaponType);
         }
 
 

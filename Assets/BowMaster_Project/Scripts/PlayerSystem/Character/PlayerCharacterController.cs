@@ -10,19 +10,16 @@ namespace PlayerSystem
         protected int characterID;
         protected PlayerController playerController;
         protected PlayerCharacterView playerCharacterView;
-        protected ScriptableObjPlayer scriptableObjPlayer;
+        protected ScriptableObjCharacter scriptableObjPlayer;
         protected IWeaponService weaponService;
         protected PlayerCharacterType playerCharacterType;
+        protected WeaponType weaponType;
 
         public int GetCharacterID()
         {
             return characterID;
         }
 
-        protected virtual void SetPlayerType()
-        {
-            playerCharacterType = PlayerCharacterType.Air; 
-        }
 
         public virtual void SetShootInfo(float power, float angle, bool gettingInput)
         {
@@ -31,18 +28,7 @@ namespace PlayerSystem
             if (gettingInput == false)
                 weaponService.SpawnWeapon(power, angle
                 , playerCharacterView.ShootPos
-                    , WeaponType.Air);
-        }
-
-        protected PlayerCharacterView ReturnPlayerView()
-        {
-            for (int i = 0; i < scriptableObjPlayer.characterViews.Count; i++)
-            {
-                if (playerCharacterType == scriptableObjPlayer.characterViews[i].playerType)
-                    return scriptableObjPlayer.characterViews[i].playerView;
-            }
-
-            return null;
+                    , scriptableObjPlayer.weaponType);
         }
 
     }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cff11f11a805448d9d140d2e39ba350, type: 3}
+  m_Name: CharacterWater
+  m_EditorClassIdentifier: 
+  playerName: Water Bender
+  playerType: 1
+  playerView: {fileID: 7005507320438267944, guid: 254adf049015d4fd8bb5dcb498cb3387,
+    type: 3}
+  playerHealth: 10
+  weaponType: 2

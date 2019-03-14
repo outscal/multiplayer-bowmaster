@@ -11,7 +11,7 @@ namespace Common
     [CreateAssetMenu(fileName = "Scriptable Settings", menuName = "Custom Objects/Installer/Scriptable Settings Attribute", order = 0)]
     public class ScriptableInstaller : ScriptableObjectInstaller
     {
-        public ScriptableObjPlayer scriptableObjPlayer;
+        public ScriptableObjCharacterList scriptableObjPlayer;
         public ScriptableObjWeapon scriptableObjWeapon;
         public UIScriptableObj uIScriptableObj;
 

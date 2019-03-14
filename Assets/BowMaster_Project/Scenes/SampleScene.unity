@@ -279,7 +279,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &224164172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,9 +374,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd4feaf64b68452faf3ba813a77163a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputName: {fileID: 1640516389}
-  lobbypanal: {fileID: 291072684}
-  connectedText: {fileID: 2141350943}
+  lobbyPanel: {fileID: 0}
+  connectingPanel: {fileID: 0}
+  gamePanel: {fileID: 0}
+  gameOverPanel: {fileID: 0}
 --- !u!1 &288617062
 GameObject:
   m_ObjectHideFlags: 0

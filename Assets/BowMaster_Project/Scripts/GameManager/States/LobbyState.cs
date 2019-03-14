@@ -21,7 +21,7 @@ namespace GameSystem
 
         public void OnStateEnter()
         {
-           
+            uIService.ShowLobbyUI();
         }
 
         public void OnStateExit()

@@ -22,7 +22,7 @@ namespace GameSystem
 
         public void OnStateEnter()
         {
-           
+            uIService.ShowConnectingUI();
         }
 
         public void OnStateExit()

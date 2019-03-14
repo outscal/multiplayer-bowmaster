@@ -111,5 +111,15 @@ namespace PlayerSystem
                 playerControllerDictionary[inputData.playerID].DeactivateDisplayPanel();
             }
         }
+
+        public void SendPlayerDamageDataToServer(float damage, int characterID)
+        {
+            multiplayerService.PlayerHit(localPlayerID, characterID, damage);
+        }
+
+        public void SetPlayerHealth(HitInfo hitInfo)
+        {
+            playerControllerDictionary[hitInfo.playerId].SetHealth(hitInfo.characterId, hitInfo.characterHealth);
+        }
     }
 }

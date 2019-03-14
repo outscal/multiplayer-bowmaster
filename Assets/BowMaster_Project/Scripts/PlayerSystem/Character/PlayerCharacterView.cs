@@ -49,6 +49,7 @@ namespace PlayerSystem
         {
             healthBar.minValue = min;
             healthBar.maxValue = max;
+            healthBar.value = max;
         }
 
         public void SetBarHealth(float value)
@@ -58,7 +59,7 @@ namespace PlayerSystem
 
         public virtual void DamageAmount(float value)
         {
-
+            playerCharacterController.SendDamageInfoToServer(value);
         }
     }
 }

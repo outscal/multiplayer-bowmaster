@@ -44,7 +44,6 @@ namespace MultiplayerSystem
         void GameStartEventProscess()
         {
             Debug.Log("game Started");
-            roomManager.GameStarted();
             multiplayerService.ChangeToGamePlayState();
             NotifyAllAboutPlayerSpawn(spData);
         }
@@ -66,6 +65,7 @@ namespace MultiplayerSystem
             spawnData.playerPosition = (Vector2)data[1];
             spawnData.playerID = (string)data[0];
             Debug.Log("Spawn Recieved from: " + (string)data[0]);
+            roomManager.GameStarted(spawnData.playerID);
             multiplayerService.SpawnPlayer(spawnData);
         }
         void HitEventProscess(EventData photonEvent)

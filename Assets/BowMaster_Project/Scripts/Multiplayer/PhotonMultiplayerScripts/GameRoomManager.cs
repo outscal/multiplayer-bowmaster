@@ -62,6 +62,20 @@ namespace MultiplayerSystem
                 Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
             }
         }
+        public List<string> GetPlayerNames()
+        {
+            List<string> names = new List<string>();
+            names.Add(PhotonNetwork.LocalPlayer.NickName);
+            if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.CurrentRoom.Players[0].UserId)
+            {
+                names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
+            }
+            else
+            {
+                names.Add(PhotonNetwork.CurrentRoom.Players[0].NickName);
+            }
+            return names;
+        }
         #endregion
         #region Public Methods
 

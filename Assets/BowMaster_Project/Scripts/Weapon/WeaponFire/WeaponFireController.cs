@@ -12,8 +12,7 @@ namespace WeaponSystem
         {
             SetWeaponType();
             this.weaponService = weaponService;
-            GameObject weapon = GameObject.Instantiate<GameObject>(
-            GetWeaponView().gameObject);
+            GameObject weapon = GameObject.Instantiate<GameObject>(GetWeaponView().gameObject);
             weapon.transform.position = spawnPos;
             weaponView = weapon.GetComponent<WeaponFireView>();
             weaponView.SetController(this);

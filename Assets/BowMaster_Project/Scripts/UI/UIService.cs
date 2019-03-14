@@ -58,17 +58,21 @@ namespace UISystem
        async public void ShowPlayerUI()
         {
             uiView.ShowPlayerUI(uIScriptableObj.playerCard);
+            Transform gamePanel=uiView.GetPlayerCardParent();
             List<string> namesToShow = multiplayerService.GetPlayerNames(localPlayerID);
-            Debug.Log("Player 1 name" + namesToShow[1]);
-            Debug.Log("opponent name" + namesToShow[2]);
 
-            playerCard = GameObject.Instantiate(uIScriptableObj.playerCard);
+            Debug.Log("Player  name" + namesToShow[0]);
+            Debug.Log("opponent name" + namesToShow[1]);
+
+            playerCard = GameObject.Instantiate(uIScriptableObj.playerCard,gamePanel);
             playerCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[0]);
 
-            opponentCard = GameObject.Instantiate(uIScriptableObj.playerCard);
+            opponentCard = GameObject.Instantiate(uIScriptableObj.playerCard,gamePanel);
             opponentCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[1]);
             await new WaitForSeconds(0.5f);
+
             spawnSide = playerService.GetLocalPlayerSide();
+
             if (spawnSide == PlayerSpawnSide.LEFTSIDE)
             {
                 //set left rect
@@ -84,6 +88,7 @@ namespace UISystem
             else
             {
                 //set right player rect
+                
                 playerCard.GetComponent<RectTransform>().anchorMin = new Vector2(1, 1);
                 playerCard.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
                 playerCard.GetComponent<RectTransform>().pivot = new Vector2(1, 1);

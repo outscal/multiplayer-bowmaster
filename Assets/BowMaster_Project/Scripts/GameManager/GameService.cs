@@ -38,24 +38,24 @@ namespace GameSystem
         public void ChangeToGameStartState()
         {
             gameStateMachine.ChangeGameState(GameStateEnum.GAME_START);
-            uIService.ShowConnectingUI();
+           
         }
 
         public void ChangeToGamePlayState()
         {
             gameStateMachine.ChangeGameState(GameStateEnum.GAME_PLAY);
+
         }
 
         public void ChangeToLoadingState()
         {
             gameStateMachine.ChangeGameState(GameStateEnum.LOADING);
-
+            
         }
 
         public void ChangeToLobbyState()
         {
-            gameStateMachine.ChangeGameState(GameStateEnum.LOBBY);
-            uIService.ShowLobbyUI();
+            gameStateMachine.ChangeGameState(GameStateEnum.LOBBY);            
 
         }
 

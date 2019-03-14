@@ -20,7 +20,6 @@ namespace PlayerSystem
             return characterID;
         }
 
-
         public virtual void SetShootInfo(float power, float angle, bool gettingInput)
         {
             Debug.Log("[CharacterController]WeaponType:" + scriptableObjPlayer.weaponType);
@@ -43,5 +42,9 @@ namespace PlayerSystem
             playerCharacterView.DeactivateDisplayHolder();
         }
 
+        public void SetHealthBarFirst(float health)
+        {
+            playerCharacterView.SetHealthBarLimits(0, health);
+        }
     }
 }

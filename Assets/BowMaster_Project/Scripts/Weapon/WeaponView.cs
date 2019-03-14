@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Common;
 
 namespace WeaponSystem
 {
@@ -26,6 +27,14 @@ namespace WeaponSystem
         public WeaponType ReturnWeaponType()
         {
             return weaponType; 
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.GetComponent<ITakeDamage>() != null)
+            {
+                other.GetComponent<ITakeDamage>().DamageAmount(15f);
+            }
         }
     }
 }

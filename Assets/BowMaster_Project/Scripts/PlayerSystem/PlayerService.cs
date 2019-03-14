@@ -55,10 +55,12 @@ namespace PlayerSystem
 
         void SpawnPlayer(PlayerSpawnData playerSpawnData)
         {
-            PlayerController playerController = new PlayerController(playerSpawnData.playerID, this
-            , weaponService, playerSpawnData.playerPosition);
+            PlayerController playerController = new PlayerController(playerSpawnData, this
+            , weaponService);
+
             Debug.Log("this is the player Id that Player Service Recieved to add" 
             + playerSpawnData.playerID);
+
             playerControllerDictionary.Add(playerSpawnData.playerID, playerController);
         }
 

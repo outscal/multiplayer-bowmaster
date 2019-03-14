@@ -2,10 +2,11 @@
 using TMPro;
 using WeaponSystem;
 using UnityEngine.UI;
+using Common;
 
 namespace PlayerSystem
 {
-    public class PlayerCharacterView : MonoBehaviour, IPlayerView
+    public class PlayerCharacterView : MonoBehaviour, IPlayerView, ITakeDamage
     {
         [SerializeField] protected GameObject displayHolder, shootPos;
         [SerializeField] protected TextMeshProUGUI powerText, angleText;
@@ -42,6 +43,22 @@ namespace PlayerSystem
         public Vector2 GetForwardDirection()
         {
             return this.transform.right;
+        }
+
+        public void SetHealthBarLimits(float min,float max)
+        {
+            healthBar.minValue = min;
+            healthBar.maxValue = max;
+        }
+
+        public void SetBarHealth(float value)
+        {
+            healthBar.value = value;
+        }
+
+        public virtual void DamageAmount(float value)
+        {
+
         }
     }
 }

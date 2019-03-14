@@ -37,6 +37,5 @@ namespace PlayerSystem
                     , scriptableObjPlayer.weaponType);
         }
 
-
     }
 }

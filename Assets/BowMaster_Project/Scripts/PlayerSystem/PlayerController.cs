@@ -16,14 +16,14 @@ namespace PlayerSystem
         private string turnID;
         private Vector2 fixedPos;
 
-        public PlayerController(string playerID, PlayerService playerService
-        , IWeaponService weaponSystem, Vector2 spawnPos)
+        public PlayerController(PlayerSpawnData playerSpawnData, PlayerService playerService
+        , IWeaponService weaponSystem)
         {
             this.playerService = playerService;
             this.weaponService = weaponSystem;
-            this.playerID = playerID;
-            spawnCharacterPos = spawnPos;
-            fixedPos = spawnPos;
+            this.playerID = playerSpawnData.playerID;
+            spawnCharacterPos = playerSpawnData.playerPosition;
+            fixedPos = playerSpawnData.playerPosition;
             playerCharacterControllerList = new List<PlayerCharacterController>();
 
             for (int i = 0; i < 3; i++)
@@ -34,6 +34,7 @@ namespace PlayerSystem
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Air)
                             , weaponService, spawnCharacterPos
                         );
+                    playerCharacterController.SetHealthBarFirst(playerSpawnData.char1Health);
                     playerCharacterControllerList.Add(playerCharacterController);
                 }
                 else if (i == 1)
@@ -42,6 +43,7 @@ namespace PlayerSystem
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Water)
                             , weaponService, spawnCharacterPos
                         );
+                    playerCharacterController.SetHealthBarFirst(playerSpawnData.char2Health);
                     playerCharacterControllerList.Add(playerCharacterController);
                 }
                 else if (i == 2)
@@ -50,6 +52,7 @@ namespace PlayerSystem
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Fire)
                             , weaponService, spawnCharacterPos
                         );
+                    playerCharacterController.SetHealthBarFirst(playerSpawnData.char3Health);
                     playerCharacterControllerList.Add(playerCharacterController);
                 }
                 spawnCharacterPos.x += 2;

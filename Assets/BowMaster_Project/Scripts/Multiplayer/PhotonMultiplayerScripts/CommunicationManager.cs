@@ -64,6 +64,9 @@ namespace MultiplayerSystem
             object[] data = (object[])photonEvent.CustomData;
             spawnData.playerPosition = (Vector2)data[1];
             spawnData.playerID = (string)data[0];
+            spawnData.char1Health = (float)data[2];
+            spawnData.char2Health = (float)data[3];
+            spawnData.char3Health = (float)data[4];
             Debug.Log("Spawn Recieved from: " + (string)data[0]);
             roomManager.GameStarted(spawnData.playerID);
             multiplayerService.SpawnPlayer(spawnData);
@@ -82,6 +85,10 @@ namespace MultiplayerSystem
         {
             spData = spawnData;
             spData.playerName = spawnData.playerName;
+            spData.char1Health = spawnData.char1Health;
+            spData.char2Health = spawnData.char2Health;
+            spData.char3Health = spawnData.char3Health;
+            //Debug.Log(spawnData.char1Health);
             multiplayerService.SetLocalPlayerID(PhotonNetwork.LocalPlayer.UserId);
             multiplayerService.SetCommunicationManager(this);
         }
@@ -97,7 +104,8 @@ namespace MultiplayerSystem
         public void NotifyAllAboutPlayerSpawn(PlayerSpawnData spawnData)
         {
             //PLAYERSPAWNEVENT
-            object[] content = new object[] { spawnData.playerID, spawnData.playerPosition };
+            //Debug.Log(spawnData.char1Health);
+            object[] content = new object[] { spawnData.playerID, spawnData.playerPosition,spawnData.char1Health, spawnData.char2Health, spawnData.char3Health };
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(PLAYERSPAWNEVENT, content, raiseEventOptions, sendOptions);

@@ -32,9 +32,9 @@ namespace MultiplayerSystem
             PlayerSpawnData spawn = new PlayerSpawnData();
             spawn.playerID = PhotonNetwork.LocalPlayer.UserId;
             spawn.playerPosition = pos;
-            spawn.char1Health = 100;
-            spawn.char2Health = 100;
-            spawn.char3Health = 100;
+            spawn.char1Health = 100f;
+            spawn.char2Health = 100f;
+            spawn.char3Health = 100f;
 
             spawn.playerName = PhotonNetwork.LocalPlayer.NickName;
             communicationManager.SavePlayerSpawnData(spawn);
@@ -74,14 +74,17 @@ namespace MultiplayerSystem
         public List<string> GetPlayerNames()
         {
             List<string> names = new List<string>();
-            names.Add(PhotonNetwork.LocalPlayer.NickName);
             if (PhotonNetwork.LocalPlayer.NickName == PhotonNetwork.CurrentRoom.Players[1].NickName)
             {
+                names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
                 names.Add(PhotonNetwork.CurrentRoom.Players[2].NickName);
+           
             }
             else
             {
+                names.Add(PhotonNetwork.CurrentRoom.Players[2].NickName);
                 names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
+                
             }
             return names;
         }

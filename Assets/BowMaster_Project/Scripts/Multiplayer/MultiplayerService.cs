@@ -76,6 +76,7 @@ namespace MultiplayerSystem
         }
         public void SpawnPlayer(PlayerSpawnData playerSpawnData)
         {
+            Debug.Log(playerSpawnData.char1Health);
             playerService.PlayerConnected(playerSpawnData);
         }
         public void ChangeToGameOverState(GameOverInfo gameOverInfo)

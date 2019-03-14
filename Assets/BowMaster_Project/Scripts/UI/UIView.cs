@@ -21,22 +21,25 @@ namespace UISystem
         private GameObject gameOverPopUp;
 
         private List<GameObject> panelList = new List<GameObject>();
+
         private void Start()
         {
             panelList.Add(lobbyPanel);
             panelList.Add(connectingPanel);
             panelList.Add(gamePanel);
             panelList.Add(gameOverPanel);
-           
+            DeactivateOtherPanels(connectingPanel);
+
         }
 
         public void ShowConnectedUI(PopUpController popUpController)
         {
-            DeactivateOtherPanels(connectingPanel);
-            connectingPanel.SetActive(true);
-            popupInstance = GameObject.Instantiate(popUpController.gameObject);
-            popupInstance.SetActive(true);
-            popupInstance.transform.SetParent(connectingPanel.transform);
+          
+           // DeactivateOtherPanels(connectingPanel);
+           
+            popupInstance = GameObject.Instantiate(popUpController.gameObject, connectingPanel.transform);
+           
+           // popupInstance.transform.SetParent(connectingPanel.transform);
             popupInstance.GetComponent<PopUpController>().SetText("Connecting To Server.  .  .  .");
         }
 
@@ -85,7 +88,7 @@ namespace UISystem
         {
             foreach(GameObject panel in panelList)
             {
-                if(panel!=currentActivePanel)
+                if(panel.name!=currentActivePanel.name)
                 {
                     panel.SetActive(false);
                 }

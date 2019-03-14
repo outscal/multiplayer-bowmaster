@@ -19,7 +19,7 @@ namespace GameSystem
         {
             this.uIService = uIService;
             this.playerService = playerService;
-            Initialize();
+           
         }
 
         public void ChangeToGameOverState(GameOverInfo gameOverInfo)

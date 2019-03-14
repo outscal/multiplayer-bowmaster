@@ -7,7 +7,7 @@ namespace UISystem
     [CreateAssetMenu(fileName = "UI Settings", menuName = "Custom Objects/UI", order = 1)]
     public class UIScriptableObj : ScriptableObject
     {
-        public UIView mainUICanvas;
+       // public UIView mainUICanvas;
         public GameObject playerCard;
         public PopUpController popUpPrefab;
     }

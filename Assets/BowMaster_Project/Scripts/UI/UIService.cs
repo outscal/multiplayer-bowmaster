@@ -13,8 +13,11 @@ namespace UISystem
         private IUIView uiView;
         private IPlayerService playerService;
         private IMultiplayerService multiplayerService;
+
         private UIScriptableObj uIScriptableObj;
         private string localPlayerID;
+
+        private GameUIController gameUIController;
         private GameObject mainCanvas;
         private GameObject playerCard;
         private GameObject opponentCard;
@@ -22,37 +25,46 @@ namespace UISystem
         public UIService(IPlayerService playerService, UIScriptableObj uIScriptableObj)
         {
             this.uIScriptableObj = uIScriptableObj;
-            this.uiView = uIScriptableObj.mainUICanvas;
+            //this.uiView = uIScriptableObj.mainUICanvas;
             this.playerService = playerService;
         }
 
         public void SetMultiplayerServiceRef(IMultiplayerService multiplayerService)
         {            
             this.multiplayerService = multiplayerService;
-            SpawnUICanvas(uIScriptableObj);
+            SetCanvasReferences();
         }
         public void SetLocalPlayerID(string id)
         {
             localPlayerID = id;
-            mainCanvas.GetComponentInChildren<GameUIController>().SetLocalPlayerID(localPlayerID);
+            gameUIController.SetLocalPlayerID(localPlayerID);
         }
 
-        private void SpawnUICanvas(UIScriptableObj uIScriptableObj)
+        private void SetCanvasReferences()
         {
-            mainCanvas = GameObject.Instantiate(uIScriptableObj.mainUICanvas.gameObject);
+            mainCanvas = GameObject.FindObjectOfType<UIView>().gameObject;
+            uiView = mainCanvas.GetComponent<UIView>();
             mainCanvas.GetComponentInChildren<LobbyController>().SetMultiplayerServiceRef(multiplayerService);
             mainCanvas.GetComponentInChildren<GameUIController>().SetMultiplayerServiceRef(multiplayerService);
+            gameUIController = mainCanvas.GetComponentInChildren<GameUIController>();
         }
 
         public void ShowConnectingUI() => uiView.ShowConnectedUI(uIScriptableObj.popUpPrefab);
         public void ShowGameOverUI(string reason) => uiView.ShowGameOverUI(reason, uIScriptableObj.popUpPrefab);
         public void ShowLobbyUI() => uiView.ShowLobbyUI();
+
         public void ShowPlayerUI()
         {
             uiView.ShowPlayerUI(uIScriptableObj.playerCard);
-            playerCard = GameObject.Instantiate(uIScriptableObj.playerCard);
+            List<string> namesToShow= multiplayerService.GetPlayerNames(localPlayerID);
 
-           // playerCard.GetComponent<PlayerInfoCardController>().SetPlayerName();            
+            playerCard = GameObject.Instantiate(uIScriptableObj.playerCard);
+            playerCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[0]);
+            
+
+            opponentCard = GameObject.Instantiate(uIScriptableObj.playerCard);
+            opponentCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[1]);
+
         }
 
 

@@ -20,7 +20,7 @@ namespace MultiplayerSystem
 
         PlayerSpawnData spData;
         IMultiplayerService multiplayerService;
-        string LastMovePlayerId;
+        string LastMovePlayerId = " ";
         public CommunicationManager(IMultiplayerService multiplayerService)
         {
             roomManager = GameObject.FindObjectOfType<GameRoomManager>();

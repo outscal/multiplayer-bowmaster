@@ -52,7 +52,7 @@ namespace MultiplayerSystem
             playerInputData.characterID = (int)data[1];
             playerInputData.powerValue = (float)data[2];
             playerInputData.angleValue = (float)data[3];
-            multiplayerService.SendInputDataToPlayer(playerInputData);
+            multiplayerService.SendInputDataToPlayer(playerInputData,LastMovePlayerId);
             LastMovePlayerId = playerInputData.playerID;
         }
         void PlayerSpawnEventProscess(EventData photonEvent)
@@ -70,7 +70,7 @@ namespace MultiplayerSystem
             HitInfo hitInfo = new HitInfo();
             hitInfo.playerId = (string)data[0];
             hitInfo.characterId = (int)data[1];
-            hitInfo.damage = (float)data[2];
+            hitInfo.characterHealth = (float)data[2];
             multiplayerService.NotifyRemotePlayerHit(hitInfo);
         }
 
@@ -78,12 +78,17 @@ namespace MultiplayerSystem
         {
             spData = spawnData;
             spData.playerName = spawnData.playerName;
+            multiplayerService.SetLocalPlayerID(PhotonNetwork.LocalPlayer.UserId);
             multiplayerService.SetCommunicationManager(this);
         }
 
-        public void NotrifyGameOver()
+        public void NotrifyGameOver(GameOverInfo gameOverInfo)
         {
-
+            //GAMEOVEREVENT
+            object[] content = new object[] { gameOverInfo.lostPlayerID, gameOverInfo.reasonToLose };
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+            SendOptions sendOptions = new SendOptions { Reliability = true };
+            PhotonNetwork.RaiseEvent(GAMEOVEREVENT, content, raiseEventOptions, sendOptions);
         }
         public void NotifyAllAboutPlayerSpawn(PlayerSpawnData spawnData)
         {
@@ -97,13 +102,12 @@ namespace MultiplayerSystem
         public void NotifyPlayerHit(HitInfo hitData)
         {
             //PLAYERHITEVENT;
-            object[] content = new object[] { hitData.playerId, hitData.characterId,hitData.damage };
+            object[] content = new object[] { hitData.playerId, hitData.characterId,hitData.characterHealth };
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(PLAYERHITEVENT, content, raiseEventOptions, sendOptions);
-            Debug.Log("Sending SpawnPositions");
         }
-        public void GameStarted()
+        public void NotifyGameStarted()
         {
             //GAMESTARTEVENT
             object[] content = new object[] { };
@@ -126,22 +130,13 @@ namespace MultiplayerSystem
         {
             //Debug.Log("Event Recieved: " + photonEvent.Code);
             byte eventCode = photonEvent.Code;
-            if (eventCode == INPUTEVENT)
+            switch (eventCode)
             {
-                InputEventProscess(photonEvent);
-                //Debug.Log("Spawn Recieved from: " + (string)data[1]);
-            }
-            else if (eventCode == PLAYERSPAWNEVENT)
-            {
-                PlayerSpawnEventProscess(photonEvent);
-            }
-            else if (eventCode == GAMESTARTEVENT)
-            {
-                GameStartEventProscess();
-            }
-            else if (eventCode == PLAYERHITEVENT)
-            {
-                HitEventProscess(photonEvent);
+                case INPUTEVENT:InputEventProscess(photonEvent); break;
+                case PLAYERSPAWNEVENT:PlayerSpawnEventProscess(photonEvent); break;
+                case PLAYERHITEVENT: HitEventProscess(photonEvent); break;
+                case GAMEOVEREVENT: GameOverEventProscess(photonEvent); break;
+                case GAMESTARTEVENT: GameStartEventProscess(); break;
             }
         }
     }

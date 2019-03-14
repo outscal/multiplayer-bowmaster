@@ -11,8 +11,8 @@ namespace MultiplayerSystem
 {
     public class GameRoomManager : MonoBehaviourPunCallbacks
     {
-        [Inject] IMultiplayerService multiplayerService;
         [Inject]CommunicationManager communicationManager;
+        Dictionary<string, List<float>> inRoomplayers;
         #region Private Methods
 
         #endregion
@@ -29,8 +29,6 @@ namespace MultiplayerSystem
             {
                 pos = new Vector2(-15,0);
             }
-           
-            multiplayerService.SetLocalPlayerID(PhotonNetwork.LocalPlayer.UserId);
             PlayerSpawnData spawn = new PlayerSpawnData();
             spawn.playerID = PhotonNetwork.LocalPlayer.UserId;
             spawn.playerPosition = pos;
@@ -38,8 +36,15 @@ namespace MultiplayerSystem
             communicationManager.SavePlayerSpawnData(spawn);
             if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
-                communicationManager.GameStarted();
+                inRoomplayers = new Dictionary<string, List<float>>();
+                inRoomplayers.Add(PhotonNetwork.CurrentRoom.Players[0].UserId, new List<float> { 100, 100, 100 });
+                inRoomplayers.Add(PhotonNetwork.CurrentRoom.Players[1].UserId, new List<float> { 100, 100, 100 });
+                communicationManager.NotifyGameStarted();
             }
+        }
+        public void playerHit(string hitPlayerID,int charachterID,float damage)
+        {
+            inRoomplayers[hitPlayerID][charachterID] -= damage;
         }
         public override void OnLeftRoom()
         {
@@ -57,7 +62,20 @@ namespace MultiplayerSystem
                 Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
             }
         }
-        
+        public List<string> GetPlayerNames()
+        {
+            List<string> names = new List<string>();
+            names.Add(PhotonNetwork.LocalPlayer.NickName);
+            if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.CurrentRoom.Players[0].UserId)
+            {
+                names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
+            }
+            else
+            {
+                names.Add(PhotonNetwork.CurrentRoom.Players[0].NickName);
+            }
+            return names;
+        }
         #endregion
         #region Public Methods
 

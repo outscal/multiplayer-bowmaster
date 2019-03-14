@@ -12,13 +12,22 @@ namespace MultiplayerSystem
     {
         IPlayerService playerService;
         IGameService gameService;
+        GameRoomManager gameRoomManager;
         PlayerName playerServerName;
-        LauncherManager launch;
         bool connected = false;
         CommunicationManager communicationManager;
-        public void PlayerHit(HitInfo hit)
+       
+        public MultiplayerService(IPlayerService playerService,IGameService gameService)
         {
-
+            this.gameService = gameService;
+            playerServerName = new PlayerName();
+            gameRoomManager = GameObject.FindObjectOfType<GameRoomManager>();
+            this.playerService = playerService;
+            //this.inputService = inputService;
+        }
+        public void PlayerHit(string hitPlayerID, int characterID, float damage)
+        {
+            gameRoomManager.playerHit(hitPlayerID, characterID, damage);
         }
         public void NotifyRemotePlayerHit(HitInfo hit)
         {
@@ -29,15 +38,6 @@ namespace MultiplayerSystem
             connected = true;
             ChangeToLobbyState();
         }
-        public MultiplayerService(IPlayerService playerService,IGameService gameService)
-        {
-            this.gameService = gameService;
-            playerServerName = new PlayerName();
-            //launch = GameObject.FindObjectOfType<Launcher>();
-            this.playerService = playerService;
-            //this.inputService = inputService;
-        }
-
         public void Connect(string name)
         {
             playerServerName.SetPlayerName(name);
@@ -57,14 +57,15 @@ namespace MultiplayerSystem
         { 
                 this.communicationManager = communicationManager;
         }
-        public void SendInputDataToPlayer(InputData inputData)
+        public void SendInputDataToPlayer(InputData inputData,string nextTurnID)
         {
             playerService.SetPlayerData(inputData, false);
+            
         }
         public void SetLocalPlayerID(string localID)
         {
             gameService.SetLocalPlayerID(localID);
-            playerService.SetLocalPlayerID(localID);
+            //playerService.SetLocalPlayerID(localID,this);
         }
         public void ChangeToGamePlayState()
         {
@@ -85,6 +86,11 @@ namespace MultiplayerSystem
         public void ChangeToLobbyState()
         {
             gameService.ChangeToLobbyState();
+        }
+
+        public List<string> GetPlayerNames(string localPlayerId)
+        {
+            return gameRoomManager.GetPlayerNames();
         }
     }
 }

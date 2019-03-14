@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using TMPro;
+using WeaponSystem;
 
 namespace PlayerSystem
 {
     public class PlayerCharacterView : MonoBehaviour, IPlayerView
     {
-        [SerializeField] private GameObject displayHolder, shootPos;
-        [SerializeField] private TextMeshProUGUI powerText, angleText;
+        [SerializeField] protected GameObject displayHolder, shootPos;
+        [SerializeField] protected TextMeshProUGUI powerText, angleText;
 
         public Vector2 ShootPos { get { return shootPos.transform.position; } }
         private PlayerCharacterController playerCharacterController;
 
-        public void SetCharacterController(PlayerCharacterController playerCharacterController)
+        public virtual void SetCharacterController(PlayerCharacterController playerCharacterController)
         {
             this.playerCharacterController = playerCharacterController; 
         }
@@ -21,7 +22,7 @@ namespace PlayerSystem
             return playerCharacterController.GetCharacterID();
         }
 
-        public void SetShootInfo(float power, float angle, bool gettingInput)
+        public virtual void SetShootInfo(float power, float angle, bool gettingInput)
         {
             if (gettingInput == true)
             {

@@ -6,6 +6,6 @@ namespace WeaponSystem
 {
     public interface IWeaponService
     {
-        void SpawnWeapon(float power, float angle, Vector2 position);
+        void SpawnWeapon(float power, float angle, Vector2 position, WeaponType weaponType);
     }
 }

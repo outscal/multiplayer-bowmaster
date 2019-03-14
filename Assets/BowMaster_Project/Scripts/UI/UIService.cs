@@ -55,7 +55,7 @@ namespace UISystem
         public void ShowGameOverUI(string reason) => uiView.ShowGameOverUI(reason, uIScriptableObj.popUpPrefab);
         public void ShowLobbyUI() => uiView.ShowLobbyUI();
 
-        public void ShowPlayerUI()
+       async public void ShowPlayerUI()
         {
             uiView.ShowPlayerUI(uIScriptableObj.playerCard);
             List<string> namesToShow = multiplayerService.GetPlayerNames(localPlayerID);
@@ -65,7 +65,7 @@ namespace UISystem
 
             opponentCard = GameObject.Instantiate(uIScriptableObj.playerCard);
             opponentCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[1]);
-
+            await new WaitForSeconds(0.5f);
             spawnSide = playerService.GetLocalPlayerSide();
             if (spawnSide == PlayerSpawnSide.LEFTSIDE)
             {

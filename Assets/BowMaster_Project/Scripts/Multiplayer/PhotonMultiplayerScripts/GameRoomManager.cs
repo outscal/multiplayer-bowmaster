@@ -43,11 +43,13 @@ namespace MultiplayerSystem
                 communicationManager.NotifyGameStarted();
             }
         }
-        public void GameStarted()
+        public void GameStarted(string ID)
         {
-            inRoomplayers = new Dictionary<string, List<float>>();
-            inRoomplayers.Add(PhotonNetwork.CurrentRoom.Players[1].UserId, new List<float> { 100, 100, 100 });
-            inRoomplayers.Add(PhotonNetwork.CurrentRoom.Players[2].UserId, new List<float> { 100, 100, 100 });
+            if (inRoomplayers == null)
+            {
+                inRoomplayers = new Dictionary<string, List<float>>();
+            }
+            inRoomplayers.Add(ID, new List<float> { 100, 100, 100 });
         }
         public void playerHit(string hitPlayerID,int charachterID,float damage)
         {
@@ -73,13 +75,13 @@ namespace MultiplayerSystem
         {
             List<string> names = new List<string>();
             names.Add(PhotonNetwork.LocalPlayer.NickName);
-            if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.CurrentRoom.Players[0].UserId)
+            if (PhotonNetwork.LocalPlayer.NickName == PhotonNetwork.CurrentRoom.Players[1].NickName)
             {
-                names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
+                names.Add(PhotonNetwork.CurrentRoom.Players[2].NickName);
             }
             else
             {
-                names.Add(PhotonNetwork.CurrentRoom.Players[0].NickName);
+                names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
             }
             return names;
         }

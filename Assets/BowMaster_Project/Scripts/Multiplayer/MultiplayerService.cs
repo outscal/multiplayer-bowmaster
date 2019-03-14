@@ -54,8 +54,7 @@ namespace MultiplayerSystem
         }
 
         public void SetCommunicationManager(CommunicationManager communicationManager)
-        {
-            
+        { 
                 this.communicationManager = communicationManager;
         }
         public void SendInputDataToPlayer(InputData inputData)
@@ -64,6 +63,7 @@ namespace MultiplayerSystem
         }
         public void SetLocalPlayerID(string localID)
         {
+            gameService.SetLocalPlayerID(localID);
             playerService.SetLocalPlayerID(localID);
         }
         public void ChangeToGamePlayState()
@@ -74,12 +74,14 @@ namespace MultiplayerSystem
         {
             playerService.PlayerConnected(playerSpawnData);
         }
-
+        public void ChangeToGameOverState(GameOverInfo gameOverInfo)
+        {
+            gameService.ChangeToGameOverState(gameOverInfo);
+        }
         public void ChangeToGameDisconnectedState()
         {
             
         }
-
         public void ChangeToLobbyState()
         {
             gameService.ChangeToLobbyState();

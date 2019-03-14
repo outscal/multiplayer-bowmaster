@@ -4,11 +4,13 @@ using Zenject;
 using InputSystem;
 using UnityEngine;
 using PlayerSystem;
+using GameSystem;
 
 namespace MultiplayerSystem
 {
     public interface IMultiplayerService
     {
+        void ChangeToGameOverState(GameOverInfo gameOverInfo);
         void PlayerHit(HitInfo hit);
         void NotifyRemotePlayerHit(HitInfo hit);
         void ChangeToGameDisconnectedState();

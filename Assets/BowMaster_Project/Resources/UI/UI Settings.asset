@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abec376b5b0506f4abf326b6586dc438, type: 3}
   m_Name: UI Settings
   m_EditorClassIdentifier: 
-  mainUICanvas: {fileID: 495400450617189781, guid: 6fde6eeab27b4a949bdf4c6430e92042,
+  mainUICanvas: {fileID: 6077401986772035615, guid: 6fde6eeab27b4a949bdf4c6430e92042,
     type: 3}
   playerCard: {fileID: 8204626909972474927, guid: 2ec8d30dbd1ec4bb29859027e4d72a7e,
     type: 3}

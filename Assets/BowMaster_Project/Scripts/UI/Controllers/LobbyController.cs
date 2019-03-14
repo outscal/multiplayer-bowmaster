@@ -15,7 +15,11 @@ namespace UISystem
         private InputField inputField;
         [SerializeField]
         private TextMeshProUGUI errorText;
-       
+
+        private void Start()
+        {
+            errorText.gameObject.SetActive(false);
+        }
         public void SetMultiplayerServiceRef(IMultiplayerService multiplayerService)
         {
             connectButton.onClick.AddListener(() => ConnectToServer(multiplayerService));
@@ -29,7 +33,7 @@ namespace UISystem
                 errorText.text = "NAME CANNOT BE EMPTY";
             }
             multiplayerService.Connect(inputField.text);
-           
+            
         }
     }
 }

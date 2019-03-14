@@ -20,7 +20,7 @@ namespace MultiplayerSystem
 
         PlayerSpawnData spData;
         IMultiplayerService multiplayerService;
-        string LastMovePlayerId;
+        string LastMovePlayerId=" ";
         public CommunicationManager(IMultiplayerService multiplayerService)
         {
             roomManager = GameObject.FindObjectOfType<GameRoomManager>();
@@ -46,7 +46,7 @@ namespace MultiplayerSystem
             Debug.Log("game Started");
             multiplayerService.ChangeToGamePlayState();
             NotifyAllAboutPlayerSpawn(spData);
-            string LastMovePlayerId=PhotonNetwork.PlayerList[0].UserId;
+            LastMovePlayerId=PhotonNetwork.PlayerList[0].UserId;
         }
         void InputEventProscess(EventData photonEvent)
         {

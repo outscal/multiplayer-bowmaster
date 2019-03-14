@@ -45,6 +45,7 @@ namespace UISystem
             mainCanvas = GameObject.FindObjectOfType<UIView>().gameObject;
             uiView = mainCanvas.GetComponent<UIView>();
             mainCanvas.GetComponentInChildren<LobbyController>().SetMultiplayerServiceRef(multiplayerService);
+            mainCanvas.GetComponentInChildren<LobbyController>().SetUIServiceRef(this);
             mainCanvas.GetComponentInChildren<GameUIController>().SetMultiplayerServiceRef(multiplayerService);
             gameUIController = mainCanvas.GetComponentInChildren<GameUIController>();
         }
@@ -66,6 +67,9 @@ namespace UISystem
             opponentCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[1]);
 
         }
+
+        public void ShowWaitingUI() => uiView.ShowWaitingUI();
+        
 
 
         // public void ShowDisconnectedUI() => uiView.ShowDisconnectedUI();       

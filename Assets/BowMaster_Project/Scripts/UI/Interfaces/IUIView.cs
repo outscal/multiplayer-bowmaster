@@ -12,5 +12,6 @@ namespace UISystem
         void ShowConnectedUI(PopUpController popUpController);
        // void ShowDisconnectedUI();        
         void ShowGameOverUI(string reason,PopUpController popUpController);
+        void ShowWaitingUI();
     }
 }

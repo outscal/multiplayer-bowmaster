@@ -32,9 +32,9 @@ namespace MultiplayerSystem
             PlayerSpawnData spawn = new PlayerSpawnData();
             spawn.playerID = PhotonNetwork.LocalPlayer.UserId;
             spawn.playerPosition = pos;
-            spawn.char1Health = 100;
-            spawn.char2Health = 100;
-            spawn.char3Health = 100;
+            spawn.char1Health = 100f;
+            spawn.char2Health = 100f;
+            spawn.char3Health = 100f;
 
             spawn.playerName = PhotonNetwork.LocalPlayer.NickName;
             communicationManager.SavePlayerSpawnData(spawn);

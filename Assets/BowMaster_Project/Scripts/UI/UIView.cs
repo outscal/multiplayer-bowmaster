@@ -80,6 +80,7 @@ namespace UISystem
         public void ShowPlayerUI(GameObject playerCard)
         {
             gamePanel.SetActive(true);
+            DeactivateOtherPanels(gamePanel);
             GameObject playerCardInstance = GameObject.Instantiate(playerCard);
             playerCardInstance.transform.SetParent(gamePanel.transform);
         }

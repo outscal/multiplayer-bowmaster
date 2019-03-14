@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: UI Settings
   m_EditorClassIdentifier: 
   mainUICanvas: {fileID: 0}
-  playerCard: {fileID: 0}
+  playerCard: {fileID: 8204626909972474927, guid: 2ec8d30dbd1ec4bb29859027e4d72a7e,
+    type: 3}

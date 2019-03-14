@@ -75,7 +75,7 @@ namespace MultiplayerSystem
         {
             List<string> names = new List<string>();
             names.Add(PhotonNetwork.LocalPlayer.NickName);
-            if (PhotonNetwork.LocalPlayer.UserId == PhotonNetwork.CurrentRoom.Players[0].UserId)
+            if (PhotonNetwork.LocalPlayer.NickName == PhotonNetwork.CurrentRoom.Players[0].NickName)
             {
                 names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
             }

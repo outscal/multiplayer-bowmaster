@@ -7,6 +7,6 @@ namespace PlayerSystem
     {
         public string playerId;
         public int characterId;
-        public float damage;
+        public float characterHealth;
     }
 }

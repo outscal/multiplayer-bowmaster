@@ -14,7 +14,7 @@ namespace GameSystem
         private IPlayerService playerService;
         private string localPlayerID;
 
-        //public GameService(IUIService uIService)
+        
         public GameService(IUIService uIService, IPlayerService playerService)
         {
             this.uIService = uIService;

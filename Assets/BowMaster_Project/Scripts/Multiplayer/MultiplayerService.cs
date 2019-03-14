@@ -5,10 +5,11 @@ using UnityEngine;
 using InputSystem;
 using PlayerSystem;
 using GameSystem;
+using UISystem;
 
 namespace MultiplayerSystem
 {
-    public class MultiplayerService : IMultiplayerService
+    public class MultiplayerService : IMultiplayerService,IInitializable
     {
         IPlayerService playerService;
         IGameService gameService;
@@ -16,9 +17,11 @@ namespace MultiplayerSystem
         PlayerName playerServerName;
         bool connected = false;
         CommunicationManager communicationManager;
+        IUIService uiService;
        
-        public MultiplayerService(IPlayerService playerService,IGameService gameService)
+        public MultiplayerService(IPlayerService playerService,IGameService gameService,IUIService uiService)
         {
+            this.uiService = uiService;
             this.gameService = gameService;
             playerServerName = new PlayerName();
             gameRoomManager = GameObject.FindObjectOfType<GameRoomManager>();
@@ -65,7 +68,7 @@ namespace MultiplayerSystem
         public void SetLocalPlayerID(string localID)
         {
             gameService.SetLocalPlayerID(localID);
-            //playerService.SetLocalPlayerID(localID,this);
+            playerService.SetLocalPlayerID(localID,this);
         }
         public void ChangeToGamePlayState()
         {
@@ -91,6 +94,11 @@ namespace MultiplayerSystem
         public List<string> GetPlayerNames(string localPlayerId)
         {
             return gameRoomManager.GetPlayerNames();
+        }
+
+        public void Initialize()
+        {
+            uiService.SetMultiplayerServiceRef(this);
         }
     }
 }

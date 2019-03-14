@@ -15,6 +15,7 @@ namespace PlayerSystem
         private ScriptableObjCharacterList playerList;
         private IWeaponService weaponService;
         private IMultiplayerService multiplayerService;
+        private string turnID;
 
         private string localPlayerID;
 
@@ -84,6 +85,17 @@ namespace PlayerSystem
             return localPlayerID;
         }
 
-       
+        public void SetTurnID(string nextTurnID)
+        {
+            turnID = nextTurnID;
+        }
+
+        public void SendInputDataToServer(InputData inputData)
+        {
+            if(turnID == localPlayerID)
+            {
+                multiplayerService.SendNewInput(inputData); 
+            }
+        }
     }
 }

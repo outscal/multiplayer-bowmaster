@@ -29,11 +29,13 @@ namespace WeaponSystem
             return weaponType; 
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            if(other.GetComponent<ITakeDamage>() != null)
+
+            if(other.gameObject.GetComponent<ITakeDamage>() != null)
             {
-                other.GetComponent<ITakeDamage>().DamageAmount(15f);
+                Debug.Log("Collision detected");
+                other.gameObject.GetComponent<ITakeDamage>().DamageAmount(50f);
             }
         }
     }

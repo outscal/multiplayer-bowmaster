@@ -89,8 +89,6 @@ namespace PlayerSystem
 
         public void SetPlayerData(InputData inputData, bool gettingInput)
         {
-            if (turnID == localPlayerID)
-            {
                 if (!gettingInput)
                 {
                     Debug.Log("this is the player Id that Player Service Recieved to move" + inputData.playerID);
@@ -102,7 +100,6 @@ namespace PlayerSystem
                     , inputData.characterID
                     , gettingInput);
                 }
-            }
         }
 
         public void SendInputDataToServer(InputData inputData)
@@ -114,13 +111,14 @@ namespace PlayerSystem
             }
         }
 
-        public void SendPlayerDamageDataToServer(float damage, int characterID)
+        public void SendPlayerDamageDataToServer(float damage, int characterID,string playerID)
         {
-            multiplayerService.PlayerHit(localPlayerID, characterID, damage);
+            multiplayerService.PlayerHit(playerID, characterID, damage);
         }
 
         public void SetPlayerHealth(HitInfo hitInfo)
         {
+            Debug.Log("Setting Player Health");
             playerControllerDictionary[hitInfo.playerId].SetHealth(hitInfo.characterId, hitInfo.characterHealth);
         }
     }

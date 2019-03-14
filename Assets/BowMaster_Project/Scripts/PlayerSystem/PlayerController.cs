@@ -81,6 +81,10 @@ namespace PlayerSystem
         {
             playerCharacterControllerList[characterID].SetHealth(value);
         }
+        public void SendDamageInfoToServer(int charID,float damage)
+        {
+            playerService.SendPlayerDamageDataToServer(damage, charID, playerID);
+        }
 
         public void DeactivateDisplayPanel()
         {

@@ -13,6 +13,7 @@ namespace MultiplayerSystem
     {
         [Inject]CommunicationManager communicationManager;
         Dictionary<string, List<float>> inRoomplayers;
+        string currentTurnId,previousTurnId;
         #region Private Methods
 
         #endregion
@@ -35,7 +36,6 @@ namespace MultiplayerSystem
             spawn.char1Health = 100f;
             spawn.char2Health = 100f;
             spawn.char3Health = 100f;
-
             spawn.playerName = PhotonNetwork.LocalPlayer.NickName;
             communicationManager.SavePlayerSpawnData(spawn);
             if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
@@ -43,11 +43,16 @@ namespace MultiplayerSystem
                 communicationManager.NotifyGameStarted();
             }
         }
-        public void GameStarted(string ID)
+        public void AddPlayerToRoom(string ID)
         {
             if (inRoomplayers == null)
             {
+                currentTurnId = ID;
                 inRoomplayers = new Dictionary<string, List<float>>();
+            }
+            else
+            {
+                previousTurnId = ID;
             }
             inRoomplayers.Add(ID, new List<float> { 100, 100, 100 });
         }
@@ -78,15 +83,25 @@ namespace MultiplayerSystem
             {
                 names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
                 names.Add(PhotonNetwork.CurrentRoom.Players[2].NickName);
-           
             }
             else
             {
                 names.Add(PhotonNetwork.CurrentRoom.Players[2].NickName);
                 names.Add(PhotonNetwork.CurrentRoom.Players[1].NickName);
-                
             }
             return names;
+        }
+        public string GetCurrentTurn()
+        {
+            return currentTurnId;
+        }
+        public string ChangeTurn()
+        {
+            string intermidiateID;
+            intermidiateID = currentTurnId;
+            currentTurnId = previousTurnId;
+            previousTurnId = intermidiateID;
+            return currentTurnId;
         }
         #endregion
         #region Public Methods

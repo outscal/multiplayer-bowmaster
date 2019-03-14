@@ -23,7 +23,7 @@ namespace PlayerSystem
 
         public virtual void SetShootInfo(float power, float angle, bool gettingInput)
         {
-            Debug.Log("[CharacterController]WeaponType:" + scriptableObjPlayer.weaponType);
+            //Debug.Log("[CharacterController]WeaponType:" + scriptableObjPlayer.weaponType);
 
             playerCharacterView.SetShootInfo(power, angle,gettingInput);
 
@@ -55,7 +55,7 @@ namespace PlayerSystem
 
         public virtual void SendDamageInfoToServer(float damage)
         {
-            playerController.GetPlayerService().SendPlayerDamageDataToServer(damage, characterID);
+            playerController.SendDamageInfoToServer(characterID,damage);
         }
     }
 }

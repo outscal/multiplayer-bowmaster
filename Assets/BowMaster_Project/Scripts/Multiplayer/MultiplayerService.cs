@@ -34,7 +34,7 @@ namespace MultiplayerSystem
         }
         public void NotifyRemotePlayerHit(HitInfo hit)
         {
-
+            playerService.SetPlayerHealth(hit);
         }
         public void SetConnected()
         {
@@ -60,9 +60,12 @@ namespace MultiplayerSystem
         { 
                 this.communicationManager = communicationManager;
         }
-        public void SendInputDataToPlayer(InputData inputData,string nextTurnID)
+        public void SendInputDataToPlayer(InputData inputData)
         {
             playerService.SetPlayerData(inputData, false);
+        }
+        public void SetCurrentTurn(string nextTurnID)
+        {
             playerService.SetTurnId(nextTurnID);
         }
         public void SetLocalPlayerID(string localID)

@@ -13,5 +13,6 @@ namespace UISystem
        // void ShowDisconnectedUI();        
         void ShowGameOverUI(string reason,PopUpController popUpController);
         void ShowWaitingUI();
+        Transform GetPlayerCardParent();
     }
 }

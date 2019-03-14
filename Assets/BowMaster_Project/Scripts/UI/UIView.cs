@@ -95,5 +95,10 @@ namespace UISystem
                 }
             }
         }
+
+        public Transform GetPlayerCardParent()
+        {
+            return gamePanel.transform;
+        }
     }
 }

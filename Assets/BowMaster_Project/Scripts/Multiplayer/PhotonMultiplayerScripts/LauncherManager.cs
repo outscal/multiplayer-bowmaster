@@ -31,10 +31,6 @@ namespace MultiplayerSystem
             //PhotonNetwork.JoinLobby();
             //Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
         }
-        //public override void OnJoinedLobby()
-        //{
-        //    PhotonNetwork.GetCustomRoomList(TypedLobby.Default, "");
-        //}
         public void PrintPlayerCout()
         {
             Debug.Log("TotalConnected Players " + PhotonNetwork.CountOfPlayers);
@@ -43,6 +39,7 @@ namespace MultiplayerSystem
         public override void OnDisconnected(DisconnectCause cause)
         {
             Debug.Log("Disconnected because of: " + cause);
+
         }
 
 

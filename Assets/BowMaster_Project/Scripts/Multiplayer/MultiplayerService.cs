@@ -16,13 +16,18 @@ namespace MultiplayerSystem
         LauncherManager launch;
         bool connected = false;
         CommunicationManager communicationManager;
+        public void PlayerHit(HitInfo hit)
+        {
+
+        }
+        public void NotifyRemotePlayerHit(HitInfo hit)
+        {
+
+        }
         public void SetConnected()
         {
             connected = true;
-        }
-        public void ChangeToGamePlayState()
-        {
-            gameService.ChangeToGamePlayState();
+            ChangeToLobbyState();
         }
         public MultiplayerService(IPlayerService playerService,IGameService gameService)
         {
@@ -61,7 +66,10 @@ namespace MultiplayerSystem
         {
             playerService.SetLocalPlayerID(localID);
         }
-
+        public void ChangeToGamePlayState()
+        {
+            gameService.ChangeToGamePlayState();
+        }
         public void SpawnPlayer(PlayerSpawnData playerSpawnData)
         {
             playerService.PlayerConnected(playerSpawnData);
@@ -69,12 +77,12 @@ namespace MultiplayerSystem
 
         public void ChangeToGameDisconnectedState()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void ChangeToLobbyState()
         {
-            throw new System.NotImplementedException();
+            gameService.ChangeToLobbyState();
         }
     }
 }

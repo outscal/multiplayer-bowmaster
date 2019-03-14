@@ -9,6 +9,8 @@ namespace MultiplayerSystem
 {
     public interface IMultiplayerService
     {
+        void PlayerHit(HitInfo hit);
+        void NotifyRemotePlayerHit(HitInfo hit);
         void ChangeToGameDisconnectedState();
         void ChangeToLobbyState();
         void ChangeToGamePlayState();

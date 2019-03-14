@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Zenject;
 using UnityEngine;
+using PlayerSystem;
 using MultiplayerSystem;
 
 namespace UISystem
@@ -9,41 +10,43 @@ namespace UISystem
     public class UIService : IUIService
     {
         
-        private UILobbyView lobbyView;
-
-        public UIService()
+        private IUIView uiView;
+        private IPlayerService playerService;
+        private UIScriptableObj uIScriptableObj;
+        
+        public UIService(IPlayerService playerService,UIScriptableObj uIScriptableObj)
         {
-                
+            this.uIScriptableObj = uIScriptableObj;
+            this.uiView = uIScriptableObj.mainUICanvas;
+            this.playerService = playerService;
+            SpawnUICanvas(uIScriptableObj);
         }
 
-        public void ShowConnectedUI()
+        private void SpawnUICanvas(UIScriptableObj uIScriptableObj)
         {
-            throw new System.NotImplementedException();
+            GameObject mainCanvas = GameObject.Instantiate(uIScriptableObj.mainUICanvas.gameObject);
+
         }
+
+        public void ShowConnectingUI() => uiView.ShowConnectedUI();       
 
         public void ShowDisconnectedUI()
         {
-            throw new System.NotImplementedException();
+           
         }
 
         public void ShowGameOverUI()
         {
-            throw new System.NotImplementedException();
+           
         }
 
-        public void ShowLobbyUI()
-        {
-            throw new System.NotImplementedException();
-        }
+        public void ShowLobbyUI() => uiView.ShowLobbyUI();        
 
-        public void ShowPlayerUI()
-        {
-            throw new System.NotImplementedException();
-        }
+        public void ShowPlayerUI() => uiView.ShowPlayerUI(uIScriptableObj.playerCard);
 
         public void ShowVictoryUI()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

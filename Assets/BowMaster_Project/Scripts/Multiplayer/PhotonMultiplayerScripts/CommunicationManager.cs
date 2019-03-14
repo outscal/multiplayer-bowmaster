@@ -81,9 +81,13 @@ namespace MultiplayerSystem
             multiplayerService.SetCommunicationManager(this);
         }
 
-        public void NotrifyGameOver()
+        public void NotrifyGameOver(GameOverInfo gameOverInfo)
         {
-
+            //GAMEOVEREVENT
+            object[] content = new object[] { gameOverInfo.lostPlayerID, gameOverInfo.reasonToLose };
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+            SendOptions sendOptions = new SendOptions { Reliability = true };
+            PhotonNetwork.RaiseEvent(GAMEOVEREVENT, content, raiseEventOptions, sendOptions);
         }
         public void NotifyAllAboutPlayerSpawn(PlayerSpawnData spawnData)
         {
@@ -101,9 +105,8 @@ namespace MultiplayerSystem
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(PLAYERHITEVENT, content, raiseEventOptions, sendOptions);
-            Debug.Log("Sending SpawnPositions");
         }
-        public void GameStarted()
+        public void NotifyGameStarted()
         {
             //GAMESTARTEVENT
             object[] content = new object[] { };
@@ -126,22 +129,13 @@ namespace MultiplayerSystem
         {
             //Debug.Log("Event Recieved: " + photonEvent.Code);
             byte eventCode = photonEvent.Code;
-            if (eventCode == INPUTEVENT)
+            switch (eventCode)
             {
-                InputEventProscess(photonEvent);
-                //Debug.Log("Spawn Recieved from: " + (string)data[1]);
-            }
-            else if (eventCode == PLAYERSPAWNEVENT)
-            {
-                PlayerSpawnEventProscess(photonEvent);
-            }
-            else if (eventCode == GAMESTARTEVENT)
-            {
-                GameStartEventProscess();
-            }
-            else if (eventCode == PLAYERHITEVENT)
-            {
-                HitEventProscess(photonEvent);
+                case INPUTEVENT:InputEventProscess(photonEvent); break;
+                case PLAYERSPAWNEVENT:PlayerSpawnEventProscess(photonEvent); break;
+                case PLAYERHITEVENT: HitEventProscess(photonEvent); break;
+                case GAMEOVEREVENT: GameOverEventProscess(photonEvent); break;
+                case GAMESTARTEVENT: GameStartEventProscess(); break;
             }
         }
     }

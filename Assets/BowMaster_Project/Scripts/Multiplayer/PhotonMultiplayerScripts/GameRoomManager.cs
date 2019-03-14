@@ -38,7 +38,7 @@ namespace MultiplayerSystem
             communicationManager.SavePlayerSpawnData(spawn);
             if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
-                communicationManager.GameStarted();
+                communicationManager.NotifyGameStarted();
             }
         }
         public override void OnLeftRoom()

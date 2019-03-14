@@ -65,24 +65,6 @@ namespace PlayerSystem
             playerControllerDictionary.Add(playerSpawnData.playerID, playerController);
         }
 
-        public void SetPlayerData(InputData inputData, bool gettingInput)
-        {
-            if (!gettingInput)
-            {
-                Debug.Log("this is the player Id that Player Service Recieved to move" + inputData.playerID);
-            }
-            if (playerControllerDictionary.Count > 0 && playerControllerDictionary.ContainsKey(inputData.playerID) )
-            {
-                //Debug.Log("[PlayerService] Power:" + inputData.powerValue +
-                //"\n Angle:" + inputData.angleValue +
-                //"\n PlayerID:" + inputData.playerID);
-                playerControllerDictionary[inputData.playerID].SetShootInfo(inputData.powerValue
-                , inputData.angleValue
-                , inputData.characterID
-                , gettingInput);
-            }
-        }
-
         public ScriptableObjCharacter ReturnPlayerScriptableObj(PlayerCharacterType playerCharacterType)
         {
             for (int i = 0; i < playerList.playerObject.Count; i++)
@@ -103,6 +85,24 @@ namespace PlayerSystem
         {
             Debug.Log("next turn for "+nextTurnID);
             turnID = nextTurnID;
+        }
+
+        public void SetPlayerData(InputData inputData, bool gettingInput)
+        {
+            if (turnID == localPlayerID)
+            {
+                if (!gettingInput)
+                {
+                    Debug.Log("this is the player Id that Player Service Recieved to move" + inputData.playerID);
+                }
+                if (playerControllerDictionary.Count > 0 && playerControllerDictionary.ContainsKey(inputData.playerID))
+                {
+                    playerControllerDictionary[inputData.playerID].SetShootInfo(inputData.powerValue
+                    , inputData.angleValue
+                    , inputData.characterID
+                    , gettingInput);
+                }
+            }
         }
 
         public void SendInputDataToServer(InputData inputData)

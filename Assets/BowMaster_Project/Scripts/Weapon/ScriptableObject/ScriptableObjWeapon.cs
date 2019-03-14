@@ -4,9 +4,17 @@ using UnityEngine;
 
 namespace WeaponSystem
 {
+    [System.Serializable]
+    public struct WeaponViewInfo
+    {
+        public string playerName;
+        public WeaponType weaponType;
+        public WeaponView weaponView;
+    }
+
     [CreateAssetMenu(fileName = "WeaponScriptableObj", menuName = "Custom Objects/Weapon", order = 0)]
     public class ScriptableObjWeapon : ScriptableObject
     {
-        public List<WeaponView> weaponList;
+        public List<WeaponViewInfo> weaponList;
     }
 }

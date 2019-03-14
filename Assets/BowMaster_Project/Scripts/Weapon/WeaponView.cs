@@ -9,17 +9,23 @@ namespace WeaponSystem
     {
         private WeaponController weaponController;
         [SerializeField] private Rigidbody2D rb;
+        [SerializeField] private WeaponType weaponType;
 
         public void SetController(WeaponController weaponController)
         {
             this.weaponController = weaponController; 
         }
 
-        public void Shoot(float force, Vector2 direction)
+        public virtual void Shoot(float force, Vector2 direction)
         {
             if (force > 30)
                 force = 30;
             rb.AddForce(force * direction, ForceMode2D.Impulse);
+        }
+
+        public WeaponType ReturnWeaponType()
+        {
+            return weaponType; 
         }
     }
 }

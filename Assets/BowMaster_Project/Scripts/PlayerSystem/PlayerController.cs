@@ -25,11 +25,30 @@ namespace PlayerSystem
 
             for (int i = 0; i < 3; i++)
             {
-                PlayerCharacterController playerCharacterController = new PlayerCharacterController(
-                        i, this, playerService.ReturnPlayerScriptableObj()
-                        , weaponService, spawnCharacterPos
-                    );
-                playerCharacterControllerList.Add(playerCharacterController);
+                if (i == 0)
+                {
+                    PlayerCharacterController playerCharacterController = new CharacterAirController(
+                            i, this, playerService.ReturnPlayerScriptableObj()
+                            , weaponService, spawnCharacterPos
+                        );
+                    playerCharacterControllerList.Add(playerCharacterController);
+                }
+                else if (i == 1)
+                {
+                    PlayerCharacterController playerCharacterController = new CharacterWaterController(
+                            i, this, playerService.ReturnPlayerScriptableObj()
+                            , weaponService, spawnCharacterPos
+                        );
+                    playerCharacterControllerList.Add(playerCharacterController);
+                }
+                else if (i == 2)
+                {
+                    PlayerCharacterController playerCharacterController = new CharacterFireController(
+                            i, this, playerService.ReturnPlayerScriptableObj()
+                            , weaponService, spawnCharacterPos
+                        );
+                    playerCharacterControllerList.Add(playerCharacterController);
+                }
                 spawnCharacterPos.x += 2;
             }
         }

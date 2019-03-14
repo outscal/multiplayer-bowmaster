@@ -89,5 +89,10 @@ namespace InputSystem
         {
             return forwardCharacterDirection;
         }
+
+        public void SendPlayerDataToServer(InputData inputData)
+        {
+            playerService.SendInputDataToServer(inputData);
+        }
     }
 }

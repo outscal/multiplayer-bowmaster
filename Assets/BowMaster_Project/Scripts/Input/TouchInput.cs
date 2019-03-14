@@ -70,8 +70,8 @@ namespace InputSystem
                 if (touch.phase == TouchPhase.Ended && inputStatus==InputStatus.VALID)
                 {
                     endTouchPos = touch.position;
-                    InputData inputData=  CreateInputData();                    
-                    inputService.SendPlayerData(inputData, false);
+                    InputData inputData=  CreateInputData();
+                    inputService.SendPlayerDataToServer(inputData);
                     inputStatus = InputStatus.INVALID;
 
                 }

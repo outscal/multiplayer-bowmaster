@@ -59,6 +59,8 @@ namespace UISystem
         {
             uiView.ShowPlayerUI(uIScriptableObj.playerCard);
             List<string> namesToShow = multiplayerService.GetPlayerNames(localPlayerID);
+            Debug.Log("Player 1 name" + namesToShow[1]);
+            Debug.Log("opponent name" + namesToShow[2]);
 
             playerCard = GameObject.Instantiate(uIScriptableObj.playerCard);
             playerCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[0]);

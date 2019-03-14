@@ -40,11 +40,14 @@ namespace MultiplayerSystem
             communicationManager.SavePlayerSpawnData(spawn);
             if(PhotonNetwork.CurrentRoom.PlayerCount == 2)
             {
-                inRoomplayers = new Dictionary<string, List<float>>();
-                inRoomplayers.Add(PhotonNetwork.CurrentRoom.Players[0].UserId, new List<float> { 100, 100, 100 });
-                inRoomplayers.Add(PhotonNetwork.CurrentRoom.Players[1].UserId, new List<float> { 100, 100, 100 });
                 communicationManager.NotifyGameStarted();
             }
+        }
+        public void GameStarted()
+        {
+            inRoomplayers = new Dictionary<string, List<float>>();
+            inRoomplayers.Add(PhotonNetwork.CurrentRoom.Players[1].UserId, new List<float> { 100, 100, 100 });
+            inRoomplayers.Add(PhotonNetwork.CurrentRoom.Players[2].UserId, new List<float> { 100, 100, 100 });
         }
         public void playerHit(string hitPlayerID,int charachterID,float damage)
         {

@@ -13,6 +13,7 @@ namespace PlayerSystem
         void PlayerConnected(PlayerSpawnData playerSpawnData);
         void SetPlayerData(InputData inputData, bool gettingInput);
         string GetLocalPlayerID();
+        PlayerSpawnSide GetLocalPlayerSide();
         void SetTurnId(string nextTurnID);
         void SendInputDataToServer(InputData inputData);
     }

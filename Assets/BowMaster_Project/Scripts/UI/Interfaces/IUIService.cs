@@ -14,6 +14,7 @@ namespace UISystem
         void ShowConnectingUI();
         void ShowGameOverUI(string reason);
         void SetLocalPlayerID(string id);
-       // void ShowDisconnectedUI();        
+        void ShowWaitingUI();
+        // void ShowDisconnectedUI();        
     }
 }

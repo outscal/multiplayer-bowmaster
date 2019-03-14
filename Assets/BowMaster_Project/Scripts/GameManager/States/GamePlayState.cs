@@ -24,8 +24,7 @@ namespace GameSystem
 
         public void OnStateEnter()
         {
-           //UIStartPlayerUI
-           //saveSystem.count
+            uIService.ShowPlayerUI();
         }
 
         public void OnStateExit()

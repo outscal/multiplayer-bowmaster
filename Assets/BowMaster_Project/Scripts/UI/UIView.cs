@@ -17,7 +17,8 @@ namespace UISystem
         [SerializeField]
         private GameObject gameOverPanel;
 
-       
+        private GameObject popupInstance;
+        private GameObject gameOverPopUp;
 
         private List<GameObject> panelList = new List<GameObject>();
         private void Start()
@@ -25,30 +26,51 @@ namespace UISystem
             panelList.Add(lobbyPanel);
             panelList.Add(connectingPanel);
             panelList.Add(gamePanel);
-
-            lobbyPanel.SetActive(false);
-            connectingPanel.SetActive(false);
-            gamePanel.SetActive(false);
+            panelList.Add(gameOverPanel);
+           
         }
 
-        public void ShowConnectedUI()
+        public void ShowConnectedUI(PopUpController popUpController)
         {
-            connectingPanel.SetActive(true);            
             DeactivateOtherPanels(connectingPanel);
+            connectingPanel.SetActive(true);
+            popupInstance = GameObject.Instantiate(popUpController.gameObject);
+            popupInstance.SetActive(true);
+            popupInstance.transform.SetParent(connectingPanel.transform);
+            popupInstance.GetComponent<PopUpController>().SetText("Connecting To Server.  .  .  .");
         }
 
-        public void ShowDisconnectedUI()
+      //  public void ShowDisconnectedUI()
+        //{
+            //DeactivateOtherPanels(gameOverPanel);
+            //gameOverPanel.SetActive(true);            
+            //gameOverPopUp.SetActive(true);
+            //popupInstance.transform.SetParent(gameOverPanel.transform);
+            //gameOverPopUp.GetComponent<PopUpController>().SetText("Disconnected");
+        //}
+
+        public void ShowGameOverUI(string reason, PopUpController popUpController)
         {
-           
+            DeactivateOtherPanels(gameOverPanel);
+            gameOverPanel.SetActive(true);
+            gameOverPopUp = GameObject.Instantiate(popUpController.gameObject);
+            gameOverPopUp.SetActive(true);
+            popupInstance.transform.SetParent(gameOverPanel.transform);
+            gameOverPopUp.GetComponent<PopUpController>().SetText(reason);
+
         }
 
-        public void ShowGameOverUI()
+        public void ShowWaitingUI()
         {
-           
+            DeactivateOtherPanels(connectingPanel);
+            connectingPanel.SetActive(true);
+            popupInstance.GetComponent<PopUpController>().SetText("Waiting for players to join . .  .  .  .");
+
         }
 
         public void ShowLobbyUI()
         {
+            DeactivateOtherPanels(lobbyPanel);
             lobbyPanel.SetActive(true);
         }
 
@@ -58,12 +80,7 @@ namespace UISystem
             GameObject playerCardInstance = GameObject.Instantiate(playerCard);
             playerCardInstance.transform.SetParent(gamePanel.transform);
         }
-
-        public void ShowVictoryUI()
-        {
-            
-        }
-
+      
         private void DeactivateOtherPanels(GameObject currentActivePanel)
         {
             foreach(GameObject panel in panelList)

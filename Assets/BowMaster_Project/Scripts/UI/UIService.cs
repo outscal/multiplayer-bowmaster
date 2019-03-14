@@ -19,15 +19,18 @@ namespace UISystem
         private GameObject playerCard;
         private GameObject opponentCard;
 
-        public UIService(IPlayerService playerService, IMultiplayerService multiplayerService, UIScriptableObj uIScriptableObj)
+        public UIService(IPlayerService playerService, UIScriptableObj uIScriptableObj)
         {
             this.uIScriptableObj = uIScriptableObj;
             this.uiView = uIScriptableObj.mainUICanvas;
             this.playerService = playerService;
+        }
+
+        public void SetMultiplayerServiceRef(IMultiplayerService multiplayerService)
+        {            
             this.multiplayerService = multiplayerService;
             SpawnUICanvas(uIScriptableObj);
         }
-
         public void SetLocalPlayerID(string id)
         {
             localPlayerID = id;
@@ -49,8 +52,9 @@ namespace UISystem
             uiView.ShowPlayerUI(uIScriptableObj.playerCard);
             playerCard = GameObject.Instantiate(uIScriptableObj.playerCard);
 
-            //playerCard.GetComponent<>
+           // playerCard.GetComponent<PlayerInfoCardController>().SetPlayerName();            
         }
+
 
         // public void ShowDisconnectedUI() => uiView.ShowDisconnectedUI();       
 

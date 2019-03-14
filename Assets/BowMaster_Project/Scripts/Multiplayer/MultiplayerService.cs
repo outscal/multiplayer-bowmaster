@@ -60,11 +60,12 @@ namespace MultiplayerSystem
         public void SendInputDataToPlayer(InputData inputData,string nextTurnID)
         {
             playerService.SetPlayerData(inputData, false);
+            
         }
         public void SetLocalPlayerID(string localID)
         {
             gameService.SetLocalPlayerID(localID);
-            playerService.SetLocalPlayerID(localID,this);
+            //playerService.SetLocalPlayerID(localID,this);
         }
         public void ChangeToGamePlayState()
         {
@@ -85,6 +86,11 @@ namespace MultiplayerSystem
         public void ChangeToLobbyState()
         {
             gameService.ChangeToLobbyState();
+        }
+
+        public List<string> GetPlayerNames(string localPlayerId)
+        {
+            return gameRoomManager.GetPlayerNames();
         }
     }
 }

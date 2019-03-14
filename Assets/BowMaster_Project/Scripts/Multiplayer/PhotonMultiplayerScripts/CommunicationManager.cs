@@ -52,7 +52,7 @@ namespace MultiplayerSystem
             playerInputData.characterID = (int)data[1];
             playerInputData.powerValue = (float)data[2];
             playerInputData.angleValue = (float)data[3];
-            multiplayerService.SendInputDataToPlayer(playerInputData);
+            multiplayerService.SendInputDataToPlayer(playerInputData,LastMovePlayerId);
             LastMovePlayerId = playerInputData.playerID;
         }
         void PlayerSpawnEventProscess(EventData photonEvent)

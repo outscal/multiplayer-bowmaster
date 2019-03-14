@@ -10,7 +10,7 @@ namespace MultiplayerSystem
 {
     public interface IMultiplayerService
     {
-
+        List<string> GetPlayerNames(string localPlayerId);
         void ChangeToGameOverState(GameOverInfo gameOverInfo);
         void PlayerHit(string hitPlayerID, int characterID, float damage);
         void NotifyRemotePlayerHit(HitInfo hit);
@@ -24,6 +24,6 @@ namespace MultiplayerSystem
         bool CheckConnection();
         void SetConnected();
         void SetCommunicationManager(CommunicationManager communicationManager);
-        void SendInputDataToPlayer(InputData inputData, string nextTurnID);
+        void SendInputDataToPlayer(InputData inputData,string nextTurnID);
     }
 }

@@ -16,6 +16,7 @@ namespace PlayerSystem
             this.weaponService = weaponService;
             this.playerController = playerController;
             this.playerCharacterType = scriptableObjPlayer.playerType;
+            this.weaponType = scriptableObjPlayer.weaponType;
             GameObject playerObj = GameObject.Instantiate<GameObject>(
                         scriptableObjPlayer.playerView.gameObject
                 );
@@ -26,6 +27,8 @@ namespace PlayerSystem
 
         public override void SetShootInfo(float power, float angle, bool gettingInput)
         {
+            base.SetShootInfo(power, angle, gettingInput);
+
             playerCharacterView.SetShootInfo(power, angle, gettingInput);
 
             if (gettingInput == false)

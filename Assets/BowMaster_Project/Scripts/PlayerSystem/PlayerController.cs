@@ -69,5 +69,13 @@ namespace PlayerSystem
             playerCharacterControllerList[characterID].SetShootInfo(power, angle, gettingInput);
         }
 
+        public void DeactivateDisplayPanel()
+        {
+            for (int i = 0; i < playerCharacterControllerList.Count; i++)
+            {
+                playerCharacterControllerList[i].DeactivateInfoPanel();
+            }
+        }
+
     }
 }

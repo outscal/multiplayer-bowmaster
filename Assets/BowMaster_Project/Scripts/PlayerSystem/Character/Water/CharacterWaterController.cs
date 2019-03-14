@@ -26,6 +26,8 @@ namespace PlayerSystem
 
         public override void SetShootInfo(float power, float angle, bool gettingInput)
         {
+            base.SetShootInfo(power, angle, gettingInput);
+
             playerCharacterView.SetShootInfo(power, angle, gettingInput);
 
             if (gettingInput == false)

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using WeaponSystem;
+using UnityEngine.UI;
 
 namespace PlayerSystem
 {
@@ -8,6 +9,7 @@ namespace PlayerSystem
     {
         [SerializeField] protected GameObject displayHolder, shootPos;
         [SerializeField] protected TextMeshProUGUI powerText, angleText;
+        [SerializeField] protected Slider healthBar;
 
         public Vector2 ShootPos { get { return shootPos.transform.position; } }
         private PlayerCharacterController playerCharacterController;
@@ -30,10 +32,11 @@ namespace PlayerSystem
                 angleText.text = angle + " \n Angle";
                 displayHolder.SetActive(true);
             }
-            else
-            {
-                displayHolder.SetActive(false); 
-            }
+        }
+
+        public void DeactivateDisplayHolder()
+        {
+            displayHolder.SetActive(false);
         }
 
         public Vector2 GetForwardDirection()

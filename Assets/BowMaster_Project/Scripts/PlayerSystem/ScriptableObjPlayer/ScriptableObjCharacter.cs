@@ -11,7 +11,6 @@ namespace PlayerSystem
         public string playerName;
         public PlayerCharacterType playerType;
         public PlayerCharacterView playerView;
-        public int playerHealth;
         public WeaponType weaponType;
     }
 }

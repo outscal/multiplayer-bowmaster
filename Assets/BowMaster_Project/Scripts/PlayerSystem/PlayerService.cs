@@ -85,7 +85,7 @@ namespace PlayerSystem
             return localPlayerID;
         }
 
-        public void SetTurnID(string nextTurnID)
+        public void SetTurnId(string nextTurnID)
         {
             turnID = nextTurnID;
         }
@@ -94,7 +94,8 @@ namespace PlayerSystem
         {
             if(turnID == localPlayerID)
             {
-                multiplayerService.SendNewInput(inputData); 
+                multiplayerService.SendNewInput(inputData);
+                playerControllerDictionary[inputData.playerID].DeactivateDisplayPanel();
             }
         }
     }

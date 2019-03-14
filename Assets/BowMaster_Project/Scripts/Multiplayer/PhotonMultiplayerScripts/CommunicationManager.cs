@@ -16,14 +16,17 @@ namespace MultiplayerSystem
         const byte PLAYERHITEVENT = 4;
         const byte INPUTEVENT = 1;
         const byte GAMEOVEREVENT = 5;
+        GameRoomManager roomManager;
 
         PlayerSpawnData spData;
         IMultiplayerService multiplayerService;
         string LastMovePlayerId=" ";
         public CommunicationManager(IMultiplayerService multiplayerService)
         {
+            roomManager = GameObject.FindObjectOfType<GameRoomManager>();
             PhotonNetwork.AddCallbackTarget(this);
             this.multiplayerService = multiplayerService;
+
         }
         ~CommunicationManager()
         {
@@ -41,6 +44,7 @@ namespace MultiplayerSystem
         void GameStartEventProscess()
         {
             Debug.Log("game Started");
+            roomManager.GameStarted();
             multiplayerService.ChangeToGamePlayState();
             NotifyAllAboutPlayerSpawn(spData);
         }

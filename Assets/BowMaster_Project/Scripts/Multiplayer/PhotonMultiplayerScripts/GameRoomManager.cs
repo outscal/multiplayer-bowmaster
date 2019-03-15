@@ -59,6 +59,11 @@ namespace MultiplayerSystem
         public void playerHit(string hitPlayerID,int charachterID,float damage)
         {
             inRoomplayers[hitPlayerID][charachterID] -= damage;
+            HitInfo hitInfo = new HitInfo();
+            hitInfo.playerId = hitPlayerID;
+            hitInfo.characterHealth = inRoomplayers[hitPlayerID][charachterID];
+            hitInfo.characterId = charachterID;
+            communicationManager.NotifyPlayerHit(hitInfo);
         }
         public override void OnLeftRoom()
         {

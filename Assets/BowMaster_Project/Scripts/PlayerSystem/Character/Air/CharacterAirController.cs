@@ -9,7 +9,7 @@ namespace PlayerSystem
     {
         public CharacterAirController(int characterID, PlayerController playerController,
         ScriptableObjCharacter scriptableObjPlayer, IWeaponService weaponService,
-            Vector2 spawnPos)
+            Vector2 spawnPos, GameObject parentObj)
         {
             this.scriptableObjPlayer = scriptableObjPlayer;
             this.characterID = characterID;
@@ -20,6 +20,7 @@ namespace PlayerSystem
             GameObject playerObj = GameObject.Instantiate<GameObject>(
                         scriptableObjPlayer.playerView.gameObject
                 );
+            playerObj.transform.SetParent(parentObj.transform);
             playerObj.transform.position = spawnPos;
             playerCharacterView = playerObj.GetComponent<CharacterAirView>();
             playerCharacterView.SetCharacterController(this);
@@ -27,8 +28,6 @@ namespace PlayerSystem
 
         public override void SetShootInfo(float power, float angle, bool gettingInput)
         {
-            base.SetShootInfo(power, angle, gettingInput);
-
             playerCharacterView.SetShootInfo(power, angle, gettingInput);
 
             if (gettingInput == false)

@@ -12,6 +12,11 @@ namespace WeaponSystem
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private WeaponType weaponType;
 
+        private void OnEnable()
+        {
+            Debug.Log("[WeaponView] WeaponSpawned");
+        }
+
         public void SetController(WeaponController weaponController)
         {
             this.weaponController = weaponController;

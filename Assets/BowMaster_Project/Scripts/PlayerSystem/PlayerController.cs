@@ -15,16 +15,24 @@ namespace PlayerSystem
         private Vector2 spawnCharacterPos;
         private string turnID;
         private Vector2 fixedPos;
+        private GameObject playerHolder;
 
         public PlayerController(PlayerSpawnData playerSpawnData, PlayerService playerService
         , IWeaponService weaponSystem)
         {
+            playerHolder = new GameObject();
             this.playerService = playerService;
             this.weaponService = weaponSystem;
             this.playerID = playerSpawnData.playerID;
             spawnCharacterPos = playerSpawnData.playerPosition;
             fixedPos = playerSpawnData.playerPosition;
             playerCharacterControllerList = new List<PlayerCharacterController>();
+            playerHolder.transform.position = playerSpawnData.playerPosition;
+
+            if(playerHolder.transform.position.x > 0)
+            {
+                playerHolder.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
 
             for (int i = 0; i < 3; i++)
             {
@@ -32,7 +40,7 @@ namespace PlayerSystem
                 {
                     PlayerCharacterController playerCharacterController = new CharacterAirController(
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Air)
-                            , weaponService, spawnCharacterPos
+                            , weaponService, spawnCharacterPos, playerHolder
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char1Health);
                     Debug.Log("[PlayerController] health:" + playerSpawnData.char1Health);
@@ -42,7 +50,7 @@ namespace PlayerSystem
                 {
                     PlayerCharacterController playerCharacterController = new CharacterWaterController(
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Water)
-                            , weaponService, spawnCharacterPos
+                            , weaponService, spawnCharacterPos, playerHolder
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char2Health);
                     Debug.Log("[PlayerController] health:" + playerSpawnData.char2Health);
@@ -52,7 +60,7 @@ namespace PlayerSystem
                 {
                     PlayerCharacterController playerCharacterController = new CharacterFireController(
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Fire)
-                            , weaponService, spawnCharacterPos
+                            , weaponService, spawnCharacterPos, playerHolder
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char3Health);
                     Debug.Log("[PlayerController] health:" + playerSpawnData.char3Health);

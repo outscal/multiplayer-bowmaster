@@ -62,6 +62,7 @@ namespace MultiplayerSystem
         }
         public void SendInputDataToPlayer(InputData inputData)
         {
+            Debug.Log("[MultiplaerService] Sending WeaponInfo to Player");
             playerService.SetPlayerData(inputData, false);
         }
         public void SetCurrentTurn(string nextTurnID)

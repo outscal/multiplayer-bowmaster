@@ -120,7 +120,7 @@ namespace PlayerSystem
         public void SetPlayerHealth(HitInfo hitInfo)
         {
             Debug.Log("Setting Player Health");
-            playerControllerDictionary[hitInfo.playerId].SetHealth(hitInfo.characterId, hitInfo.characterHealth);
+            playerControllerDictionary[hitInfo.playerId].SetHealth(hitInfo);
         }
     }
 }

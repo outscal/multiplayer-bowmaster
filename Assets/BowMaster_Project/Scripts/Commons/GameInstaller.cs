@@ -16,6 +16,9 @@ namespace Commons
         public override void InstallBindings()
         {
             SignalBusInstaller.Install(Container);
+            Container.DeclareSignal<SignalDestroyWeapon>();
+
+
             Container.Bind<IPlayerService>().
                 To<PlayerService>().
                 AsSingle().

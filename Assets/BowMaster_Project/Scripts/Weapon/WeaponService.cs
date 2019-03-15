@@ -15,6 +15,7 @@ namespace WeaponSystem
         {
             this.signalBus = signalBus;
             this.scriptableObjWeapon = scriptableObjWeapon;
+            signalBus.Subscribe<SignalDestroyWeapon>(DestroyWeapon);
         }
 
         public void SpawnWeapon(float power, float angle, Vector2 spawnPos, WeaponType weaponType)
@@ -35,6 +36,11 @@ namespace WeaponSystem
         public ScriptableObjWeapon ReturnWeaponScriptable()
         {
             return scriptableObjWeapon;
+        }
+
+        public void DestroyWeapon(SignalDestroyWeapon weaponDestroy)
+        {
+            weaponDestroy.weaponController = null;
         }
     }
 }

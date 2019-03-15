@@ -14,7 +14,7 @@ namespace WeaponSystem
 
         public void SetController(WeaponController weaponController)
         {
-            this.weaponController = weaponController; 
+            this.weaponController = weaponController;
         }
 
         public virtual void Shoot(float force, Vector2 direction)
@@ -26,17 +26,24 @@ namespace WeaponSystem
 
         public WeaponType ReturnWeaponType()
         {
-            return weaponType; 
+            return weaponType;
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-
-            if(other.gameObject.GetComponent<ITakeDamage>() != null)
+            if (other.gameObject.GetComponent<ITakeDamage>() != null)
             {
                 Debug.Log("Collision detected");
                 other.gameObject.GetComponent<ITakeDamage>().DamageAmount(50f);
             }
+
+            DestroyWeapon();
+        }
+
+        private void DestroyWeapon()
+        {
+            weaponController.DestroyWeapon();
+            Destroy(gameObject);
         }
     }
 }

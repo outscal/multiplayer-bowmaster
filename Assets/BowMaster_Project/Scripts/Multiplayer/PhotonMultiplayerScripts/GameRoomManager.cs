@@ -13,7 +13,7 @@ namespace MultiplayerSystem
     public class GameRoomManager : MonoBehaviourPunCallbacks
     {
         [Inject]CommunicationManager communicationManager;
-        Dictionary<string, List<float>> inRoomplayers;
+        Dictionary<string, Dictionary<int,float>> inRoomplayers;
         string currentTurnId,previousTurnId;
         #region Private Methods
 
@@ -49,13 +49,18 @@ namespace MultiplayerSystem
             if (inRoomplayers == null)
             {
                 currentTurnId = ID;
-                inRoomplayers = new Dictionary<string, List<float>>();
+                inRoomplayers = new Dictionary<string, Dictionary<int, float>>();
             }
             else
             {
                 previousTurnId = ID;
             }
-            inRoomplayers.Add(ID, new List<float> { 100, 100, 100 });
+            Dictionary<int, float> healths = new Dictionary<int, float>();
+            healths.Add(0, 100f);
+            healths.Add(1, 100f);
+            healths.Add(2, 100f);
+
+            inRoomplayers.Add(ID, healths);
         }
         public void playerHit(string hitPlayerID,int charachterID,float damage)
         {
@@ -68,7 +73,7 @@ namespace MultiplayerSystem
             if (inRoomplayers[hitPlayerID][charachterID] < 0)
             {
                 hitInfo.destroy = true;
-                inRoomplayers[hitPlayerID].RemoveAt(charachterID);
+                inRoomplayers[hitPlayerID].Remove(charachterID);
             }  
             communicationManager.NotifyPlayerHit(hitInfo);
             if (inRoomplayers[hitPlayerID].Count < 1)

@@ -88,7 +88,8 @@ namespace PlayerSystem
 
         public void SetHealth(HitInfo hitInfo)
         {
-            
+            Debug.Log("[PlayerController] CharacterID:" + hitInfo.characterId +
+            playerCharacterControllerList.Count);
             if (hitInfo.destroy == false)
                 playerCharacterControllerList[hitInfo.characterId].SetHealth(hitInfo.characterHealth);
             else

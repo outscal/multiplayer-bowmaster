@@ -113,6 +113,7 @@ namespace PlayerSystem
 
         public void SendPlayerDamageDataToServer(float damage, int characterID,string playerID)
         {
+            Debug.Log("DamageTaken" + damage);
             multiplayerService.PlayerHit(playerID, characterID, damage);
         }
 

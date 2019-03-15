@@ -42,6 +42,7 @@ namespace UISystem
         public void ShowGameOverUI(string reason, PopUpController popUpController)
         {
             DeactivateOtherPanels(gameOverPanel);
+            Destroy(popupInstance);
             gameOverPanel.SetActive(true);
             gameOverPopUp = GameObject.Instantiate(popUpController.gameObject,gameOverPanel.transform);
             gameOverPopUp.SetActive(true);
@@ -65,10 +66,8 @@ namespace UISystem
 
         public void ShowPlayerUI(GameObject playerCard)
         {
+            DeactivateOtherPanels(gamePanel);   
             gamePanel.SetActive(true);
-            DeactivateOtherPanels(gamePanel);
-            GameObject playerCardInstance = GameObject.Instantiate(playerCard);
-            playerCardInstance.transform.SetParent(gamePanel.transform);
         }
       
         private void DeactivateOtherPanels(GameObject currentActivePanel)
@@ -85,6 +84,11 @@ namespace UISystem
         public Transform GetPlayerCardParent()
         {
             return gamePanel.transform;
+        }
+
+        public void DestroyObject(GameObject objectToDestory)
+        {
+            Destroy(objectToDestory);
         }
     }
 }

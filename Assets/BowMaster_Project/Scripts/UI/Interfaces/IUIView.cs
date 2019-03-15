@@ -14,5 +14,6 @@ namespace UISystem
         void ShowGameOverUI(string reason,PopUpController popUpController);
         void ShowWaitingUI();
         Transform GetPlayerCardParent();
+        void DestroyObject(GameObject objectToDestroy);
     }
 }

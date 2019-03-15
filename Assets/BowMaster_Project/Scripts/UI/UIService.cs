@@ -26,7 +26,7 @@ namespace UISystem
 
         public UIService(IPlayerService playerService, UIScriptableObj uIScriptableObj)
         {
-            this.uIScriptableObj = uIScriptableObj;            
+            this.uIScriptableObj = uIScriptableObj;
             this.playerService = playerService;
         }
 
@@ -57,20 +57,25 @@ namespace UISystem
         }
 
         public void ShowConnectingUI() => uiView.ShowConnectedUI(uIScriptableObj.popUpPrefab);
-        public void ShowGameOverUI(string reason) => uiView.ShowGameOverUI(reason, uIScriptableObj.popUpPrefab);
+        public void ShowGameOverUI(string reason)
+        {
+            uiView.ShowGameOverUI(reason, uIScriptableObj.popUpPrefab);
+            uiView.DestroyObject(playerCard);
+            uiView.DestroyObject(opponentCard);
+        }
         public void ShowLobbyUI() => uiView.ShowLobbyUI();
 
-       async public void ShowPlayerUI()
+        async public void ShowPlayerUI()
         {
             uiView.ShowPlayerUI(uIScriptableObj.playerCard);
-            Transform gamePanel=uiView.GetPlayerCardParent();
+            Transform gamePanel = uiView.GetPlayerCardParent();
             List<string> namesToShow = multiplayerService.GetPlayerNames(localPlayerID);
-         
 
-            playerCard = GameObject.Instantiate(uIScriptableObj.playerCard,gamePanel);
+
+            playerCard = GameObject.Instantiate(uIScriptableObj.playerCard, gamePanel);
             playerCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[0]);
 
-            opponentCard = GameObject.Instantiate(uIScriptableObj.playerCard,gamePanel);
+            opponentCard = GameObject.Instantiate(uIScriptableObj.playerCard, gamePanel);
             opponentCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[1]);
             await new WaitForSeconds(0.5f);
 
@@ -91,7 +96,7 @@ namespace UISystem
             else
             {
                 //set right player rect
-                
+
                 playerCard.GetComponent<RectTransform>().anchorMin = new Vector2(1, 1);
                 playerCard.GetComponent<RectTransform>().anchorMax = new Vector2(1, 1);
                 playerCard.GetComponent<RectTransform>().pivot = new Vector2(1, 1);
@@ -105,7 +110,7 @@ namespace UISystem
 
         public void ShowWaitingUI() => uiView.ShowWaitingUI();
 
-            
+
 
     }
 }

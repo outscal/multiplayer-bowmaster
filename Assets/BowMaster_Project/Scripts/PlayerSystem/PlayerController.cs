@@ -44,7 +44,6 @@ namespace PlayerSystem
                             , weaponService, spawnCharacterPos, playerHolder
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char1Health);
-                    Debug.Log("[PlayerController] health:" + playerSpawnData.char1Health);
                     playerCharacterControllerList.Add(i,playerCharacterController);
                 }
                 else if (i == 1)
@@ -54,7 +53,6 @@ namespace PlayerSystem
                             , weaponService, spawnCharacterPos, playerHolder
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char2Health);
-                    Debug.Log("[PlayerController] health:" + playerSpawnData.char2Health);
                     playerCharacterControllerList.Add(i,playerCharacterController);
                 }
                 else if (i == 2)
@@ -64,7 +62,6 @@ namespace PlayerSystem
                             , weaponService, spawnCharacterPos, playerHolder
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char3Health);
-                    Debug.Log("[PlayerController] health:" + playerSpawnData.char3Health);
                     playerCharacterControllerList.Add(i,playerCharacterController);
                 }
                 spawnCharacterPos.x += 2;
@@ -88,8 +85,6 @@ namespace PlayerSystem
 
         public void SetHealth(HitInfo hitInfo)
         {
-            Debug.Log("[PlayerController] CharacterID:" + hitInfo.characterId +
-            playerCharacterControllerList.Count);
             if (hitInfo.destroy == false)
                 playerCharacterControllerList[hitInfo.characterId].SetHealth(hitInfo.characterHealth);
             else

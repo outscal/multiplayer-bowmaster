@@ -38,7 +38,6 @@ namespace WeaponSystem
         {
             if (other.gameObject.GetComponent<ITakeDamage>() != null)
             {
-                Debug.Log("Collision detected Name:" + other.gameObject.name);
                 other.gameObject.GetComponent<ITakeDamage>().DamageAmount(51f);
             }
 

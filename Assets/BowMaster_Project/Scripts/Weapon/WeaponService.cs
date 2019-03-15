@@ -20,11 +20,9 @@ namespace WeaponSystem
 
         public void SpawnWeapon(float power, float angle, Vector2 spawnPos, WeaponType weaponType)
         {
-            //Debug.Log("[WeaponService] Angle:" + angle);
-            Debug.Log("[WeaponService] Weapon Spawned");
             Vector2 direction = new Vector2((float)Mathf.Cos((angle) * Mathf.Deg2Rad),
                                             (float)Mathf.Sin((angle) * Mathf.Deg2Rad));
-            //Debug.Log("[WeaponService] Direction:" + direction);
+
             if (weaponType == WeaponType.Air)
                 weaponController = new WeaponAirController(this, power, direction, spawnPos);
             else if (weaponType == WeaponType.Water)

@@ -16,6 +16,7 @@ namespace PlayerSystem
         private string turnID;
         private Vector2 fixedPos;
         private GameObject playerHolder;
+        PlayerCharacterController currentCharacterController;
 
         public PlayerController(PlayerSpawnData playerSpawnData, PlayerService playerService
         , IWeaponService weaponSystem)
@@ -87,14 +88,22 @@ namespace PlayerSystem
 
         public void SetHealth(HitInfo hitInfo)
         {
+            for (int i = 0; i < playerCharacterControllerList.Count; i++)
+            {
+                if (playerCharacterControllerList[i].GetCharacterID() == hitInfo.characterId)
+                {
+                    currentCharacterController = playerCharacterControllerList[i];
+                    break;
+                }
+            }
+
             if (hitInfo.destroy == false)
-                playerCharacterControllerList[hitInfo.characterId].SetHealth(hitInfo.characterHealth);
+                currentCharacterController.SetHealth(hitInfo.characterHealth);
             else
             {
-                playerCharacterControllerList[hitInfo.characterId].DestroyCharacter();
-                PlayerCharacterController characterController = playerCharacterControllerList[hitInfo.characterId];
-                playerCharacterControllerList.RemoveAt(hitInfo.characterId);
-                characterController = null;
+                currentCharacterController.DestroyCharacter();
+                playerCharacterControllerList.Remove(currentCharacterController);
+                currentCharacterController = null;
             }
 
         }

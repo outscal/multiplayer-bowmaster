@@ -74,7 +74,7 @@ namespace MultiplayerSystem
             {
                 hitInfo.destroy = true;
                 inRoomplayers[hitPlayerID].Remove(charachterID);
-            }  
+            }
             communicationManager.NotifyPlayerHit(hitInfo);
             if (inRoomplayers[hitPlayerID].Count < 1)
             {

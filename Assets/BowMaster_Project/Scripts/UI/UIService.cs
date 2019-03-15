@@ -18,6 +18,7 @@ namespace UISystem
         private string localPlayerID;
 
         private GameUIController gameUIController;
+        private GameOverUIController gameOverUIController;
         private GameObject mainCanvas;
         private GameObject playerCard;
         private GameObject opponentCard;
@@ -25,8 +26,7 @@ namespace UISystem
 
         public UIService(IPlayerService playerService, UIScriptableObj uIScriptableObj)
         {
-            this.uIScriptableObj = uIScriptableObj;
-            //this.uiView = uIScriptableObj.mainUICanvas;
+            this.uIScriptableObj = uIScriptableObj;            
             this.playerService = playerService;
         }
 
@@ -39,6 +39,8 @@ namespace UISystem
         {
             localPlayerID = id;
             gameUIController.SetLocalPlayerID(localPlayerID);
+            gameOverUIController.SetLocalPlayerID(localPlayerID);
+
         }
 
         private void SetCanvasReferences()
@@ -48,7 +50,10 @@ namespace UISystem
             mainCanvas.GetComponentInChildren<LobbyController>().SetMultiplayerServiceRef(multiplayerService);
             mainCanvas.GetComponentInChildren<LobbyController>().SetUIServiceRef(this);
             mainCanvas.GetComponentInChildren<GameUIController>().SetMultiplayerServiceRef(multiplayerService);
+            mainCanvas.GetComponentInChildren<GameOverUIController>().SetMultiplayerServiceRef(multiplayerService);
             gameUIController = mainCanvas.GetComponentInChildren<GameUIController>();
+            gameOverUIController = mainCanvas.GetComponentInChildren<GameOverUIController>();
+
         }
 
         public void ShowConnectingUI() => uiView.ShowConnectedUI(uIScriptableObj.popUpPrefab);
@@ -100,9 +105,7 @@ namespace UISystem
 
         public void ShowWaitingUI() => uiView.ShowWaitingUI();
 
-
-
-        // public void ShowDisconnectedUI() => uiView.ShowDisconnectedUI();       
+            
 
     }
 }

@@ -13,6 +13,7 @@ namespace MultiplayerSystem
         string[] rooms = new string[] { "room1", "room2", "room3", "room4" };
         [SerializeField]
         private byte maxPlayersInRoom = 2;
+        int room = 0;
         [Inject] CommunicationManager communicationManager;
         #endregion
         #region Private Fields
@@ -22,10 +23,12 @@ namespace MultiplayerSystem
         #region MonoBehaviour CallBacks
         void Awake()
         {
+            
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }
+       
         public void LeaveRoom()
         {
             GameOverInfo overInfo = new GameOverInfo();
@@ -54,8 +57,15 @@ namespace MultiplayerSystem
             communicationManager.NotifyGameOver(overInfo);
             Debug.Log("Disconnected because of: " + cause);
         }
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            Debug.Log("Failed to join room = " + rooms[room]);
+            room++;
+            Connect();
+        }
         public override void OnLeftRoom()
         {
+            room = 0;
             multiplayerService.ChangeToLobbyState();
         }
         #endregion
@@ -64,11 +74,8 @@ namespace MultiplayerSystem
         {
             //PhotonNetwork.CreateRoom("testing2", new RoomOptions { MaxPlayers = 2 });
             //Room rooms = PhotonNetwork.;
-
-            Debug.Log("Connecting to room total rooms present " + PhotonNetwork.CountOfRooms);
-            int room = 0;
-            bool testing = PhotonNetwork.JoinOrCreateRoom("testing", new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
-            Debug.Log("joined a room= " + testing);
+            Debug.Log("try Connecting to room " + rooms[room]);
+            bool testing = PhotonNetwork.JoinOrCreateRoom(rooms[room], new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
                 //while(!PhotonNetwork.JoinOrCreateRoom(rooms[room], new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default))
             //{
             //    room++;

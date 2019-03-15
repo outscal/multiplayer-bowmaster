@@ -41,6 +41,7 @@ namespace MultiplayerSystem
         }
         void GameOverEventProscess(EventData photonEvent)
         {
+            Debug.Log("[CommunicationManager] GameOver Scene");
             object[] data = (object[])photonEvent.CustomData;
             GameOverInfo gameOverInfo = new GameOverInfo();
             gameOverInfo.lostPlayerID = (string)data[0];

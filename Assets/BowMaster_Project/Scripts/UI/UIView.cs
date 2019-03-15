@@ -33,32 +33,18 @@ namespace UISystem
         }
 
         public void ShowConnectedUI(PopUpController popUpController)
-        {
-          
-           // DeactivateOtherPanels(connectingPanel);
-           
-            popupInstance = GameObject.Instantiate(popUpController.gameObject, connectingPanel.transform);
-           
-           // popupInstance.transform.SetParent(connectingPanel.transform);
+        {          
+           DeactivateOtherPanels(connectingPanel);           
+            popupInstance = GameObject.Instantiate(popUpController.gameObject, connectingPanel.transform);                     
             popupInstance.GetComponent<PopUpController>().SetText("Connecting To Server.  .  .  .");
         }
-
-      //  public void ShowDisconnectedUI()
-        //{
-            //DeactivateOtherPanels(gameOverPanel);
-            //gameOverPanel.SetActive(true);            
-            //gameOverPopUp.SetActive(true);
-            //popupInstance.transform.SetParent(gameOverPanel.transform);
-            //gameOverPopUp.GetComponent<PopUpController>().SetText("Disconnected");
-        //}
 
         public void ShowGameOverUI(string reason, PopUpController popUpController)
         {
             DeactivateOtherPanels(gameOverPanel);
             gameOverPanel.SetActive(true);
-            gameOverPopUp = GameObject.Instantiate(popUpController.gameObject);
+            gameOverPopUp = GameObject.Instantiate(popUpController.gameObject,gameOverPanel.transform);
             gameOverPopUp.SetActive(true);
-            popupInstance.transform.SetParent(gameOverPanel.transform);
             gameOverPopUp.GetComponent<PopUpController>().SetText(reason);
 
         }

@@ -106,9 +106,9 @@ namespace PlayerSystem
 
         public void DeactivateDisplayPanel()
         {
-            for (int i = 0; i < playerCharacterControllerList.Count; i++)
+            foreach (PlayerCharacterController controller in playerCharacterControllerList.Values)
             {
-                playerCharacterControllerList[i].DeactivateInfoPanel();
+                controller.DeactivateInfoPanel();
             }
         }
 

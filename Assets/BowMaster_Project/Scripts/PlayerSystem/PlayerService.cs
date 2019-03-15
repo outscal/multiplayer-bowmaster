@@ -106,15 +106,19 @@ namespace PlayerSystem
         {
             if(turnID == localPlayerID)
             {
+                Debug.Log("[PlayerService] Sending Data");
                 multiplayerService.SendNewInput(inputData);
                 playerControllerDictionary[inputData.playerID].DeactivateDisplayPanel();
             }
+            else
+                Debug.Log("[PlayerService] Not Sending Data");
         }
 
         public void SendPlayerDamageDataToServer(float damage, int characterID,string playerID)
         {
             Debug.Log("DamageTaken" + damage);
-            multiplayerService.PlayerHit(playerID, characterID, damage);
+            if (turnID == localPlayerID)
+                multiplayerService.PlayerHit(playerID, characterID, damage);
         }
 
         public void SetPlayerHealth(HitInfo hitInfo)

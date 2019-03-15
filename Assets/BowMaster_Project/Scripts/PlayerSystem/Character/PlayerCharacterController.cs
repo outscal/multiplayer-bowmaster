@@ -24,18 +24,6 @@ namespace PlayerSystem
         public virtual void SetShootInfo(float power, float angle, bool gettingInput)
         {
             //Debug.Log("[CharacterController]WeaponType:" + scriptableObjPlayer.weaponType);
-
-            playerCharacterView.SetShootInfo(power, angle,gettingInput);
-
-            if (gettingInput == false)
-            {
-                playerCharacterView.DeactivateDisplayHolder();
-
-                weaponService.SpawnWeapon(power, angle
-                    , playerCharacterView.ShootPos
-                    , scriptableObjPlayer.weaponType);
-
-            }
         }
 
         public void DeactivateInfoPanel()
@@ -56,6 +44,11 @@ namespace PlayerSystem
         public virtual void SendDamageInfoToServer(float damage)
         {
             playerController.SendDamageInfoToServer(characterID,damage);
+        }
+
+        public void DestroyCharacter()
+        {
+            GameObject.Destroy(playerCharacterView.gameObject);
         }
     }
 }

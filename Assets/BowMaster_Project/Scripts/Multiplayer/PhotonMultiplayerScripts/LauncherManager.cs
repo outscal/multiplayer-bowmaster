@@ -50,8 +50,10 @@ namespace MultiplayerSystem
         {
             //PhotonNetwork.CreateRoom("testing2", new RoomOptions { MaxPlayers = 2 });
             //Room rooms = PhotonNetwork.;
+            
             Debug.Log("Connecting to room total rooms present " + PhotonNetwork.CountOfRooms);
-            PhotonNetwork.JoinOrCreateRoom("testing", new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
+            bool testing=PhotonNetwork.JoinOrCreateRoom("testing", new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
+            Debug.Log("was able to join room " + testing);
             //if (PhotonNetwork.CountOfRooms == 0)
             //{
             //    Debug.Log("Room created with name testing");

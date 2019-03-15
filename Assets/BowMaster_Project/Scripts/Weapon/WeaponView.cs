@@ -12,6 +12,11 @@ namespace WeaponSystem
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private WeaponType weaponType;
 
+        private void OnEnable()
+        {
+            Debug.Log("[WeaponView] WeaponSpawned");
+        }
+
         public void SetController(WeaponController weaponController)
         {
             this.weaponController = weaponController;
@@ -33,8 +38,8 @@ namespace WeaponSystem
         {
             if (other.gameObject.GetComponent<ITakeDamage>() != null)
             {
-                Debug.Log("Collision detected");
-                other.gameObject.GetComponent<ITakeDamage>().DamageAmount(50f);
+                Debug.Log("Collision detected Name:" + other.gameObject.name);
+                other.gameObject.GetComponent<ITakeDamage>().DamageAmount(51f);
             }
 
             DestroyWeapon();

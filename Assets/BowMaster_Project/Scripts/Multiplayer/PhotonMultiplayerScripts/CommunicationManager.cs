@@ -84,6 +84,9 @@ namespace MultiplayerSystem
             hitInfo.playerId = (string)data[0];
             hitInfo.characterId = (int)data[1];
             hitInfo.characterHealth = (float)data[2];
+            hitInfo.destroy = (bool)data[3];
+            Debug.Log("[CommunicationManager] HitEvent Process ID:" + hitInfo.characterId
+            + " " + hitInfo.destroy);
             multiplayerService.NotifyRemotePlayerHit(hitInfo);
         }
 
@@ -120,7 +123,7 @@ namespace MultiplayerSystem
         public void NotifyPlayerHit(HitInfo hitData)
         {
             //PLAYERHITEVENT;
-            object[] content = new object[] { hitData.playerId, hitData.characterId,hitData.characterHealth };
+            object[] content = new object[] { hitData.playerId, hitData.characterId,hitData.characterHealth,hitData.destroy };
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(PLAYERHITEVENT, content, raiseEventOptions, sendOptions);

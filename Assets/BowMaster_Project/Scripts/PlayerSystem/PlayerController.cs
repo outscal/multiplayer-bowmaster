@@ -9,22 +9,31 @@ namespace PlayerSystem
     {
         private string playerID;
 
-        private List<PlayerCharacterController> playerCharacterControllerList;
+        private Dictionary<int,PlayerCharacterController> playerCharacterControllerList;
         private PlayerService playerService;
         private IWeaponService weaponService;
         private Vector2 spawnCharacterPos;
         private string turnID;
         private Vector2 fixedPos;
+        private GameObject playerHolder;
+        PlayerCharacterController currentCharacterController;
 
         public PlayerController(PlayerSpawnData playerSpawnData, PlayerService playerService
         , IWeaponService weaponSystem)
         {
+            playerHolder = new GameObject();
             this.playerService = playerService;
             this.weaponService = weaponSystem;
             this.playerID = playerSpawnData.playerID;
             spawnCharacterPos = playerSpawnData.playerPosition;
             fixedPos = playerSpawnData.playerPosition;
-            playerCharacterControllerList = new List<PlayerCharacterController>();
+            playerCharacterControllerList = new Dictionary<int,PlayerCharacterController>();
+            playerHolder.transform.position = playerSpawnData.playerPosition;
+
+            if(playerHolder.transform.position.x > 0)
+            {
+                playerHolder.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            }
 
             for (int i = 0; i < 3; i++)
             {
@@ -32,31 +41,31 @@ namespace PlayerSystem
                 {
                     PlayerCharacterController playerCharacterController = new CharacterAirController(
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Air)
-                            , weaponService, spawnCharacterPos
+                            , weaponService, spawnCharacterPos, playerHolder
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char1Health);
                     Debug.Log("[PlayerController] health:" + playerSpawnData.char1Health);
-                    playerCharacterControllerList.Add(playerCharacterController);
+                    playerCharacterControllerList.Add(i,playerCharacterController);
                 }
                 else if (i == 1)
                 {
                     PlayerCharacterController playerCharacterController = new CharacterWaterController(
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Water)
-                            , weaponService, spawnCharacterPos
+                            , weaponService, spawnCharacterPos, playerHolder
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char2Health);
                     Debug.Log("[PlayerController] health:" + playerSpawnData.char2Health);
-                    playerCharacterControllerList.Add(playerCharacterController);
+                    playerCharacterControllerList.Add(i,playerCharacterController);
                 }
                 else if (i == 2)
                 {
                     PlayerCharacterController playerCharacterController = new CharacterFireController(
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Fire)
-                            , weaponService, spawnCharacterPos
+                            , weaponService, spawnCharacterPos, playerHolder
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char3Health);
                     Debug.Log("[PlayerController] health:" + playerSpawnData.char3Health);
-                    playerCharacterControllerList.Add(playerCharacterController);
+                    playerCharacterControllerList.Add(i,playerCharacterController);
                 }
                 spawnCharacterPos.x += 2;
             }
@@ -77,9 +86,18 @@ namespace PlayerSystem
             playerCharacterControllerList[characterID].SetShootInfo(power, angle, gettingInput);
         }
 
-        public void SetHealth(int characterID, float value)
+        public void SetHealth(HitInfo hitInfo)
         {
-            playerCharacterControllerList[characterID].SetHealth(value);
+            Debug.Log("[PlayerController] CharacterID:" + hitInfo.characterId +
+            playerCharacterControllerList.Count);
+            if (hitInfo.destroy == false)
+                playerCharacterControllerList[hitInfo.characterId].SetHealth(hitInfo.characterHealth);
+            else
+            {
+                playerCharacterControllerList[hitInfo.characterId].DestroyCharacter();
+                playerCharacterControllerList.Remove(hitInfo.characterId);
+            }
+
         }
         public void SendDamageInfoToServer(int charID,float damage)
         {

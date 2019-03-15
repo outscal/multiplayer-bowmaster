@@ -9,7 +9,7 @@ namespace PlayerSystem
     {
         private string playerID;
 
-        private List<PlayerCharacterController> playerCharacterControllerList;
+        private Dictionary<int,PlayerCharacterController> playerCharacterControllerList;
         private PlayerService playerService;
         private IWeaponService weaponService;
         private Vector2 spawnCharacterPos;
@@ -27,7 +27,7 @@ namespace PlayerSystem
             this.playerID = playerSpawnData.playerID;
             spawnCharacterPos = playerSpawnData.playerPosition;
             fixedPos = playerSpawnData.playerPosition;
-            playerCharacterControllerList = new List<PlayerCharacterController>();
+            playerCharacterControllerList = new Dictionary<int,PlayerCharacterController>();
             playerHolder.transform.position = playerSpawnData.playerPosition;
 
             if(playerHolder.transform.position.x > 0)
@@ -45,7 +45,7 @@ namespace PlayerSystem
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char1Health);
                     Debug.Log("[PlayerController] health:" + playerSpawnData.char1Health);
-                    playerCharacterControllerList.Add(playerCharacterController);
+                    playerCharacterControllerList.Add(i,playerCharacterController);
                 }
                 else if (i == 1)
                 {
@@ -55,7 +55,7 @@ namespace PlayerSystem
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char2Health);
                     Debug.Log("[PlayerController] health:" + playerSpawnData.char2Health);
-                    playerCharacterControllerList.Add(playerCharacterController);
+                    playerCharacterControllerList.Add(i,playerCharacterController);
                 }
                 else if (i == 2)
                 {
@@ -65,7 +65,7 @@ namespace PlayerSystem
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char3Health);
                     Debug.Log("[PlayerController] health:" + playerSpawnData.char3Health);
-                    playerCharacterControllerList.Add(playerCharacterController);
+                    playerCharacterControllerList.Add(i,playerCharacterController);
                 }
                 spawnCharacterPos.x += 2;
             }
@@ -88,22 +88,13 @@ namespace PlayerSystem
 
         public void SetHealth(HitInfo hitInfo)
         {
-            for (int i = 0; i < playerCharacterControllerList.Count; i++)
-            {
-                if (playerCharacterControllerList[i].GetCharacterID() == hitInfo.characterId)
-                {
-                    currentCharacterController = playerCharacterControllerList[i];
-                    break;
-                }
-            }
-
+            
             if (hitInfo.destroy == false)
-                currentCharacterController.SetHealth(hitInfo.characterHealth);
+                playerCharacterControllerList[hitInfo.characterId].SetHealth(hitInfo.characterHealth);
             else
             {
-                currentCharacterController.DestroyCharacter();
-                playerCharacterControllerList.Remove(currentCharacterController);
-                currentCharacterController = null;
+                playerCharacterControllerList[hitInfo.characterId].DestroyCharacter();
+                playerCharacterControllerList.Remove(hitInfo.characterId);
             }
 
         }

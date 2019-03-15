@@ -13,7 +13,7 @@ namespace CameraSystem
         private Camera mainCamera;
         private Vector3 offset=new Vector3(0,0,-5f);
 
-        public CameraService(IPlayerService playerService, CameraScriptableObj cameraScriptableObj)
+        public CameraService(IPlayerService playerService)//, CameraScriptableObj cameraScriptableObj)
         {
             this.playerService = playerService;
             //mainCamera = cameraScriptableObj.mainCameraPrefab;

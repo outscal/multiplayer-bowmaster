@@ -15,14 +15,14 @@ namespace Common
         public ScriptableObjCharacterList scriptableObjPlayer;
         public ScriptableObjWeapon scriptableObjWeapon;
         public UIScriptableObj uIScriptableObj;
-        public CameraScriptableObj cameraScriptableObj;
+        //public CameraScriptableObj cameraScriptableObj;
 
         public override void InstallBindings()
         {
             Container.BindInstances(scriptableObjPlayer);
             Container.BindInstances(scriptableObjWeapon);
             Container.BindInstances(uIScriptableObj);
-            Container.BindInstances(cameraScriptableObj);
+           // Container.BindInstances(cameraScriptableObj);
         }
     }
 }

@@ -67,11 +67,13 @@ namespace MultiplayerSystem
 
             Debug.Log("Connecting to room total rooms present " + PhotonNetwork.CountOfRooms);
             int room = 0;
-            while(!PhotonNetwork.JoinOrCreateRoom(rooms[room], new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default))
-            {
-                room++;
-                Debug.Log("Failed to enter room- " + rooms[room]);
-            }
+            bool testing = PhotonNetwork.JoinOrCreateRoom("testing", new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
+            Debug.Log("joined a room= " + testing);
+                //while(!PhotonNetwork.JoinOrCreateRoom(rooms[room], new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default))
+            //{
+            //    room++;
+            //    Debug.Log("Failed to enter room- " + rooms[room]);
+            //}
             //if (PhotonNetwork.CountOfRooms == 0)
             //{
             //    Debug.Log("Room created with name testing");

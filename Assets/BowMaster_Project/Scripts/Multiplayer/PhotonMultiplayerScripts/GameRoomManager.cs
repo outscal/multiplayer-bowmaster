@@ -14,6 +14,7 @@ namespace MultiplayerSystem
     {
         [Inject]CommunicationManager communicationManager;
         Dictionary<string, Dictionary<int,float>> inRoomplayers;
+        
         string currentTurnId,previousTurnId;
         #region Private Methods
 

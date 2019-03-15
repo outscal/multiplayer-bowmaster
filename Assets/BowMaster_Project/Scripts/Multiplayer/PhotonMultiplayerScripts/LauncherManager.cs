@@ -10,6 +10,7 @@ namespace MultiplayerSystem
     public class LauncherManager : MonoBehaviourPunCallbacks
     {
         #region Private Serializable Fields
+        string[] rooms = new string[] { "room1", "room2", "room3", "room4" };
         [SerializeField]
         private byte maxPlayersInRoom = 2;
         [Inject] CommunicationManager communicationManager;
@@ -63,10 +64,14 @@ namespace MultiplayerSystem
         {
             //PhotonNetwork.CreateRoom("testing2", new RoomOptions { MaxPlayers = 2 });
             //Room rooms = PhotonNetwork.;
-            
+
             Debug.Log("Connecting to room total rooms present " + PhotonNetwork.CountOfRooms);
-            bool testing=PhotonNetwork.JoinOrCreateRoom("testing", new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
-            Debug.Log("was able to join room " + testing);
+            int room = 0;
+            while(!PhotonNetwork.JoinOrCreateRoom(rooms[room], new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default))
+            {
+                room++;
+                Debug.Log("Failed to enter room- " + rooms[room]);
+            }
             //if (PhotonNetwork.CountOfRooms == 0)
             //{
             //    Debug.Log("Room created with name testing");

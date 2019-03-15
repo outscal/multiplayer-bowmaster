@@ -36,7 +36,7 @@ namespace UISystem
         private void ReplayGame()
         {
             Debug.Log("REPLAY GAME called:");
-            //multiplayerService.Restart();
+            multiplayerService.RestartGame(); ;
         }
         private void ExitGame()
         {

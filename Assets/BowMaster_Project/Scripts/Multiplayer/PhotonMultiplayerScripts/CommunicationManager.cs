@@ -15,12 +15,13 @@ namespace MultiplayerSystem
         const byte GAMESTARTEVENT = 3;
         const byte PLAYERHITEVENT = 4;
         const byte INPUTEVENT = 1;
+        const byte TURNCHANGEEVENT = 6;
         const byte GAMEOVEREVENT = 5;
         GameRoomManager roomManager;
-
+        
         PlayerSpawnData spData;
         IMultiplayerService multiplayerService;
-        string LastMovePlayerId=" ";
+        
         public CommunicationManager(IMultiplayerService multiplayerService)
         {
             roomManager = GameObject.FindObjectOfType<GameRoomManager>();
@@ -33,6 +34,11 @@ namespace MultiplayerSystem
             PhotonNetwork.RemoveCallbackTarget(this);
         }
 
+        void ChangeTurnProscess()
+        {
+            multiplayerService.SetCurrentTurn(roomManager.ChangeTurn());
+            Debug.Log("TurnChangedTo" + roomManager.GetCurrentTurn());
+        }
         void GameOverEventProscess(EventData photonEvent)
         {
             object[] data = (object[])photonEvent.CustomData;
@@ -46,18 +52,17 @@ namespace MultiplayerSystem
             Debug.Log("game Started");
             multiplayerService.ChangeToGamePlayState();
             NotifyAllAboutPlayerSpawn(spData);
-            LastMovePlayerId=PhotonNetwork.PlayerList[0].UserId;
         }
         void InputEventProscess(EventData photonEvent)
         {
+            Debug.Log("InputEvent");
             object[] data = (object[])photonEvent.CustomData;
             InputData playerInputData = new InputData();
             playerInputData.playerID = (string)data[0];
             playerInputData.characterID = (int)data[1];
             playerInputData.powerValue = (float)data[2];
             playerInputData.angleValue = (float)data[3];
-            multiplayerService.SendInputDataToPlayer(playerInputData,LastMovePlayerId);
-            LastMovePlayerId = playerInputData.playerID;
+            multiplayerService.SendInputDataToPlayer(playerInputData);
         }
         void PlayerSpawnEventProscess(EventData photonEvent)
         {
@@ -69,7 +74,7 @@ namespace MultiplayerSystem
             spawnData.char2Health = (float)data[3];
             spawnData.char3Health = (float)data[4];
             Debug.Log("Spawn Recieved from: " + (string)data[0]);
-            roomManager.GameStarted(spawnData.playerID);
+            roomManager.AddPlayerToRoom(spawnData.playerID);
             multiplayerService.SpawnPlayer(spawnData);
         }
         void HitEventProscess(EventData photonEvent)
@@ -94,7 +99,7 @@ namespace MultiplayerSystem
             multiplayerService.SetCommunicationManager(this);
         }
 
-        public void NotrifyGameOver(GameOverInfo gameOverInfo)
+        public void NotifyGameOver(GameOverInfo gameOverInfo)
         {
             //GAMEOVEREVENT
             object[] content = new object[] { gameOverInfo.lostPlayerID, gameOverInfo.reasonToLose };
@@ -128,15 +133,24 @@ namespace MultiplayerSystem
             SendOptions sendOptions = new SendOptions { Reliability = true };
             PhotonNetwork.RaiseEvent(GAMESTARTEVENT, content, raiseEventOptions, sendOptions);
         }
+        public void NotifyTurnChange()
+        {
+            object[] content = new object[] { };
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
+            SendOptions sendOptions = new SendOptions { Reliability = true };
+            PhotonNetwork.RaiseEvent(TURNCHANGEEVENT, content, raiseEventOptions, sendOptions);
+            
+        }
         public void SendInputData(InputData data)
         {
             //INPUTEVENT
-            if (!LastMovePlayerId.Equals(data.playerID))
+            if (roomManager.GetCurrentTurn().Equals(data.playerID))
             {
                 object[] content = new object[] { data.playerID, data.characterID, data.powerValue, data.angleValue };
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
                 SendOptions sendOptions = new SendOptions { Reliability = true };
                 PhotonNetwork.RaiseEvent(INPUTEVENT, content, raiseEventOptions, sendOptions);
+                NotifyTurnChange();
             }
         }
         public void OnEvent(EventData photonEvent)
@@ -150,6 +164,7 @@ namespace MultiplayerSystem
                 case PLAYERHITEVENT: HitEventProscess(photonEvent); break;
                 case GAMEOVEREVENT: GameOverEventProscess(photonEvent); break;
                 case GAMESTARTEVENT: GameStartEventProscess(); break;
+                case TURNCHANGEEVENT:ChangeTurnProscess();Debug.Log("turn Changed"); break;
             }
         }
     }

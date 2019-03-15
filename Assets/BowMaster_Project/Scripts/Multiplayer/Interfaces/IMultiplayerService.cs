@@ -24,6 +24,7 @@ namespace MultiplayerSystem
         bool CheckConnection();
         void SetConnected();
         void SetCommunicationManager(CommunicationManager communicationManager);
-        void SendInputDataToPlayer(InputData inputData,string nextTurnID);
+        void SendInputDataToPlayer(InputData inputData);
+        void SetCurrentTurn(string nextTurnID);
     }
 }

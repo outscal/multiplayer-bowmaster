@@ -54,10 +54,10 @@ namespace InputSystem
                 RaycastHit2D hitInfo = Physics2D.GetRayIntersection(hitRay, 100);
                 if (hitInfo.collider != null)
                 {
-                    Debug.Log("COLLIDER NAME"+hitInfo.collider.name);   
+                    //Debug.Log("COLLIDER NAME"+hitInfo.collider.name);   
                     if (hitInfo.collider.GetComponent<IPlayerView>() != null)
                     {
-                        Debug.Log("[InputService] PlayerDetected");
+                        //Debug.Log("[InputService] PlayerDetected");
                         selectedCharacterID = hitInfo.collider.GetComponent<IPlayerView>().GetCharacterID();
                         forwardCharacterDirection = hitInfo.collider.GetComponent<IPlayerView>().GetForwardDirection();
 

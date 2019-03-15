@@ -18,5 +18,6 @@ namespace PlayerSystem
         void SendInputDataToServer(InputData inputData);
         void SetPlayerHealth(HitInfo hitInfo);
         bool IsCurrentPlayerTurn();
+        List<Vector3> GetCameraPositions();
     }
 }

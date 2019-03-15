@@ -5,6 +5,7 @@ using UnityEngine;
 using InputSystem;
 using PlayerSystem;
 using GameSystem;
+using CameraSystem;
 using UISystem;
 
 namespace MultiplayerSystem
@@ -13,16 +14,18 @@ namespace MultiplayerSystem
     {
         IPlayerService playerService;
         IGameService gameService;
+        ICameraService cameraService;
         GameRoomManager gameRoomManager;
         PlayerName playerServerName;
         bool connected = false;
         CommunicationManager communicationManager;
         IUIService uiService;
        
-        public MultiplayerService(IPlayerService playerService,IGameService gameService,IUIService uiService)
+        public MultiplayerService(IPlayerService playerService,IGameService gameService,IUIService uiService, ICameraService cameraService)
         {
             this.uiService = uiService;
             this.gameService = gameService;
+            this.cameraService = cameraService;
             playerServerName = new PlayerName();
             gameRoomManager = GameObject.FindObjectOfType<GameRoomManager>();
             this.playerService = playerService;
@@ -63,10 +66,12 @@ namespace MultiplayerSystem
         public void SendInputDataToPlayer(InputData inputData)
         {
             playerService.SetPlayerData(inputData, false);
+            cameraService.ResetCameraOrthoSize();
         }
         public void SetCurrentTurn(string nextTurnID)
         {
             playerService.SetTurnId(nextTurnID);
+            cameraService.SwitchCamera();
         }
         public void SetLocalPlayerID(string localID)
         {
@@ -81,6 +86,7 @@ namespace MultiplayerSystem
         {
             Debug.Log(playerSpawnData.char1Health);
             playerService.PlayerConnected(playerSpawnData);
+            cameraService.OnGameStart();
         }
         public void ChangeToGameOverState(GameOverInfo gameOverInfo)
         {

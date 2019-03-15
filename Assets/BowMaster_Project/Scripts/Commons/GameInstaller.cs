@@ -8,6 +8,7 @@ using PlayerSystem;
 using UISystem;
 using UnityEngine;
 using WeaponSystem;
+using CameraSystem;
 
 namespace Commons
 {
@@ -33,10 +34,10 @@ namespace Commons
                 AsSingle().
                 NonLazy();
 
-            //Container.Bind<IGameService>().
-            //    To<GameService>().
-            //    AsSingle().
-            //    NonLazy();
+            Container.Bind<ICameraService>().
+                To<CameraService>().
+                AsSingle().
+                NonLazy();
 
             Container.Bind(typeof(IMultiplayerService), typeof(IInitializable)).
                 To<MultiplayerService>().

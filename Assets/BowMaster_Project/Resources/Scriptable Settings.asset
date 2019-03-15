@@ -17,3 +17,5 @@ MonoBehaviour:
   scriptableObjWeapon: {fileID: 11400000, guid: 162da45549fc04915aae521b7d0cc518,
     type: 2}
   uIScriptableObj: {fileID: 11400000, guid: 6e129fb17da48414ab190cd6fd9f0042, type: 2}
+  cameraScriptableObj: {fileID: 11400000, guid: 3f493520a1012244395fbfcb4c12c56f,
+    type: 2}

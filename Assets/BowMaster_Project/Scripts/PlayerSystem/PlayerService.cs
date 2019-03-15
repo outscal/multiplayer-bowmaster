@@ -127,5 +127,13 @@ namespace PlayerSystem
             //return if its current turn
             return true;
         }
+
+        public List<Vector3> GetCameraPositions()
+        {
+            List<Vector3> cameraPos = new List<Vector3>();
+            cameraPos.Add(new Vector3(-10,0,0));
+            cameraPos.Add(new Vector3(10,0,0));
+            return cameraPos;
+        }
     }
 }

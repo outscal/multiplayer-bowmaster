@@ -3,9 +3,10 @@ using System.Collections;
 
 namespace CameraSystem
 {
-    public interface ICameraSystem 
+    public interface ICameraService 
     {
-
+        void ResetCameraOrthoSize();
+        void OnGameStart();
         void SwitchCamera();
     }
 }

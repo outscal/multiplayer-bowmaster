@@ -85,9 +85,18 @@ namespace PlayerSystem
             playerCharacterControllerList[characterID].SetShootInfo(power, angle, gettingInput);
         }
 
-        public void SetHealth(int characterID, float value)
+        public void SetHealth(HitInfo hitInfo)
         {
-            playerCharacterControllerList[characterID].SetHealth(value);
+            if (hitInfo.destroy == false)
+                playerCharacterControllerList[hitInfo.characterId].SetHealth(hitInfo.characterHealth);
+            else
+            {
+                playerCharacterControllerList[hitInfo.characterId].DestroyCharacter();
+                PlayerCharacterController characterController = playerCharacterControllerList[hitInfo.characterId];
+                playerCharacterControllerList.RemoveAt(hitInfo.characterId);
+                characterController = null;
+            }
+
         }
         public void SendDamageInfoToServer(int charID,float damage)
         {

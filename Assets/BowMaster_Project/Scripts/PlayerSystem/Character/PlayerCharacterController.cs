@@ -45,5 +45,10 @@ namespace PlayerSystem
         {
             playerController.SendDamageInfoToServer(characterID,damage);
         }
+
+        public void DestroyCharacter()
+        {
+            GameObject.Destroy(playerCharacterView.gameObject);
+        }
     }
 }

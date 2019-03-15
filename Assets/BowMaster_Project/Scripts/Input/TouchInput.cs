@@ -1,20 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Zenject;
-using UnityEngine;
-using PlayerSystem;
-using GameSystem;
+﻿using GameSystem;
 using MultiplayerSystem;
+using PlayerSystem;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Zenject;
 
 namespace InputSystem
 {
-   
-    public class TouchInput :IInputComponent
+
+    public class TouchInput : IInputComponent
     {
-        private IInputService inputService;        
+        private IInputService inputService;
         private IGameService gameService;
-        
+
         private Vector2 startTouchPos;
         private Vector2 endTouchPos;
         private Vector2 forwardPosition;
@@ -25,14 +25,14 @@ namespace InputSystem
         private string localPlayerID;
         private InputStatus inputStatus = InputStatus.INVALID;
 
-        public TouchInput(IInputService inputService,IGameService gameService)
+        public TouchInput(IInputService inputService, IGameService gameService)
         {
-            this.inputService = inputService;            
+            this.inputService = inputService;
             this.gameService = gameService;
-            localPlayerID=inputService.GetLocalPlayerID();
+            localPlayerID = inputService.GetLocalPlayerID();
         }
-      
-        
+
+
 
         public void OnTick()
         {
@@ -44,38 +44,44 @@ namespace InputSystem
             if (Input.touchCount >= 1)
             {
                 Touch touch = Input.GetTouch(0);
-                if(inputService.CheckForCharacterPresence(touch.position))
+                //if(inputStatus==InputStatus.VALID)
+                //{
+                //    return;
+                //}
+
+
+                if (touch.phase == TouchPhase.Began)
                 {
-                     inputStatus = InputStatus.VALID;
-                    selectedID = inputService.GetSelectedCharacterID();
-                    forwardPosition = inputService.GetCharacterForwardDirection();
-                }
-                else
-                {
-                    return;
-                }
-                if (touch.phase == TouchPhase.Began && inputStatus == InputStatus.VALID)
-                {
+                    if (inputService.CheckForCharacterPresence(touch.position))
+                    {
+                        inputStatus = InputStatus.VALID;
+                        selectedID = inputService.GetSelectedCharacterID();
+                        forwardPosition = inputService.GetCharacterForwardDirection();
+                    }
+                    else
+                    {
+                        return;
+                    }
                     startTouchPos = touch.position;
                     endTouchPos = touch.position;
-                    InputData inputData=CreateInputData();
+                    InputData inputData = CreateInputData();
                     inputService.SendPlayerData(inputData, true);
                 }
-                if(touch.phase==TouchPhase.Moved && inputStatus == InputStatus.VALID)
+                if (touch.phase == TouchPhase.Moved && inputStatus == InputStatus.VALID)
                 {
                     endTouchPos = touch.position;
                     InputData inputData = CreateInputData();
                     inputService.SendPlayerData(inputData, true);
                 }
-                if (touch.phase == TouchPhase.Ended && inputStatus==InputStatus.VALID)
+                if (touch.phase == TouchPhase.Ended && inputStatus == InputStatus.VALID)
                 {
                     endTouchPos = touch.position;
-                    InputData inputData=  CreateInputData();
+                    InputData inputData = CreateInputData();
                     inputService.SendPlayerDataToServer(inputData);
                     inputStatus = InputStatus.INVALID;
 
                 }
-                
+
             }
         }
 
@@ -87,15 +93,15 @@ namespace InputSystem
             inputData.powerValue = power;
             inputData.playerID = inputService.GetLocalPlayerID();
             inputData.characterID = selectedID;
-            return inputData;          
+            return inputData;
         }
 
         //calculate angle and current distance
         private void CalculateAngleAndPower(Vector2 startPos, Vector2 endPos)
         {
-            Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);         
+            Vector2 vectorA = new Vector2(endPos.x - startPos.x, endPos.y - startPos.y);
             float currentDistance = Vector2.SqrMagnitude(vectorA);
-            power = Mathf.Sqrt(currentDistance);                       
+            power = Mathf.Sqrt(currentDistance);
             if (power > 100)
             {
                 power = 100f;

@@ -118,7 +118,6 @@ namespace PlayerSystem
                 {
                     controller.DestroyPlayer();
                 }
-
                 playerControllerDictionary.Clear();
             }
         }

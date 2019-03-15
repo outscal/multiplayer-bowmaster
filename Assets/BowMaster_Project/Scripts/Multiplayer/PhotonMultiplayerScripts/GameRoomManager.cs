@@ -101,17 +101,10 @@ namespace MultiplayerSystem
         {
             Debug.LogFormat("A Player Entered Room With Name: " + other.NickName);
         }
-        public override void OnPlayerLeftRoom(Player other)
-        {
-            Debug.LogFormat("A Player Left Room: "+ other.NickName);
-            if (PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
-            }
-        }
+        
         public void Restart()
         {
-            PhotonNetwork.JoinLobby();
+            PhotonNetwork.LeaveRoom();
         }
         public List<string> GetPlayerNames()
         {

@@ -17,5 +17,6 @@ namespace PlayerSystem
         void SetTurnId(string nextTurnID);
         void SendInputDataToServer(InputData inputData);
         void SetPlayerHealth(HitInfo hitInfo);
+        void ResetPlayerService();
     }
 }

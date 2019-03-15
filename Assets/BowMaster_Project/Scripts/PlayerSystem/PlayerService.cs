@@ -109,5 +109,18 @@ namespace PlayerSystem
         {
             playerControllerDictionary[hitInfo.playerId].SetHealth(hitInfo);
         }
+
+        public void ResetPlayerService()
+        {
+            if(playerControllerDictionary.Count > 0)
+            {
+                foreach (PlayerController controller in playerControllerDictionary.Values)
+                {
+                    controller.DestroyPlayer();
+                }
+
+                playerControllerDictionary.Clear();
+            }
+        }
     }
 }

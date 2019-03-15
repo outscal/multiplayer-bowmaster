@@ -13,10 +13,9 @@ namespace CameraSystem
         private Camera mainCamera;
         private Vector3 offset=new Vector3(0,0,-5f);
 
-        public CameraService(IPlayerService playerService)//, CameraScriptableObj cameraScriptableObj)
+        public CameraService(IPlayerService playerService)
         {
-            this.playerService = playerService;
-            //mainCamera = cameraScriptableObj.mainCameraPrefab;
+            this.playerService = playerService;            
             mainCamera = Camera.main;
         }
         
@@ -43,14 +42,14 @@ namespace CameraSystem
         {
             if (mainCamera.transform.position == turn1Pos)
             {
-                //mainCamera.transform.position = turn2Pos;
+                
                 iTween.MoveTo(mainCamera.gameObject, turn2Pos, 0.2f);
                 await new WaitForSeconds(0.2f);
                 mainCamera.orthographicSize = 7f;
             }
             else
             {
-                //mainCamera.transform.position = turn1Pos;
+                
                 iTween.MoveTo(mainCamera.gameObject, turn1Pos, 0.2f);
                 await new WaitForSeconds(0.2f);
                 mainCamera.orthographicSize = 7f;

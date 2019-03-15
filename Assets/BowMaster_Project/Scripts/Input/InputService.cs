@@ -55,11 +55,11 @@ namespace InputSystem
                 if (hitInfo.collider != null)
                 {
                     //Debug.Log("COLLIDER NAME"+hitInfo.collider.name);   
-                    if (hitInfo.collider.GetComponent<IPlayerView>() != null)
+                    if (hitInfo.collider.GetComponent<ICharacterView>() != null)
                     {
                         //Debug.Log("[InputService] PlayerDetected");
-                        selectedCharacterID = hitInfo.collider.GetComponent<IPlayerView>().GetCharacterID();
-                        forwardCharacterDirection = hitInfo.collider.GetComponent<IPlayerView>().GetForwardDirection();
+                        selectedCharacterID = hitInfo.collider.GetComponent<ICharacterView>().GetCharacterID();
+                        forwardCharacterDirection = hitInfo.collider.GetComponent<ICharacterView>().GetForwardDirection();
 
                         return true;
                     }

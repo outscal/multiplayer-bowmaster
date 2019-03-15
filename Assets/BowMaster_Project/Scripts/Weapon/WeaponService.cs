@@ -38,6 +38,11 @@ namespace WeaponSystem
             return scriptableObjWeapon;
         }
 
+        public SignalBus GetSignalBus()
+        {
+            return signalBus; 
+        }
+
         public void DestroyWeapon(SignalDestroyWeapon weaponDestroy)
         {
             weaponDestroy.weaponController = null;

@@ -38,6 +38,14 @@ namespace MultiplayerSystem
             PhotonNetwork.LeaveRoom();
             //PhotonNetwork.Disconnect();
         }
+        public override void OnPlayerLeftRoom(Player other)
+        {
+            Debug.LogFormat("A Player Left Room: " + other.NickName);
+            GameOverInfo overInfo = new GameOverInfo();
+            overInfo.lostPlayerID = other.UserId;
+            overInfo.reasonToLose = "player Disconnected";
+            multiplayerService.ChangeToGameOverState(overInfo);
+        }
         public override void OnConnectedToMaster()
         {
             Debug.Log("Connected To Server");
@@ -52,10 +60,6 @@ namespace MultiplayerSystem
 
         public override void OnDisconnected(DisconnectCause cause)
         {
-            GameOverInfo overInfo = new GameOverInfo();
-            overInfo.lostPlayerID = PhotonNetwork.LocalPlayer.UserId;
-            overInfo.reasonToLose = "player Disconnected";
-            communicationManager.NotifyGameOver(overInfo);
             Debug.Log("Disconnected because of: " + cause);
         }
         public override void OnJoinRoomFailed(short returnCode, string message)

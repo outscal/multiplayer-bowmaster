@@ -106,6 +106,7 @@ namespace MultiplayerSystem
 
         public void NotifyGameOver(GameOverInfo gameOverInfo)
         {
+            Debug.Log("GameOver");
             //GAMEOVEREVENT
             object[] content = new object[] { gameOverInfo.lostPlayerID, gameOverInfo.reasonToLose };
             RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };

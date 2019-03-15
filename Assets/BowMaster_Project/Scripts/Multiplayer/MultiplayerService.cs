@@ -89,7 +89,7 @@ namespace MultiplayerSystem
         {
             gameService.ChangeToGameOverState(gameOverInfo);
             playerService.ResetPlayerService();
-            Disconnect();
+
         }
         public void ChangeToLobbyState()
         {

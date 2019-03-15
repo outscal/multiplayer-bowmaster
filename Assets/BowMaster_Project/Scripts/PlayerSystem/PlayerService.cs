@@ -112,15 +112,15 @@ namespace PlayerSystem
 
         public void ResetPlayerService()
         {
-            //if(playerControllerDictionary.Count > 0)
-            //{
-            //    foreach (PlayerController controller in playerControllerDictionary.Values)
-            //    {
-            //        controller.DestroyPlayer();
-            //    }
+            if(playerControllerDictionary.Count > 0)
+            {
+                foreach (PlayerController controller in playerControllerDictionary.Values)
+                {
+                    controller.DestroyPlayer();
+                }
 
-            //    playerControllerDictionary.Clear();
-            //}
+                playerControllerDictionary.Clear();
+            }
         }
     }
 }

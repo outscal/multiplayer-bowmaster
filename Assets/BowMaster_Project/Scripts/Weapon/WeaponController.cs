@@ -30,7 +30,7 @@ namespace WeaponSystem
 
         public void DestroyWeapon()
         {
-            signalBus.TryFire(new SignalDestroyWeapon() { weaponController = this });
+            weaponService.GetSignalBus().TryFire(new SignalDestroyWeapon() { weaponController = this });
         }
     }
 }

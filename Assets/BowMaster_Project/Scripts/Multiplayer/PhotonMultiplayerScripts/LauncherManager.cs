@@ -28,7 +28,7 @@ namespace MultiplayerSystem
         {
             Debug.Log("Connected To Server");
             multiplayerService.SetConnected();
-            //PhotonNetwork.JoinLobby();
+            PhotonNetwork.JoinLobby();
             //Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
         }
         public void PrintPlayerCout()

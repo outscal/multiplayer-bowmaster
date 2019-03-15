@@ -10,11 +10,12 @@ namespace MultiplayerSystem
 {
     public interface IMultiplayerService
     {
+        void RestartGame();
+        void Disconnect();
         List<string> GetPlayerNames(string localPlayerId);
         void ChangeToGameOverState(GameOverInfo gameOverInfo);
         void PlayerHit(string hitPlayerID, int characterID, float damage);
         void NotifyRemotePlayerHit(HitInfo hit);
-        void ChangeToGameDisconnectedState();
         void ChangeToLobbyState();
         void ChangeToGamePlayState();
         void SendNewInput(InputData inputData);

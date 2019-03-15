@@ -19,6 +19,10 @@ namespace MultiplayerSystem
 
         #endregion
         #region Photon Callbacks
+        public void ResetPlayersInRoom()
+        {
+            inRoomplayers = new Dictionary<string, Dictionary<int, float>>();
+        }
         public override void OnJoinedRoom()
         {
             Vector2 pos;
@@ -99,6 +103,10 @@ namespace MultiplayerSystem
             {
                 Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
             }
+        }
+        public void Restart()
+        {
+            PhotonNetwork.LeaveRoom();
         }
         public List<string> GetPlayerNames()
         {

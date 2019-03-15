@@ -16,11 +16,13 @@ namespace MultiplayerSystem
         GameRoomManager gameRoomManager;
         PlayerName playerServerName;
         bool connected = false;
+        LauncherManager launcher;
         CommunicationManager communicationManager;
         IUIService uiService;
        
         public MultiplayerService(IPlayerService playerService,IGameService gameService,IUIService uiService)
         {
+            launcher = GameObject.FindObjectOfType<LauncherManager>();
             this.uiService = uiService;
             this.gameService = gameService;
             playerServerName = new PlayerName();
@@ -87,10 +89,6 @@ namespace MultiplayerSystem
         {
             gameService.ChangeToGameOverState(gameOverInfo);
         }
-        public void ChangeToGameDisconnectedState()
-        {
-            
-        }
         public void ChangeToLobbyState()
         {
             gameService.ChangeToLobbyState();
@@ -99,6 +97,14 @@ namespace MultiplayerSystem
         public List<string> GetPlayerNames(string localPlayerId)
         {
             return gameRoomManager.GetPlayerNames();
+        }
+        public void Disconnect()
+        {
+            launcher.LeaveRoom();
+        }
+        public void RestartGame()
+        {
+            gameRoomManager.Restart();
         }
 
         public void Initialize()

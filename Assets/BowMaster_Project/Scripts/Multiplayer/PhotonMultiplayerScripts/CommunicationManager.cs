@@ -46,6 +46,7 @@ namespace MultiplayerSystem
             gameOverInfo.lostPlayerID = (string)data[0];
             gameOverInfo.reasonToLose = (string)data[1];
             multiplayerService.ChangeToGameOverState(gameOverInfo);
+            roomManager.ResetPlayersInRoom();
         }
         void GameStartEventProscess()
         {

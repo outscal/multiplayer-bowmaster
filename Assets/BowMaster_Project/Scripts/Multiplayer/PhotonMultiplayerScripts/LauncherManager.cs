@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using Zenject;
 using System.Collections.Generic;
+using GameSystem;
 
 namespace MultiplayerSystem
 {
@@ -11,7 +12,7 @@ namespace MultiplayerSystem
         #region Private Serializable Fields
         [SerializeField]
         private byte maxPlayersInRoom = 2;
-
+        [Inject] CommunicationManager communicationManager;
         #endregion
         #region Private Fields
         string gameVersion = "1";
@@ -23,6 +24,14 @@ namespace MultiplayerSystem
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
+        }
+        public void LeaveRoom()
+        {
+            GameOverInfo overInfo = new GameOverInfo();
+            overInfo.lostPlayerID = PhotonNetwork.LocalPlayer.UserId;
+            overInfo.reasonToLose = "player Disconnected";
+            communicationManager.NotifyGameOver(overInfo);
+            //PhotonNetwork.Disconnect();
         }
         public override void OnConnectedToMaster()
         {
@@ -38,12 +47,16 @@ namespace MultiplayerSystem
 
         public override void OnDisconnected(DisconnectCause cause)
         {
+            GameOverInfo overInfo = new GameOverInfo();
+            overInfo.lostPlayerID = PhotonNetwork.LocalPlayer.UserId;
+            overInfo.reasonToLose = "player Disconnected";
+            communicationManager.NotifyGameOver(overInfo);
             Debug.Log("Disconnected because of: " + cause);
-
         }
-
-
-
+        public override void OnLeftRoom()
+        {
+            multiplayerService.ChangeToLobbyState();
+        }
         #endregion
         #region Public Methods
         public void Connect()

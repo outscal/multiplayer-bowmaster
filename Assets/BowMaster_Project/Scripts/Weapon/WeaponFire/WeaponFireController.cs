@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace WeaponSystem
 {
     public class WeaponFireController : WeaponController
     {
         public WeaponFireController(WeaponService weaponService, float force
-        , Vector2 direction
-            , Vector2 spawnPos)
+        , Vector2 direction, Vector2 spawnPos)
         {
             SetWeaponType();
             this.weaponService = weaponService;

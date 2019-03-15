@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8170707303430583207}
   - component: {fileID: 4941087616321984278}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: WeaponSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 7116902170214591090}
   - component: {fileID: 5180560397898577778}
   - component: {fileID: 1727808459275617527}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: WeaponFirePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

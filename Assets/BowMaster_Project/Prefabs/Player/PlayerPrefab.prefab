@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2246417185329293478}
   - component: {fileID: 2246417185329293476}
   - component: {fileID: 2246417185329293477}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PlayerPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 2246417185631254416}
   - component: {fileID: 2246417185631254422}
   - component: {fileID: 2246417185631254423}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PowerValueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2246417185991751468}
   - component: {fileID: 2246417185991751459}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2246417186122495305}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PowerHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 2246417186355677031}
   - component: {fileID: 2246417186355677029}
   - component: {fileID: 2246417186355677030}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PowerValueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +527,7 @@ GameObject:
   - component: {fileID: 2246417186366538501}
   - component: {fileID: 2246417186366538502}
   - component: {fileID: 2246417186366538503}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -623,7 +623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2246417186403466743}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AngleHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -661,7 +661,7 @@ GameObject:
   - component: {fileID: 2246417186617559640}
   - component: {fileID: 2246417186617559647}
   - component: {fileID: 2310462065292013846}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,6 +701,7 @@ MonoBehaviour:
   shootPos: {fileID: 4222022621517788834}
   powerText: {fileID: 2246417185631254423}
   angleText: {fileID: 2246417186355677030}
+  healthBar: {fileID: 0}
 --- !u!61 &2310462065292013846
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -736,7 +737,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6600458065500330140}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ShootPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -751,7 +752,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4222022621517788834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.66, y: 0.55, z: 0}
+  m_LocalPosition: {x: 1.193, y: 0.894, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2246417186617559640}

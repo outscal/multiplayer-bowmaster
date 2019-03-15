@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace WeaponSystem
 {
@@ -9,6 +10,7 @@ namespace WeaponSystem
         protected WeaponService weaponService;
         protected WeaponView weaponView;
         protected WeaponType weaponType;
+        readonly SignalBus signalBus;
 
         protected virtual void SetWeaponType()
         {
@@ -24,6 +26,11 @@ namespace WeaponSystem
             }
 
             return null;
+        }
+
+        public void DestroyWeapon()
+        {
+            weaponService.GetSignalBus().TryFire(new SignalDestroyWeapon() { weaponController = this });
         }
     }
 }

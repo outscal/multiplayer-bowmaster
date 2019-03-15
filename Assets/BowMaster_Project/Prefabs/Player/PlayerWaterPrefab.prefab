@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7290690151296678587}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7013185414421288604}
   - component: {fileID: 8484820309935696739}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3908279123137150888}
   - component: {fileID: 561519459117935833}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 5720050970672859248}
   - component: {fileID: 2476639114869872007}
   - component: {fileID: 8406829086905552494}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PowerValueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 3578118442262027439}
   - component: {fileID: 1781279793322225964}
   - component: {fileID: 4605741103723014743}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7653676010707578065}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AngleHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 61498239951045556}
   - component: {fileID: 6643085663865496044}
   - component: {fileID: 2655623720648149304}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -584,7 +584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1031905656784173619}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PowerHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +622,7 @@ GameObject:
   - component: {fileID: 707761098212145007}
   - component: {fileID: 358969556858406876}
   - component: {fileID: 7184989267778886589}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -694,7 +694,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4441757143844560674}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 5991736167785579293}
   - component: {fileID: 25451731283063618}
   - component: {fileID: 2173942037320400048}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: AngleValueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -892,7 +892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 853001878009351926}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: ShootPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +907,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7165244039691089071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.66, y: 0.55, z: 0}
+  m_LocalPosition: {x: 1.193, y: 0.894, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4532653461321702826}
@@ -924,7 +924,7 @@ GameObject:
   - component: {fileID: 4532653461321702826}
   - component: {fileID: 6561642029725146991}
   - component: {fileID: 7005507320438267944}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PlayerWaterPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1002,7 +1002,7 @@ GameObject:
   - component: {fileID: 6732180930336902558}
   - component: {fileID: 9029053226645272065}
   - component: {fileID: 7602882601638425314}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 8706463400459098174}
   - component: {fileID: 3932225963582595149}
   - component: {fileID: 8344565238121984944}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PlayerPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

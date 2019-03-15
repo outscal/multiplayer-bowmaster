@@ -6,7 +6,7 @@ using Common;
 
 namespace PlayerSystem
 {
-    public class PlayerCharacterView : MonoBehaviour, IPlayerView, ITakeDamage
+    public class PlayerCharacterView : MonoBehaviour, ICharacterView, ITakeDamage
     {
         [SerializeField] protected GameObject displayHolder, shootPos;
         [SerializeField] protected TextMeshProUGUI powerText, angleText;

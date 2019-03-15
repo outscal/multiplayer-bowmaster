@@ -6,6 +6,7 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using Zenject;
 using PlayerSystem;
+using GameSystem;
 
 namespace MultiplayerSystem
 {
@@ -63,7 +64,20 @@ namespace MultiplayerSystem
             hitInfo.playerId = hitPlayerID;
             hitInfo.characterHealth = inRoomplayers[hitPlayerID][charachterID];
             hitInfo.characterId = charachterID;
+            hitInfo.destroy = false;
+            if (inRoomplayers[hitPlayerID][charachterID] < 0)
+            {
+                hitInfo.destroy = true;
+                inRoomplayers[hitPlayerID].RemoveAt(charachterID);
+            }  
             communicationManager.NotifyPlayerHit(hitInfo);
+            if (inRoomplayers[hitPlayerID].Count < 1)
+            {
+                GameOverInfo overInfo = new GameOverInfo();
+                overInfo.lostPlayerID = hitPlayerID;
+                overInfo.reasonToLose = "All Characters Dead";
+                communicationManager.NotifyGameOver(overInfo);
+            }
         }
         public override void OnLeftRoom()
         {

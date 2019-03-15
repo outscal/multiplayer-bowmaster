@@ -105,8 +105,6 @@ namespace PlayerSystem
             {
                 controller.DeactivateInfoPanel();
             }
-
-            playerCharacterControllerList.Clear();
         }
 
         public void DestroyPlayer()
@@ -115,6 +113,8 @@ namespace PlayerSystem
             {
                 controller.DestroyCharacter();
             }
+
+            playerCharacterControllerList.Clear();
         }
 
         public Vector2 GetSpawnPos()

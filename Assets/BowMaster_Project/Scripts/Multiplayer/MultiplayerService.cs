@@ -88,6 +88,7 @@ namespace MultiplayerSystem
         public void ChangeToGameOverState(GameOverInfo gameOverInfo)
         {
             gameService.ChangeToGameOverState(gameOverInfo);
+            playerService.ResetPlayerService();
         }
         public void ChangeToLobbyState()
         {

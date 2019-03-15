@@ -111,7 +111,7 @@ namespace MultiplayerSystem
         }
         public void Restart()
         {
-            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.JoinLobby();
         }
         public List<string> GetPlayerNames()
         {

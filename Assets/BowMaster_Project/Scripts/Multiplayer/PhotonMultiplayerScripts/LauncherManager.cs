@@ -35,6 +35,7 @@ namespace MultiplayerSystem
             overInfo.lostPlayerID = PhotonNetwork.LocalPlayer.UserId;
             overInfo.reasonToLose = "player Disconnected";
             communicationManager.NotifyGameOver(overInfo);
+            PhotonNetwork.LeaveRoom();
             //PhotonNetwork.Disconnect();
         }
         public override void OnConnectedToMaster()
@@ -63,7 +64,7 @@ namespace MultiplayerSystem
             room++;
             Connect();
         }
-        public override void OnLeftRoom()
+        public override void OnJoinedLobby()
         {
             room = 0;
             multiplayerService.ChangeToLobbyState();

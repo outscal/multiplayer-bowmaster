@@ -6,6 +6,6 @@ namespace CameraSystem
     public interface ICameraSystem 
     {
 
-
+        void SwitchCamera();
     }
 }

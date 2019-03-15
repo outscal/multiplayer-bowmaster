@@ -121,5 +121,11 @@ namespace PlayerSystem
             Debug.Log("Setting Player Health");
             playerControllerDictionary[hitInfo.playerId].SetHealth(hitInfo.characterId, hitInfo.characterHealth);
         }
+
+        public bool IsCurrentPlayerTurn()
+        {
+            //return if its current turn
+            return true;
+        }
     }
 }

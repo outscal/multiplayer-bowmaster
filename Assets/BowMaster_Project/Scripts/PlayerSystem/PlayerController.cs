@@ -22,11 +22,11 @@ namespace PlayerSystem
         , IWeaponService weaponSystem, string localPlayerID)
         {
             playerHolder = new GameObject();
-            playerHolder.name = playerID;
             this.playerService = playerService;
             this.weaponService = weaponSystem;
             this.playerID = playerSpawnData.playerID;
             this.localPlayerID = localPlayerID;
+            playerHolder.name = playerID;
             spawnCharacterPos = playerSpawnData.playerPosition;
             fixedPos = playerSpawnData.playerPosition;
             playerCharacterControllerList = new Dictionary<int,PlayerCharacterController>();
@@ -66,7 +66,12 @@ namespace PlayerSystem
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char3Health);
                     playerCharacterControllerList.Add(i,playerCharacterController);
                 }
-                spawnCharacterPos.x += 2;
+                if (playerHolder.transform.position.x > 0)
+                    spawnCharacterPos.x += 2;
+                else
+                    spawnCharacterPos.x -= 2;
+
+                spawnCharacterPos.y += 1.95f;
             }
         }
 

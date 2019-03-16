@@ -24,6 +24,7 @@ namespace InputSystem
         private IGameService gameService;
         private int selectedCharacterID;
         private Vector2 forwardCharacterDirection;
+        private string localPlayerID;
         private Camera cam;
 
         public InputService(IUIService uiService, IPlayerService playerService, IGameService gameService)
@@ -60,7 +61,7 @@ namespace InputSystem
                         //Debug.Log("[InputService] PlayerDetected");
                         selectedCharacterID = hitInfo.collider.GetComponent<ICharacterView>().GetCharacterID();
                         forwardCharacterDirection = hitInfo.collider.GetComponent<ICharacterView>().GetForwardDirection();
-
+                        localPlayerID = hitInfo.collider.GetComponent<ICharacterView>().GetLocalPlayerID();
                         return true;
                     }
                 }
@@ -76,7 +77,7 @@ namespace InputSystem
 
         public string GetLocalPlayerID()
         {
-            return playerService.GetLocalPlayerID();
+            return localPlayerID;
         }
 
         public void SendPlayerData(InputData inputData, bool recieveInput)

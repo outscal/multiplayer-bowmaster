@@ -156,7 +156,7 @@ namespace MultiplayerSystem
                 RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.All };
                 SendOptions sendOptions = new SendOptions { Reliability = true };
                 PhotonNetwork.RaiseEvent(INPUTEVENT, content, raiseEventOptions, sendOptions);
-                NotifyTurnChange();
+                
             }
         }
         public void OnEvent(EventData photonEvent)

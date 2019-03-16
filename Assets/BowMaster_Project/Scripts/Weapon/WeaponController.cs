@@ -28,7 +28,7 @@ namespace WeaponSystem
             return null;
         }
 
-        public void DestroyWeapon()
+        public virtual void DestroyWeapon()
         {
             WeaponInfo weaponInfo;
             weaponInfo.isLocalPlayer = LocalPlayer;

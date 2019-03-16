@@ -28,5 +28,6 @@ namespace WeaponSystem
         {
             weaponType = WeaponType.Fire;
         }
+
     }
 }

@@ -129,10 +129,7 @@ namespace PlayerSystem
 
         public bool IsLocalPlayer()
         {
-            if (turnID == playerID)
-                return true;
-
-            return false; 
+            return playerService.IsCurrentPlayerTurn();
         }
     }
 }

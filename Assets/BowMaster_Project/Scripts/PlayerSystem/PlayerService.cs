@@ -125,15 +125,21 @@ namespace PlayerSystem
 
         public bool IsCurrentPlayerTurn()
         {
-            //return if its current turn
-            return true;
+            if (turnID == localPlayerID)
+                return true;
+
+            return false;
         }
 
         public List<Vector3> GetCameraPositions()
         {
             List<Vector3> cameraPos = new List<Vector3>();
-            cameraPos.Add(new Vector3(-10,0,0));
-            cameraPos.Add(new Vector3(10,0,0));
+
+            foreach (PlayerController controller in playerControllerDictionary.Values)
+            {
+                cameraPos.Add(controller.GetSpawnPos());
+            }
+
             return cameraPos;
         }
     }

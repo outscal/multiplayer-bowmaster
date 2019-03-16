@@ -30,6 +30,7 @@ namespace CameraSystem
         
         async public void OnGameStart()
         {
+            Debug.Log("[CameraService] Game Started");
             List<Vector3> cameraPos=playerService.GetCameraPositions();
             if (cameraPos.Count >= 2)
             {

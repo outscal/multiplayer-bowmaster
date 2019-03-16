@@ -6,6 +6,7 @@ namespace WeaponSystem
 {
     public interface IWeaponService
     {
-        void SpawnWeapon(float power, float angle, Vector2 position, WeaponType weaponType);
+        void SpawnWeapon(float power, float angle, Vector2 position
+        , WeaponType weaponType, bool localPlayer);
     }
 }

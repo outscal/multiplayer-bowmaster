@@ -10,10 +10,11 @@ namespace WeaponSystem
         readonly SignalBus signalBus;
 
         public WeaponAirController(WeaponService weaponService, float force
-        , Vector2 direction, Vector2 spawnPos, SignalBus signalBus)
+        , Vector2 direction, Vector2 spawnPos, SignalBus signalBus, bool localPlayer)
         {
             this.signalBus = signalBus;
             SetWeaponType();
+            this.LocalPlayer = localPlayer;
             this.weaponService = weaponService;
             GameObject weapon = GameObject.Instantiate<GameObject>(
             GetWeaponView().gameObject);

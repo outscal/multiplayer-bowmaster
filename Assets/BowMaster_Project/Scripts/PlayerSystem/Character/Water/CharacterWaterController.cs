@@ -32,7 +32,8 @@ namespace PlayerSystem
             if (gettingInput == false)
                 weaponService.SpawnWeapon(power, angle
                 , playerCharacterView.ShootPos
-                    , scriptableObjPlayer.weaponType);
+                    , scriptableObjPlayer.weaponType
+                , playerController.IsLocalPlayer());
         }
 
 

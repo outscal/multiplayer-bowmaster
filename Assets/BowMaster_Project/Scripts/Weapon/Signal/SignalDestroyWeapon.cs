@@ -6,6 +6,6 @@ namespace WeaponSystem
 {
     public class SignalDestroyWeapon
     {
-        public WeaponController weaponController;
+        public IWeaponController weaponController;
     }
 }

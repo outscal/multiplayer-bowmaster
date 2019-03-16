@@ -28,23 +28,9 @@ namespace MultiplayerSystem
             PhotonNetwork.GameVersion = gameVersion;
             PhotonNetwork.ConnectUsingSettings();
         }
-       
-        public void LeaveRoom()
-        {
-            GameOverInfo overInfo = new GameOverInfo();
-            overInfo.lostPlayerID = PhotonNetwork.LocalPlayer.UserId;
-            overInfo.reasonToLose = "player Disconnected";
-            communicationManager.NotifyGameOver(overInfo);
-            PhotonNetwork.LeaveRoom();
-            //PhotonNetwork.Disconnect();
-        }
         public override void OnPlayerLeftRoom(Player other)
         {
-            Debug.LogFormat("A Player Left Room: " + other.NickName);
-            GameOverInfo overInfo = new GameOverInfo();
-            overInfo.lostPlayerID = other.UserId;
-            overInfo.reasonToLose = "player Disconnected";
-            multiplayerService.ChangeToGameOverState(overInfo);
+           
         }
         public override void OnConnectedToMaster()
         {
@@ -53,25 +39,34 @@ namespace MultiplayerSystem
             PhotonNetwork.JoinLobby();
             //Debug.Log("this is the master" + PhotonNetwork.IsMasterClient);
         }
-        public void PrintPlayerCout()
+        public void PrintPlayerCount()
         {
             Debug.Log("TotalConnected Players " + PhotonNetwork.CountOfPlayers);
         }
-
         public override void OnDisconnected(DisconnectCause cause)
         {
+            Debug.LogFormat("A Player Left Room: " + PhotonNetwork.LocalPlayer.NickName);
+            GameOverInfo overInfo = new GameOverInfo();
+            overInfo.lostPlayerID = PhotonNetwork.LocalPlayer.UserId;
+            overInfo.reasonToLose = "player Disconnected";
+            multiplayerService.ChangeToGameOverState(overInfo);
             Debug.Log("Disconnected because of: " + cause);
         }
         public override void OnJoinRoomFailed(short returnCode, string message)
         {
-            Debug.Log("Failed to join room = " + rooms[room]);
+            Debug.Log("Failed to join = " + rooms[room]);
             room++;
             Connect();
         }
         public override void OnJoinedLobby()
         {
             room = 0;
-            multiplayerService.ChangeToLobbyState();
+            Debug.Log("you Joined a Lobby");
+            //multiplayerService.ChangeToLobbyState();
+        }
+        public override void OnLeftLobby()
+        {
+            Debug.Log("left the lobby");
         }
         #endregion
         #region Public Methods
@@ -79,7 +74,7 @@ namespace MultiplayerSystem
         {
             //PhotonNetwork.CreateRoom("testing2", new RoomOptions { MaxPlayers = 2 });
             //Room rooms = PhotonNetwork.;
-            Debug.Log("try Connecting to room " + rooms[room]);
+            //Debug.Log("try Connecting to room " + rooms[room]);
             bool testing = PhotonNetwork.JoinOrCreateRoom(rooms[room], new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
                 //while(!PhotonNetwork.JoinOrCreateRoom(rooms[room], new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default))
             //{

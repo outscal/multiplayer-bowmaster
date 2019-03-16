@@ -15,8 +15,7 @@ namespace UISystem
         private IMultiplayerService multiplayerService;
 
         private UIScriptableObj uIScriptableObj;
-        private string localPlayerID;
-
+        private string localPlayerID,localPlayerName;
         private GameUIController gameUIController;
         private GameOverUIController gameOverUIController;
         private GameObject mainCanvas;
@@ -24,6 +23,10 @@ namespace UISystem
         private GameObject opponentCard;
         private PlayerSpawnSide spawnSide;
 
+        public string GetLocalPlayerName()
+        {
+            return localPlayerName;
+        }
         public UIService(IPlayerService playerService, UIScriptableObj uIScriptableObj)
         {
             this.uIScriptableObj = uIScriptableObj;
@@ -40,7 +43,6 @@ namespace UISystem
             localPlayerID = id;
             gameUIController.SetLocalPlayerID(localPlayerID);
             gameOverUIController.SetLocalPlayerID(localPlayerID);
-
         }
 
         private void SetCanvasReferences()
@@ -74,7 +76,7 @@ namespace UISystem
 
             playerCard = GameObject.Instantiate(uIScriptableObj.playerCard, gamePanel);
             playerCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[0]);
-
+            localPlayerName = namesToShow[0];
             opponentCard = GameObject.Instantiate(uIScriptableObj.playerCard, gamePanel);
             opponentCard.GetComponent<PlayerInfoCardController>().SetPlayerName(namesToShow[1]);
             await new WaitForSeconds(0.5f);
@@ -84,7 +86,6 @@ namespace UISystem
             if (spawnSide == PlayerSpawnSide.LEFTSIDE)
             {
                 //set left rect
-
                 playerCard.GetComponent<RectTransform>().anchorMin = new Vector2(0, 1);
                 playerCard.GetComponent<RectTransform>().anchorMax = new Vector2(0, 1);
                 playerCard.GetComponent<RectTransform>().pivot = new Vector2(0, 1);

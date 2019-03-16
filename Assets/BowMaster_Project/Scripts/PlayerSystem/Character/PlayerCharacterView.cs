@@ -34,6 +34,7 @@ namespace PlayerSystem
                 angleText.text = Mathf.FloorToInt(angle) + " \n Angle";
                 displayHolder.SetActive(true);
 
+
             }
         }
 

@@ -47,7 +47,8 @@ namespace UISystem
             DeactivateOtherPanels(gameOverPanel);
             Destroy(popupInstance);
             gameOverPanel.SetActive(true);
-            gameOverPopUp = GameObject.Instantiate(popUpController.gameObject,gameOverPanel.transform);
+           if(gameOverPopUp==null)
+                gameOverPopUp = GameObject.Instantiate(popUpController.gameObject,gameOverPanel.transform);
             gameOverPopUp.SetActive(true);
             gameOverPopUp.GetComponent<PopUpController>().SetText(reason);
 

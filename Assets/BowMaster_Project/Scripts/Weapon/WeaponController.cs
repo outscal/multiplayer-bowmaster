@@ -34,16 +34,13 @@ namespace WeaponSystem
             weaponInfo.isLocalPlayer = LocalPlayer;
             weaponInfo.weaponController = this;
             weaponService.GetSignalBus().TryFire(new SignalDestroyWeapon() { weaponInfo = weaponInfo });
+            Debug.Log("[WeaponController] LocalPlayer:" + LocalPlayer
+            + " WeaponName:" + weaponView.gameObject.name);
         }
 
         public GameObject GetWeaponGameObject()
         {
             return weaponView.gameObject;
-        }
-
-        public bool isLocalPlayer()
-        {
-            return LocalPlayer;
         }
     }
 }

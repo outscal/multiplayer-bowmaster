@@ -33,6 +33,7 @@ namespace PlayerSystem
         {
             this.multiplayerService = multiplayerService;
             this.localPlayerID = localPlayerID;
+            Debug.Log("[PlayerService] LocalPlayerID:" + localPlayerID);
             //turnID = localPlayerID;
         }
 
@@ -125,6 +126,7 @@ namespace PlayerSystem
 
         public bool IsCurrentPlayerTurn()
         {
+            
             if (turnID == localPlayerID)
                 return true;
 

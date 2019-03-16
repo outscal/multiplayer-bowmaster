@@ -11,9 +11,10 @@ namespace WeaponSystem
         readonly SignalBus signalBus;
 
         public WeaponFireController(WeaponService weaponService, float force
-        , Vector2 direction, Vector2 spawnPos, SignalBus signalBus)
+        , Vector2 direction, Vector2 spawnPos, SignalBus signalBus, bool localPlayer)
         {
             SetWeaponType();
+            this.LocalPlayer = localPlayer;
             this.weaponService = weaponService;
             GameObject weapon = GameObject.Instantiate<GameObject>(GetWeaponView().gameObject);
             weapon.transform.position = spawnPos;

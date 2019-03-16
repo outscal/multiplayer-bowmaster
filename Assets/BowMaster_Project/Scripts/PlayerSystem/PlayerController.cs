@@ -127,5 +127,12 @@ namespace PlayerSystem
             return playerService;
         }
 
+        public bool IsLocalPlayer()
+        {
+            if (turnID == playerID)
+                return true;
+
+            return false; 
+        }
     }
 }

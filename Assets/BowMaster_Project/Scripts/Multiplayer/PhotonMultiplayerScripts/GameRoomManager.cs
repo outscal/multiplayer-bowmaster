@@ -27,8 +27,9 @@ namespace MultiplayerSystem
         public override void OnJoinedRoom()
         {
             Vector2 pos;
-            
-            Debug.Log("You Joined a room YourName is " + PhotonNetwork.LocalPlayer.NickName + " RoomNameIs " + PhotonNetwork.CurrentRoom.Name+" PlayersInRoom "+PhotonNetwork.CurrentRoom.PlayerCount);
+
+            Debug.Log(" You entered a room = " + PhotonNetwork.CurrentRoom.Name);
+            Debug.Log("You Joined a room YourName is " + PhotonNetwork.LocalPlayer.NickName +" PlayersInRoom "+PhotonNetwork.CurrentRoom.PlayerCount);
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
                 pos = new Vector2(15, 0);
@@ -69,8 +70,6 @@ namespace MultiplayerSystem
 
             inRoomplayers.Add(ID, healths);
         }
-        
-
         public void playerHit(string hitPlayerID,int charachterID,float damage)
         {
             inRoomplayers[hitPlayerID][charachterID] -= damage;
@@ -100,8 +99,7 @@ namespace MultiplayerSystem
         public override void OnPlayerEnteredRoom(Player other)
         {
             Debug.LogFormat("A Player Entered Room With Name: " + other.NickName);
-        }
-        
+        }      
         public void Restart()
         {
             PhotonNetwork.LeaveRoom();

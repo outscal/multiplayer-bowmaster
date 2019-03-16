@@ -8,5 +8,6 @@ namespace CameraSystem
         void ResetCameraOrthoSize();
         void OnGameStart();
         void SwitchCamera();
+        void FollowProjectile();
     }
 }

@@ -34,8 +34,8 @@ namespace CameraSystem
             }
             
             mainCamera.orthographicSize = 7f;
-            iTween.MoveTo(mainCamera.gameObject, turn2Pos, 0.2f);
-            await new WaitForSeconds(0.2f);
+            //iTween.MoveTo(mainCamera.gameObject, turn2Pos, 0.2f);
+            //await new WaitForSeconds(0.2f);
             iTween.MoveTo(mainCamera.gameObject, turn1Pos, 0.2f);
             await new WaitForSeconds(0.2f);
         }
@@ -64,11 +64,13 @@ namespace CameraSystem
 
         async public void FollowProjectile()
         {
-            //while(projectile is not null)
-            //{
-            //  maincamera.pos= porjectile.x,projectile.y,camera.z;
+            while (weaponToFollow!=null)
+            {
+                mainCamera.transform.localPosition= new Vector3(weaponToFollow.transform.localPosition.x,
+                                                                weaponToFollow.transform.localPosition.y,
+                                                                mainCamera.transform.localPosition.z);
                 await new WaitForEndOfFrame();
-            //}
+            }
         }
 
         public void SetWeaponToFollow(GameObject weapon)

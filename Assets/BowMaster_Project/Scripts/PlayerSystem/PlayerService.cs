@@ -28,9 +28,6 @@ namespace PlayerSystem
             this.weaponService = weaponService;
         }
 
-        public PlayerService()
-        {
-        }
 
         public void SetLocalPlayerID(string localPlayerID, IMultiplayerService multiplayerService)
         {

@@ -84,7 +84,7 @@ namespace MultiplayerSystem
         }
         public void SendInputDataToPlayer(InputData inputData)
         {
-            Debug.Log("[MultiplaerService] Sending WeaponInfo to Player");
+            Debug.Log("[MultiplaerService] Sending InputInfo to server");
             playerService.SetPlayerData(inputData, false);
             //cameraService.ResetCameraOrthoSize();
             cameraService.FollowProjectile();

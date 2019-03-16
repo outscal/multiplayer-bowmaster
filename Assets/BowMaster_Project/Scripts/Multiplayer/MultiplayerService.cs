@@ -38,12 +38,14 @@ namespace MultiplayerSystem
         }
         void ChangeTurn(SignalDestroyWeapon weapon)
         {
-            if (weapon.weaponInfo.isLocalPlayer)
+            if (playerService.IsCurrentPlayerTurn())
             {
-                Debug.Log("[change turn signal]");
+                Debug.Log("[change turn signal] True");
                 communicationManager.NotifyTurnChange();
             }
-            
+            else
+                Debug.Log("[change turn signal] false");
+
         }
         public void PlayerHit(string hitPlayerID, int characterID, float damage)
         {

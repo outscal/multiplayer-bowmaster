@@ -33,6 +33,7 @@ namespace PlayerSystem
         {
             this.multiplayerService = multiplayerService;
             this.localPlayerID = localPlayerID;
+            Debug.Log("[PlayerService] LocalPlayerID:" + localPlayerID);
             turnID = localPlayerID;
         }
 
@@ -77,6 +78,7 @@ namespace PlayerSystem
 
         public void SetTurnId(string nextTurnID)
         {
+            //Debug.Log("[PlayerService]")
             turnID = nextTurnID;
         }
 

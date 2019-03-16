@@ -47,7 +47,7 @@ namespace WeaponSystem
 
         public void DestroyWeapon(SignalDestroyWeapon weaponDestroy)
         {
-            weaponDestroy.weaponController = null;
+            weaponDestroy.weaponInfo.weaponController = null;
         }
     }
 }

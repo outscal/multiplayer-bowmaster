@@ -4,8 +4,14 @@ using UnityEngine;
 
 namespace WeaponSystem
 {
-    public class SignalDestroyWeapon
+    public struct WeaponInfo
     {
         public IWeaponController weaponController;
+        public bool isLocalPlayer;
+    }
+
+    public class SignalDestroyWeapon
+    {
+        public WeaponInfo weaponInfo;
     }
 }

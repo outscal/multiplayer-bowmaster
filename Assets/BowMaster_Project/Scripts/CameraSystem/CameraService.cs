@@ -6,6 +6,11 @@ using Zenject;
 
 namespace CameraSystem
 {
+    public enum CameraTurn
+    {
+        TURN1,
+        TURN2
+    }
     public class CameraService : ICameraService
     {
         private IPlayerService playerService;
@@ -14,6 +19,7 @@ namespace CameraSystem
         private Camera mainCamera;
         private Vector3 offset=new Vector3(0,0,-5f);
         private GameObject weaponToFollow;
+        private CameraTurn currentTurn;
 
         public CameraService(IPlayerService playerService, SignalBus signalBus)
         {
@@ -39,11 +45,12 @@ namespace CameraSystem
             //iTween.MoveTo(mainCamera.gameObject, turn2Pos, 0.2f);
             //await new WaitForSeconds(0.2f);
             iTween.MoveTo(mainCamera.gameObject, turn1Pos, 0.2f);
+            currentTurn = CameraTurn.TURN1;
             await new WaitForSeconds(0.2f);
         }
         async public void SwitchCamera()
         {
-            if (mainCamera.transform.position == turn1Pos)
+            if (currentTurn==CameraTurn.TURN1)
             {
                 
                 iTween.MoveTo(mainCamera.gameObject, turn2Pos, 0.2f);
@@ -56,6 +63,7 @@ namespace CameraSystem
                 iTween.MoveTo(mainCamera.gameObject, turn1Pos, 0.2f);
                 await new WaitForSeconds(0.2f);
                 mainCamera.orthographicSize = 7f;
+                currentTurn = CameraTurn.TURN2;
             }
         }
         public void ResetCameraOrthoSize()

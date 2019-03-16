@@ -4,6 +4,7 @@ using Zenject;
 using UnityEngine;
 using InputSystem;
 using PlayerSystem;
+using WeaponSystem;
 using GameSystem;
 using CameraSystem;
 using UISystem;
@@ -22,16 +23,22 @@ namespace MultiplayerSystem
         CommunicationManager communicationManager;
         IUIService uiService;
        
-        public MultiplayerService(IPlayerService playerService,IGameService gameService,IUIService uiService, ICameraService cameraService)
+        public MultiplayerService(IPlayerService playerService,IGameService gameService,IUIService uiService, ICameraService cameraService,SignalBus signalBus)
         {
             launcher = GameObject.FindObjectOfType<LauncherManager>();
             this.uiService = uiService;
             this.gameService = gameService;
             this.cameraService = cameraService;
             playerServerName = new PlayerName();
+            signalBus.Subscribe<SignalDestroyWeapon>(ChangeTurn);
             gameRoomManager = GameObject.FindObjectOfType<GameRoomManager>();
             this.playerService = playerService;
+            
             //this.inputService = inputService;
+        }
+        void ChangeTurn(SignalDestroyWeapon weapon)
+        {
+            communicationManager.NotifyTurnChange();
         }
         public void PlayerHit(string hitPlayerID, int characterID, float damage)
         {

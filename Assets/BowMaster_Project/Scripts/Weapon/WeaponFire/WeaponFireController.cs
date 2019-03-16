@@ -8,8 +8,10 @@ namespace WeaponSystem
 {
     public class WeaponFireController : WeaponController
     {
+        readonly SignalBus signalBus;
+
         public WeaponFireController(WeaponService weaponService, float force
-        , Vector2 direction, Vector2 spawnPos, ICameraService cameraService)
+        , Vector2 direction, Vector2 spawnPos, SignalBus signalBus)
         {
             SetWeaponType();
             this.weaponService = weaponService;
@@ -18,7 +20,7 @@ namespace WeaponSystem
             weaponView = weapon.GetComponent<WeaponFireView>();
             weaponView.SetController(this);
             weaponView.Shoot(force, direction);
-            cameraService.SetWeaponToFollow(weapon);
+            signalBus.TryFire(new SignalSpawnWeapon() { weaponObject = weapon });
         }
 
         protected override void SetWeaponType()

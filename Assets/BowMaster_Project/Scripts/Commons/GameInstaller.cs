@@ -18,7 +18,7 @@ namespace Commons
         {
             SignalBusInstaller.Install(Container);
             Container.DeclareSignal<SignalDestroyWeapon>();
-
+            Container.DeclareSignal<SignalSpawnWeapon>();
 
             Container.Bind<IPlayerService>().
                 To<PlayerService>().

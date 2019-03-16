@@ -8,7 +8,8 @@ namespace PlayerSystem
 {
     public class PlayerCharacterView : MonoBehaviour, ICharacterView, ITakeDamage
     {
-        [SerializeField] protected GameObject displayHolder, shootPos;
+        [SerializeField] protected GameObject displayHolder, shootPos, projectilePos;
+        [SerializeField] protected GameObject projectileDots;
         [SerializeField] protected TextMeshProUGUI powerText, angleText;
         [SerializeField] protected Slider healthBar;
 
@@ -29,9 +30,10 @@ namespace PlayerSystem
         {
             if (gettingInput == true)
             {
-                powerText.text = power + " \n Power";
-                angleText.text = angle + " \n Angle";
+                powerText.text = Mathf.FloorToInt(power) + " \n Power";
+                angleText.text = Mathf.FloorToInt(angle) + " \n Angle";
                 displayHolder.SetActive(true);
+
             }
         }
 

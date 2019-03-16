@@ -10,7 +10,6 @@ namespace WeaponSystem
         protected WeaponService weaponService;
         protected WeaponView weaponView;
         protected WeaponType weaponType;
-        readonly SignalBus signalBus;
 
         protected virtual void SetWeaponType()
         {
@@ -27,6 +26,8 @@ namespace WeaponSystem
 
             return null;
         }
+
+
 
         public void DestroyWeapon()
         {

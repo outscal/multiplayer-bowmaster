@@ -82,10 +82,10 @@ namespace CameraSystem
         {
             while (weaponToFollow!=null)
             {
+                await new WaitForEndOfFrame();
                 mainCamera.transform.localPosition= new Vector3(weaponToFollow.transform.localPosition.x,
                                                                 weaponToFollow.transform.localPosition.y,
                                                                 mainCamera.transform.localPosition.z);
-                await new WaitForEndOfFrame();
             }
         }
 

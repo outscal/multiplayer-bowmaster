@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CameraSystem;
 
 namespace WeaponSystem
 {
     public class WeaponWaterController : WeaponController
     {
         public WeaponWaterController(WeaponService weaponService, float force
-        , Vector2 direction
-            , Vector2 spawnPos)
+        , Vector2 direction, Vector2 spawnPos, ICameraService cameraService)
         {
             SetWeaponType();
             this.weaponService = weaponService;

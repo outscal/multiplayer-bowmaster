@@ -22,6 +22,7 @@ namespace PlayerSystem
         , IWeaponService weaponSystem, string localPlayerID)
         {
             playerHolder = new GameObject();
+            playerHolder.name = localPlayerID;
             this.playerService = playerService;
             this.weaponService = weaponSystem;
             this.playerID = playerSpawnData.playerID;

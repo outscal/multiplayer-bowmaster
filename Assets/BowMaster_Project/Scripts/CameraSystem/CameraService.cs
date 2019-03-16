@@ -12,6 +12,7 @@ namespace CameraSystem
         private Vector3 turn2Pos;
         private Camera mainCamera;
         private Vector3 offset=new Vector3(0,0,-5f);
+        private GameObject weaponToFollow;
 
         public CameraService(IPlayerService playerService)
         {
@@ -68,6 +69,11 @@ namespace CameraSystem
             //  maincamera.pos= porjectile.x,projectile.y,camera.z;
                 await new WaitForEndOfFrame();
             //}
+        }
+
+        public void SetWeaponToFollow(GameObject weapon)
+        {
+            weaponToFollow = weapon;
         }
     }
 }

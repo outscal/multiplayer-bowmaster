@@ -1,6 +1,7 @@
 ﻿using PlayerSystem;
 using System.Collections.Generic;
 using UnityEngine;
+using WeaponSystem;
 using Zenject;
 
 namespace CameraSystem
@@ -14,10 +15,11 @@ namespace CameraSystem
         private Vector3 offset=new Vector3(0,0,-5f);
         private GameObject weaponToFollow;
 
-        public CameraService(IPlayerService playerService)
+        public CameraService(IPlayerService playerService, SignalBus signalBus)
         {
             this.playerService = playerService;            
             mainCamera = Camera.main;
+            //signalBus.Subscribe()
         }
         
         async public void OnGameStart()
@@ -73,9 +75,10 @@ namespace CameraSystem
             }
         }
 
-        public void SetWeaponToFollow(GameObject weapon)
+        private void SetWeaponToFollow()//SignalSpawnWeapon spawnWeaponSignal)//GameObject weapon)
         {
-            weaponToFollow = weapon;
+            //weaponToFollow = weapon;
+            //weaponToFollow = spawnWeaponSignal.weapon;
         }
     }
 }

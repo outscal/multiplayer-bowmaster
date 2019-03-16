@@ -143,7 +143,6 @@ namespace PlayerSystem
             cameraPos.Add(new Vector3(10, 0, 0));
             cameraPos.Add(new Vector3(-10, 0, 0));
 
-
             return cameraPos;
         }
     }

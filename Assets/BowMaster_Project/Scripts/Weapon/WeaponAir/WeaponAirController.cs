@@ -18,6 +18,7 @@ namespace WeaponSystem
             weaponView = weapon.GetComponent<WeaponAirView>();
             weaponView.SetController(this);
             weaponView.Shoot(force, direction);
+            cameraService.SetWeaponToFollow(weapon);
         }
 
         protected override void SetWeaponType()

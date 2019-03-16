@@ -56,6 +56,7 @@ namespace CameraSystem
                 iTween.MoveTo(mainCamera.gameObject, turn2Pos, 0.2f);
                 await new WaitForSeconds(0.2f);
                 mainCamera.orthographicSize = 7f;
+                 currentTurn = CameraTurn.TURN1;
             }
             else
             {

@@ -33,7 +33,7 @@ namespace PlayerSystem
         {
             this.multiplayerService = multiplayerService;
             this.localPlayerID = localPlayerID;
-            turnID = localPlayerID;
+            //turnID = localPlayerID;
         }
 
         public void PlayerConnected(PlayerSpawnData playerSpawnData)
@@ -131,13 +131,13 @@ namespace PlayerSystem
             return false;
         }
 
-        public bool MyTurn(string playerID)
-        {
-            if (turnID == playerID)
-                return true;
+        //public bool MyTurn(string playerID)
+        //{
+        //    if (turnID == playerID)
+        //        return true;
 
-            return false;
-        }
+        //    return false;
+        //}
 
         public List<Vector3> GetCameraPositions()
         {

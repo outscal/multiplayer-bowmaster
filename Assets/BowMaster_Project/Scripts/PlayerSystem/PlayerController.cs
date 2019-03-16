@@ -123,7 +123,8 @@ namespace PlayerSystem
 
         public bool IsLocalPlayer()
         {
-            return playerService.MyTurn(playerID);
+            Debug.Log("[PlayerController] IsLocalPlayer:" + playerService.IsCurrentPlayerTurn());
+            return playerService.IsCurrentPlayerTurn();
         }
     }
 }

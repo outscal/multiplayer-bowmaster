@@ -34,7 +34,7 @@ namespace PlayerSystem
             this.multiplayerService = multiplayerService;
             this.localPlayerID = localPlayerID;
             Debug.Log("[PlayerService] LocalPlayerID:" + localPlayerID);
-            //turnID = localPlayerID;
+            turnID = localPlayerID;
         }
 
         public void PlayerConnected(PlayerSpawnData playerSpawnData)
@@ -78,6 +78,7 @@ namespace PlayerSystem
 
         public void SetTurnId(string nextTurnID)
         {
+            //Debug.Log("[PlayerService]")
             turnID = nextTurnID;
         }
 
@@ -126,7 +127,6 @@ namespace PlayerSystem
 
         public bool IsCurrentPlayerTurn()
         {
-            
             if (turnID == localPlayerID)
                 return true;
 
@@ -150,8 +150,8 @@ namespace PlayerSystem
             //    cameraPos.Add(controller.GetSpawnPos());
             //}
 
-            cameraPos.Add(new Vector3(10, 0, 0));
             cameraPos.Add(new Vector3(-10, 0, 0));
+            cameraPos.Add(new Vector3(10, 0, 0));
 
             return cameraPos;
         }

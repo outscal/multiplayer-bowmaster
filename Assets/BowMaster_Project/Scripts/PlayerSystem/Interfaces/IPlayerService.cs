@@ -17,7 +17,6 @@ namespace PlayerSystem
         void SetTurnId(string nextTurnID);
         void SendInputDataToServer(InputData inputData);
         void SetPlayerHealth(HitInfo hitInfo);
-        bool IsCurrentPlayerTurn();
-        List<Vector3> GetCameraPositions();
+        void ResetPlayerService();
     }
 }

@@ -26,9 +26,6 @@ namespace PlayerSystem
             this.playerList = playerList;
             playerControllerDictionary = new Dictionary<string, PlayerController>();
             this.weaponService = weaponService;
-            //SpawnPlayer("YoYo", new Vector2(-5, 0));
-            //localPlayerID = "YoYo";
-            //SetLocalPlayerID("YoYo");
         }
 
         public void SetLocalPlayerID(string localPlayerID, IMultiplayerService multiplayerService)
@@ -36,7 +33,6 @@ namespace PlayerSystem
             this.multiplayerService = multiplayerService;
             this.localPlayerID = localPlayerID;
             turnID = localPlayerID;
-            Debug.Log("this is the Localplayer Id that Player Service Recieved " + localPlayerID);
         }
 
         public void PlayerConnected(PlayerSpawnData playerSpawnData)
@@ -59,9 +55,6 @@ namespace PlayerSystem
             PlayerController playerController = new PlayerController(playerSpawnData, this
             , weaponService);
 
-            Debug.Log("this is the player Id that Player Service Recieved to add" 
-            + playerSpawnData.playerID);
-
             playerControllerDictionary.Add(playerSpawnData.playerID, playerController);
         }
 
@@ -83,23 +76,18 @@ namespace PlayerSystem
 
         public void SetTurnId(string nextTurnID)
         {
-            Debug.Log("next turn for "+nextTurnID);
             turnID = nextTurnID;
         }
 
         public void SetPlayerData(InputData inputData, bool gettingInput)
         {
-                if (!gettingInput)
-                {
-                    Debug.Log("this is the player Id that Player Service Recieved to move" + inputData.playerID);
-                }
-                if (playerControllerDictionary.Count > 0 && playerControllerDictionary.ContainsKey(inputData.playerID))
-                {
-                    playerControllerDictionary[inputData.playerID].SetShootInfo(inputData.powerValue
-                    , inputData.angleValue
-                    , inputData.characterID
-                    , gettingInput);
-                }
+            if (playerControllerDictionary.Count > 0 && playerControllerDictionary.ContainsKey(inputData.playerID))
+            {
+                playerControllerDictionary[inputData.playerID].SetShootInfo(inputData.powerValue
+                , inputData.angleValue
+                , inputData.characterID
+                , gettingInput);
+            }
         }
 
         public void SendInputDataToServer(InputData inputData)
@@ -113,13 +101,25 @@ namespace PlayerSystem
 
         public void SendPlayerDamageDataToServer(float damage, int characterID,string playerID)
         {
-            multiplayerService.PlayerHit(playerID, characterID, damage);
+            if (turnID == localPlayerID)
+                multiplayerService.PlayerHit(playerID, characterID, damage);
         }
 
         public void SetPlayerHealth(HitInfo hitInfo)
         {
-            Debug.Log("Setting Player Health");
-            playerControllerDictionary[hitInfo.playerId].SetHealth(hitInfo.characterId, hitInfo.characterHealth);
+            playerControllerDictionary[hitInfo.playerId].SetHealth(hitInfo);
+        }
+
+        public void ResetPlayerService()
+        {
+            if(playerControllerDictionary.Count > 0)
+            {
+                foreach (PlayerController controller in playerControllerDictionary.Values)
+                {
+                    controller.DestroyPlayer();
+                }
+                playerControllerDictionary.Clear();
+            }
         }
 
         public bool IsCurrentPlayerTurn()

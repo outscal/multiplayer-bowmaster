@@ -18,11 +18,13 @@ namespace MultiplayerSystem
         GameRoomManager gameRoomManager;
         PlayerName playerServerName;
         bool connected = false;
+        LauncherManager launcher;
         CommunicationManager communicationManager;
         IUIService uiService;
        
         public MultiplayerService(IPlayerService playerService,IGameService gameService,IUIService uiService, ICameraService cameraService)
         {
+            launcher = GameObject.FindObjectOfType<LauncherManager>();
             this.uiService = uiService;
             this.gameService = gameService;
             this.cameraService = cameraService;
@@ -65,6 +67,7 @@ namespace MultiplayerSystem
         }
         public void SendInputDataToPlayer(InputData inputData)
         {
+            Debug.Log("[MultiplaerService] Sending WeaponInfo to Player");
             playerService.SetPlayerData(inputData, false);
             cameraService.ResetCameraOrthoSize();
         }
@@ -91,10 +94,8 @@ namespace MultiplayerSystem
         public void ChangeToGameOverState(GameOverInfo gameOverInfo)
         {
             gameService.ChangeToGameOverState(gameOverInfo);
-        }
-        public void ChangeToGameDisconnectedState()
-        {
-            
+            playerService.ResetPlayerService();
+
         }
         public void ChangeToLobbyState()
         {
@@ -104,6 +105,14 @@ namespace MultiplayerSystem
         public List<string> GetPlayerNames(string localPlayerId)
         {
             return gameRoomManager.GetPlayerNames();
+        }
+        public void Disconnect()
+        {
+            launcher.LeaveRoom();
+        }
+        public void RestartGame()
+        {
+            gameRoomManager.Restart();
         }
 
         public void Initialize()

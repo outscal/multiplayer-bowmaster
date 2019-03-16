@@ -33,32 +33,19 @@ namespace UISystem
         }
 
         public void ShowConnectedUI(PopUpController popUpController)
-        {
-          
-           // DeactivateOtherPanels(connectingPanel);
-           
-            popupInstance = GameObject.Instantiate(popUpController.gameObject, connectingPanel.transform);
-           
-           // popupInstance.transform.SetParent(connectingPanel.transform);
+        {          
+           DeactivateOtherPanels(connectingPanel);           
+            popupInstance = GameObject.Instantiate(popUpController.gameObject, connectingPanel.transform);                     
             popupInstance.GetComponent<PopUpController>().SetText("Connecting To Server.  .  .  .");
         }
-
-      //  public void ShowDisconnectedUI()
-        //{
-            //DeactivateOtherPanels(gameOverPanel);
-            //gameOverPanel.SetActive(true);            
-            //gameOverPopUp.SetActive(true);
-            //popupInstance.transform.SetParent(gameOverPanel.transform);
-            //gameOverPopUp.GetComponent<PopUpController>().SetText("Disconnected");
-        //}
 
         public void ShowGameOverUI(string reason, PopUpController popUpController)
         {
             DeactivateOtherPanels(gameOverPanel);
+            Destroy(popupInstance);
             gameOverPanel.SetActive(true);
-            gameOverPopUp = GameObject.Instantiate(popUpController.gameObject);
+            gameOverPopUp = GameObject.Instantiate(popUpController.gameObject,gameOverPanel.transform);
             gameOverPopUp.SetActive(true);
-            popupInstance.transform.SetParent(gameOverPanel.transform);
             gameOverPopUp.GetComponent<PopUpController>().SetText(reason);
 
         }
@@ -79,10 +66,8 @@ namespace UISystem
 
         public void ShowPlayerUI(GameObject playerCard)
         {
+            DeactivateOtherPanels(gamePanel);   
             gamePanel.SetActive(true);
-            DeactivateOtherPanels(gamePanel);
-            GameObject playerCardInstance = GameObject.Instantiate(playerCard);
-            playerCardInstance.transform.SetParent(gamePanel.transform);
         }
       
         private void DeactivateOtherPanels(GameObject currentActivePanel)
@@ -99,6 +84,11 @@ namespace UISystem
         public Transform GetPlayerCardParent()
         {
             return gamePanel.transform;
+        }
+
+        public void DestroyObject(GameObject objectToDestory)
+        {
+            Destroy(objectToDestory);
         }
     }
 }

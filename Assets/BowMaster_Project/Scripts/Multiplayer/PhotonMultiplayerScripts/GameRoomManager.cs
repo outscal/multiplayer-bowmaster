@@ -6,21 +6,28 @@ using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using Zenject;
 using PlayerSystem;
+using GameSystem;
 
 namespace MultiplayerSystem
 {
     public class GameRoomManager : MonoBehaviourPunCallbacks
     {
         [Inject]CommunicationManager communicationManager;
-        Dictionary<string, List<float>> inRoomplayers;
+        Dictionary<string, Dictionary<int,float>> inRoomplayers;
+        
         string currentTurnId,previousTurnId;
         #region Private Methods
 
         #endregion
         #region Photon Callbacks
+        public void ResetPlayersInRoom()
+        {
+            inRoomplayers = new Dictionary<string, Dictionary<int, float>>();
+        }
         public override void OnJoinedRoom()
         {
             Vector2 pos;
+            
             Debug.Log("You Joined a room YourName is " + PhotonNetwork.LocalPlayer.NickName + " RoomNameIs " + PhotonNetwork.CurrentRoom.Name+" PlayersInRoom "+PhotonNetwork.CurrentRoom.PlayerCount);
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
@@ -42,23 +49,49 @@ namespace MultiplayerSystem
             {
                 communicationManager.NotifyGameStarted();
             }
+           
         }
         public void AddPlayerToRoom(string ID)
         {
             if (inRoomplayers == null)
             {
                 currentTurnId = ID;
-                inRoomplayers = new Dictionary<string, List<float>>();
+                inRoomplayers = new Dictionary<string, Dictionary<int, float>>();
             }
             else
             {
                 previousTurnId = ID;
             }
-            inRoomplayers.Add(ID, new List<float> { 100, 100, 100 });
+            Dictionary<int, float> healths = new Dictionary<int, float>();
+            healths.Add(0, 100f);
+            healths.Add(1, 100f);
+            healths.Add(2, 100f);
+
+            inRoomplayers.Add(ID, healths);
         }
+        
+
         public void playerHit(string hitPlayerID,int charachterID,float damage)
         {
             inRoomplayers[hitPlayerID][charachterID] -= damage;
+            HitInfo hitInfo = new HitInfo();
+            hitInfo.playerId = hitPlayerID;
+            hitInfo.characterHealth = inRoomplayers[hitPlayerID][charachterID];
+            hitInfo.characterId = charachterID;
+            hitInfo.destroy = false;
+            if (inRoomplayers[hitPlayerID][charachterID] < 0)
+            {
+                hitInfo.destroy = true;
+                inRoomplayers[hitPlayerID].Remove(charachterID);
+            }
+            communicationManager.NotifyPlayerHit(hitInfo);
+            if (inRoomplayers[hitPlayerID].Count < 1)
+            {
+                GameOverInfo overInfo = new GameOverInfo();
+                overInfo.lostPlayerID = hitPlayerID;
+                overInfo.reasonToLose = "All Characters Dead";
+                communicationManager.NotifyGameOver(overInfo);
+            }
         }
         public override void OnLeftRoom()
         {
@@ -68,13 +101,10 @@ namespace MultiplayerSystem
         {
             Debug.LogFormat("A Player Entered Room With Name: " + other.NickName);
         }
-        public override void OnPlayerLeftRoom(Player other)
+        
+        public void Restart()
         {
-            Debug.LogFormat("A Player Left Room: "+ other.NickName);
-            if (PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
-            }
+            PhotonNetwork.LeaveRoom();
         }
         public List<string> GetPlayerNames()
         {

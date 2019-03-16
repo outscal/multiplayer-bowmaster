@@ -22,11 +22,11 @@ namespace PlayerSystem
         , IWeaponService weaponSystem, string localPlayerID)
         {
             playerHolder = new GameObject();
-            playerHolder.name = playerID;
             this.playerService = playerService;
             this.weaponService = weaponSystem;
             this.playerID = playerSpawnData.playerID;
             this.localPlayerID = localPlayerID;
+            playerHolder.name = playerID;
             spawnCharacterPos = playerSpawnData.playerPosition;
             fixedPos = playerSpawnData.playerPosition;
             playerCharacterControllerList = new Dictionary<int,PlayerCharacterController>();

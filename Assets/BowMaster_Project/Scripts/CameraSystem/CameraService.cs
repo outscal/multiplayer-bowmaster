@@ -12,6 +12,7 @@ namespace CameraSystem
         private Vector3 turn2Pos;
         private Camera mainCamera;
         private Vector3 offset=new Vector3(0,0,-5f);
+        private GameObject weaponToFollow;
 
         public CameraService(IPlayerService playerService)
         {
@@ -25,7 +26,7 @@ namespace CameraSystem
             turn1Pos = cameraPos[0] + offset;
             turn2Pos = cameraPos[1] + offset;
 
-            if (!playerService.IsCurrentPlayerTurn())
+            if (!playerService.IsCurrentPlayerTurn()) 
             {
                 Vector3 tempPos = turn1Pos;
                 turn1Pos = turn2Pos;
@@ -59,6 +60,20 @@ namespace CameraSystem
         {
             mainCamera.orthographicSize = 15f;
 
+        }
+
+        async public void FollowProjectile()
+        {
+            //while(projectile is not null)
+            //{
+            //  maincamera.pos= porjectile.x,projectile.y,camera.z;
+                await new WaitForEndOfFrame();
+            //}
+        }
+
+        public void SetWeaponToFollow(GameObject weapon)
+        {
+            weaponToFollow = weapon;
         }
     }
 }

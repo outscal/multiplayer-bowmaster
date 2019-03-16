@@ -8,5 +8,7 @@ namespace CameraSystem
         void ResetCameraOrthoSize();
         void OnGameStart();
         void SwitchCamera();
+        void SetWeaponToFollow(GameObject weapon);
+        void FollowProjectile();
     }
 }

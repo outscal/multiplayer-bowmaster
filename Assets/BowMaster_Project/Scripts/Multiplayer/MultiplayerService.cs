@@ -69,7 +69,9 @@ namespace MultiplayerSystem
         {
             Debug.Log("[MultiplaerService] Sending WeaponInfo to Player");
             playerService.SetPlayerData(inputData, false);
-            cameraService.ResetCameraOrthoSize();
+            //cameraService.ResetCameraOrthoSize();
+            cameraService.FollowProjectile();
+
         }
         public void SetCurrentTurn(string nextTurnID)
         {

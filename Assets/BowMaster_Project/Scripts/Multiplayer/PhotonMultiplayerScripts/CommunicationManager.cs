@@ -48,6 +48,8 @@ namespace MultiplayerSystem
             gameOverInfo.reasonToLose = (string)data[1];
             multiplayerService.ChangeToGameOverState(gameOverInfo);
             roomManager.ResetPlayersInRoom();
+            PhotonNetwork.LeaveRoom();
+            //PhotonNetwork.JoinLobby();
         }
         void GameStartEventProscess()
         {

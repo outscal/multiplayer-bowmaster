@@ -4,6 +4,7 @@ using TMPro;
 using MultiplayerSystem;
 using System.Collections;
 using System;
+using Zenject;
 
 namespace UISystem
 {
@@ -13,10 +14,9 @@ namespace UISystem
         private Button replayButton;
         [SerializeField]
         private Button exitButton;
-
-
-        private IMultiplayerService multiplayerService;        
+        private IMultiplayerService multiplayerService;
         private string localID;
+        [Inject] IUIService uiService;
 
         private void Start()
         {
@@ -36,7 +36,8 @@ namespace UISystem
         private void ReplayGame()
         {
             Debug.Log("REPLAY GAME called:");
-            multiplayerService.RestartGame(); ;
+            multiplayerService.Connect();
+            uiService.ShowWaitingUI();
         }
         private void ExitGame()
         {

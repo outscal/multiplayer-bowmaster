@@ -40,8 +40,13 @@ namespace MultiplayerSystem
         }
         public void SetConnected()
         {
+            if (connected == false)
+            {
+                ChangeToLobbyState();
+            }
             connected = true;
-            ChangeToLobbyState();
+            
+            
         }
         public void Connect(string name)
         {
@@ -100,9 +105,9 @@ namespace MultiplayerSystem
         {
             return gameRoomManager.GetPlayerNames();
         }
-        public void Disconnect()
+        public void Connect()
         {
-            launcher.LeaveRoom();
+            launcher.Connect();
         }
         public void RestartGame()
         {

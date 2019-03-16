@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using CameraSystem;
 
 namespace WeaponSystem
 {
@@ -11,14 +10,11 @@ namespace WeaponSystem
         readonly SignalBus signalBus;
         private ScriptableObjWeapon scriptableObjWeapon;
         private WeaponController weaponController;
-        private ICameraService cameraService;
 
-        public WeaponService(SignalBus signalBus, ScriptableObjWeapon scriptableObjWeapon
-        , ICameraService cameraService)
+        public WeaponService(SignalBus signalBus, ScriptableObjWeapon scriptableObjWeapon)
         {
             this.signalBus = signalBus;
             this.scriptableObjWeapon = scriptableObjWeapon;
-            this.cameraService = cameraService;
             signalBus.Subscribe<SignalDestroyWeapon>(DestroyWeapon);
         }
 
@@ -28,14 +24,14 @@ namespace WeaponSystem
                                             (float)Mathf.Sin((angle) * Mathf.Deg2Rad));
 
             if (weaponType == WeaponType.Air)
-                weaponController = new WeaponAirController(this, power, direction, spawnPos,
-                cameraService);
+                weaponController = new WeaponAirController(this, power, direction, spawnPos
+                , signalBus);
             else if (weaponType == WeaponType.Water)
-                weaponController = new WeaponWaterController(this, power, direction, spawnPos,
-                cameraService);
+                weaponController = new WeaponWaterController(this, power, direction, spawnPos
+                , signalBus);
             else if (weaponType == WeaponType.Fire)
-                weaponController = new WeaponFireController(this, power, direction, spawnPos,
-                cameraService);
+                weaponController = new WeaponFireController(this, power, direction, spawnPos
+                , signalBus);
         }
 
         public ScriptableObjWeapon ReturnWeaponScriptable()

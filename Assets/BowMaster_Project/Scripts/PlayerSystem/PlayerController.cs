@@ -13,7 +13,6 @@ namespace PlayerSystem
         private PlayerService playerService;
         private IWeaponService weaponService;
         private Vector2 spawnCharacterPos;
-        private string turnID;
         private Vector2 fixedPos;
         private GameObject playerHolder;
         PlayerCharacterController currentCharacterController;
@@ -66,11 +65,6 @@ namespace PlayerSystem
                 }
                 spawnCharacterPos.x += 2;
             }
-        }
-
-        public void SetTurnId(string turnID)
-        {
-            this.turnID = turnID;
         }
 
         public string ReturnPlayerID()
@@ -129,7 +123,7 @@ namespace PlayerSystem
 
         public bool IsLocalPlayer()
         {
-            return playerService.IsCurrentPlayerTurn();
+            return playerService.MyTurn(playerID);
         }
     }
 }

@@ -131,6 +131,14 @@ namespace PlayerSystem
             return false;
         }
 
+        public bool MyTurn(string playerID)
+        {
+            if (turnID == playerID)
+                return true;
+
+            return false;
+        }
+
         public List<Vector3> GetCameraPositions()
         {
             List<Vector3> cameraPos = new List<Vector3>();

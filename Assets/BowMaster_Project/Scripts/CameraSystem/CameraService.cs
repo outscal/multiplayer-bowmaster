@@ -19,7 +19,7 @@ namespace CameraSystem
         {
             this.playerService = playerService;            
             mainCamera = Camera.main;
-            //signalBus.Subscribe()
+            signalBus.Subscribe<SignalSpawnWeapon>(SetWeaponToFollow);
         }
         
         async public void OnGameStart()
@@ -75,10 +75,9 @@ namespace CameraSystem
             }
         }
 
-        private void SetWeaponToFollow()//SignalSpawnWeapon spawnWeaponSignal)//GameObject weapon)
+        private void SetWeaponToFollow(SignalSpawnWeapon spawnWeaponSignal)
         {
-            //weaponToFollow = weapon;
-            //weaponToFollow = spawnWeaponSignal.weapon;
+            weaponToFollow = spawnWeaponSignal.weaponObject;
         }
     }
 }

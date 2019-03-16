@@ -55,7 +55,7 @@ namespace PlayerSystem
         void SpawnPlayer(PlayerSpawnData playerSpawnData)
         {
             PlayerController playerController = new PlayerController(playerSpawnData, this
-            , weaponService);
+            , weaponService, localPlayerID);
 
             playerControllerDictionary.Add(playerSpawnData.playerID, playerController);
         }
@@ -78,7 +78,6 @@ namespace PlayerSystem
 
         public void SetTurnId(string nextTurnID)
         {
-            //Debug.Log("[PlayerService]")
             turnID = nextTurnID;
         }
 
@@ -133,25 +132,17 @@ namespace PlayerSystem
             return false;
         }
 
-        //public bool MyTurn(string playerID)
-        //{
-        //    if (turnID == playerID)
-        //        return true;
-
-        //    return false;
-        //}
-
         public List<Vector3> GetCameraPositions()
         {
             List<Vector3> cameraPos = new List<Vector3>();
 
-            //foreach (PlayerController controller in playerControllerDictionary.Values)
-            //{
-            //    cameraPos.Add(controller.GetSpawnPos());
-            //}
+            foreach (PlayerController controller in playerControllerDictionary.Values)
+            {
+                cameraPos.Add(controller.GetSpawnPos());
+            }
 
-            cameraPos.Add(new Vector3(-10, 0, 0));
-            cameraPos.Add(new Vector3(10, 0, 0));
+            //cameraPos.Add(new Vector3(-10, 0, 0));
+            //cameraPos.Add(new Vector3(10, 0, 0));
 
             return cameraPos;
         }

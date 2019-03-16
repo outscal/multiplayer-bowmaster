@@ -26,6 +26,11 @@ namespace PlayerSystem
             return playerCharacterController.GetCharacterID();
         }
 
+        public string GetLocalPlayerID()
+        {
+            return playerCharacterController.GetLocalPlayerID(); 
+        }
+
         public virtual void SetShootInfo(float power, float angle, bool gettingInput)
         {
             if (gettingInput == true)

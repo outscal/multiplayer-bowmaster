@@ -9,8 +9,9 @@ namespace PlayerSystem
     {
         public CharacterFireController(int characterID, PlayerController playerController,
         ScriptableObjCharacter scriptableObjPlayer, IWeaponService weaponService,
-            Vector2 spawnPos, GameObject parentObj)
+            Vector2 spawnPos, GameObject parentObj, string localPlayerID)
         {
+            this.localPlayerID = localPlayerID;
             this.scriptableObjPlayer = scriptableObjPlayer;
             this.characterID = characterID;
             this.weaponService = weaponService;

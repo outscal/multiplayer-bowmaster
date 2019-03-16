@@ -36,13 +36,14 @@ namespace CameraSystem
             {
                 turn1Pos = cameraPos[0] + offset;
                 turn2Pos = cameraPos[1] + offset;
-
-                if (!playerService.IsCurrentPlayerTurn())
-                {
-                    Vector3 tempPos = turn1Pos;
-                    turn1Pos = turn2Pos;
-                    turn2Pos = turn1Pos;
-                }
+                Debug.Log("[CameraService] Camera Pos1:" + cameraPos[0] +
+                " Camera Pos1:" + cameraPos[1]);
+                //if (!playerService.IsCurrentPlayerTurn())
+                //{
+                //    Vector3 tempPos = turn1Pos;
+                //    turn1Pos = turn2Pos;
+                //    turn2Pos = turn1Pos;
+                //}
 
                 mainCamera.orthographicSize = 7f;
                 //iTween.MoveTo(mainCamera.gameObject, turn2Pos, 0.2f);
@@ -54,21 +55,21 @@ namespace CameraSystem
         }
         async public void SwitchCamera()
         {
-            if (currentTurn==CameraTurn.TURN1)
+            if (currentTurn==CameraTurn.TURN2)
             {
                 
                 iTween.MoveTo(mainCamera.gameObject, turn2Pos, 0.2f);
                 await new WaitForSeconds(0.2f);
                 mainCamera.orthographicSize = 7f;
-                 currentTurn = CameraTurn.TURN2;
+                 currentTurn = CameraTurn.TURN1;
             }
-            else
+            else if(currentTurn == CameraTurn.TURN1)
             {
-                
+
                 iTween.MoveTo(mainCamera.gameObject, turn1Pos, 0.2f);
                 await new WaitForSeconds(0.2f);
                 mainCamera.orthographicSize = 7f;
-                currentTurn = CameraTurn.TURN1;
+                currentTurn = CameraTurn.TURN2;
             }
         }
         public void ResetCameraOrthoSize()

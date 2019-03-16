@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CameraSystem;
 
 namespace WeaponSystem
 {
     public class WeaponAirController : WeaponController
     {
         public WeaponAirController(WeaponService weaponService, float force
-        , Vector2 direction
-            , Vector2 spawnPos)
+        , Vector2 direction, Vector2 spawnPos, ICameraService cameraService)
         {
             SetWeaponType();
             this.weaponService = weaponService;
@@ -18,6 +18,7 @@ namespace WeaponSystem
             weaponView = weapon.GetComponent<WeaponAirView>();
             weaponView.SetController(this);
             weaponView.Shoot(force, direction);
+            cameraService.SetWeaponToFollow(weapon);
         }
 
         protected override void SetWeaponType()

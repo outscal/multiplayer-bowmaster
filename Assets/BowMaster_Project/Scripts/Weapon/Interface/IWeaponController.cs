@@ -7,6 +7,5 @@ namespace WeaponSystem
     public interface IWeaponController
     {
         GameObject GetWeaponGameObject();
-        bool isLocalPlayer();
     }
 }

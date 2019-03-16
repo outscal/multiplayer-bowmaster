@@ -7,6 +7,7 @@ namespace PlayerSystem
     public interface ICharacterView
     {
         int GetCharacterID();
+        string GetLocalPlayerID();
         Vector2 GetForwardDirection();
     }
 }

@@ -45,6 +45,7 @@ namespace InputSystem
                 startMousePosition = Input.mousePosition;
                 endMousePosition = Input.mousePosition;
                 characterID = inputService.GetSelectedCharacterID();
+                localPlayerID = inputService.GetLocalPlayerID();
                 forwardPosition = inputService.GetCharacterForwardDirection();
                 InputData inputData = CreateInputData(startMousePosition, endMousePosition);
                 inputService.SendPlayerData(inputData, true);
@@ -75,7 +76,7 @@ namespace InputSystem
             inputData.angleValue = angle;
             inputData.powerValue = power;
             inputData.characterID = characterID;
-            inputData.playerID = inputService.GetLocalPlayerID();            
+            inputData.playerID = localPlayerID;          
             return inputData;
         }
 

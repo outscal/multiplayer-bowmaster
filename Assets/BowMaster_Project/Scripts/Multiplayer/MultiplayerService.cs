@@ -38,7 +38,7 @@ namespace MultiplayerSystem
         }
         void ChangeTurn(SignalDestroyWeapon weapon)
         {
-            if (weapon.weaponController.isLocalPlayer())
+            if (weapon.weaponInfo.isLocalPlayer)
             {
                 Debug.Log("[change turn signal]");
                 communicationManager.NotifyTurnChange();

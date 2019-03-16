@@ -30,7 +30,10 @@ namespace WeaponSystem
 
         public void DestroyWeapon()
         {
-            weaponService.GetSignalBus().TryFire(new SignalDestroyWeapon() { weaponController = this });
+            WeaponInfo weaponInfo;
+            weaponInfo.isLocalPlayer = LocalPlayer;
+            weaponInfo.weaponController = this;
+            weaponService.GetSignalBus().TryFire(new SignalDestroyWeapon() { weaponInfo = weaponInfo });
         }
 
         public GameObject GetWeaponGameObject()

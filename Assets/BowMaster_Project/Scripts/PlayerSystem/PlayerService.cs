@@ -135,10 +135,13 @@ namespace PlayerSystem
         {
             List<Vector3> cameraPos = new List<Vector3>();
 
-            foreach (PlayerController controller in playerControllerDictionary.Values)
-            {
-                cameraPos.Add(controller.GetSpawnPos());
-            }
+            //foreach (PlayerController controller in playerControllerDictionary.Values)
+            //{
+            //    cameraPos.Add(controller.GetSpawnPos());
+            //}
+
+            cameraPos.Add(new Vector3(10, 0, 0));
+            cameraPos.Add(new Vector3(-10, 0, 0));
 
             return cameraPos;
         }

@@ -110,7 +110,7 @@ namespace MultiplayerSystem
         {
             Debug.Log(playerSpawnData.char1Health);
             playerService.PlayerConnected(playerSpawnData);
-            cameraService.OnGameStart();
+            //cameraService.OnGameStart();
         }
         public void ChangeToGameOverState(GameOverInfo gameOverInfo)
         {

@@ -66,7 +66,12 @@ namespace PlayerSystem
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char3Health);
                     playerCharacterControllerList.Add(i,playerCharacterController);
                 }
-                spawnCharacterPos.x += 2;
+                if (playerHolder.transform.position.x > 0)
+                    spawnCharacterPos.x += 2;
+                else
+                    spawnCharacterPos.x -= 2;
+
+                spawnCharacterPos.y += 1.95f;
             }
         }
 

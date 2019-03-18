@@ -19,7 +19,7 @@ Principles Used:
 
 Tools Used:
 * Zenject (Dependency Injection) https://github.com/modesttree/Zenject
-* Async-await (so much better than Coroutines :P)
+* Async-await (so much better than using Unity Coroutines)
 * Photon Multiplayer (Good only for prototyping)
 
 Check out our project it has amazing above stuff and more, you may find something useful for your project.

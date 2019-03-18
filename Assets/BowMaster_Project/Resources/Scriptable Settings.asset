@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b3cbc6715f64381ab41867d13d194d, type: 3}
+  m_Name: Scriptable Settings
+  m_EditorClassIdentifier: 
+  scriptableObjPlayer: {fileID: 11400000, guid: 7f3fcb4fdbd3b43bead1feef5f35c6e9,
+    type: 2}
+  scriptableObjWeapon: {fileID: 11400000, guid: 162da45549fc04915aae521b7d0cc518,
+    type: 2}
+  uIScriptableObj: {fileID: 11400000, guid: 6e129fb17da48414ab190cd6fd9f0042, type: 2}
+  cameraScriptableObj: {fileID: 11400000, guid: 3f493520a1012244395fbfcb4c12c56f,
+    type: 2}

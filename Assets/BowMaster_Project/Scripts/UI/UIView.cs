@@ -20,6 +20,8 @@ namespace UISystem
         private GameObject popupInstance;
         private GameObject gameOverPopUp;
 
+        private PopUpController popUPController;
+
         private List<GameObject> panelList = new List<GameObject>();
 
         private void Start()
@@ -34,7 +36,8 @@ namespace UISystem
 
         public void ShowConnectedUI(PopUpController popUpController)
         {          
-           DeactivateOtherPanels(connectingPanel);           
+           DeactivateOtherPanels(connectingPanel);
+            popUPController=popUpController;
             popupInstance = GameObject.Instantiate(popUpController.gameObject, connectingPanel.transform);                     
             popupInstance.GetComponent<PopUpController>().SetText("Connecting To Server.  .  .  .");
         }
@@ -44,7 +47,8 @@ namespace UISystem
             DeactivateOtherPanels(gameOverPanel);
             Destroy(popupInstance);
             gameOverPanel.SetActive(true);
-            gameOverPopUp = GameObject.Instantiate(popUpController.gameObject,gameOverPanel.transform);
+           if(gameOverPopUp==null)
+                gameOverPopUp = GameObject.Instantiate(popUpController.gameObject,gameOverPanel.transform);
             gameOverPopUp.SetActive(true);
             gameOverPopUp.GetComponent<PopUpController>().SetText(reason);
 
@@ -54,6 +58,10 @@ namespace UISystem
         {
             DeactivateOtherPanels(connectingPanel);
             connectingPanel.SetActive(true);
+            if(popupInstance==null)
+            {
+                popupInstance= GameObject.Instantiate(popUPController.gameObject, connectingPanel.transform);
+            }
             popupInstance.GetComponent<PopUpController>().SetText("Waiting for players to join . .  .  .  .");
 
         }

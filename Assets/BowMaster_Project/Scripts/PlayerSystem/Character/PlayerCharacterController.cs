@@ -15,10 +15,16 @@ namespace PlayerSystem
         protected PlayerCharacterType playerCharacterType;
         protected WeaponType weaponType;
         protected PlayerService playerService;
+        protected string localPlayerID;
 
         public int GetCharacterID()
         {
             return characterID;
+        }
+
+        public string GetLocalPlayerID()
+        {
+            return localPlayerID; 
         }
 
         public virtual void SetShootInfo(float power, float angle, bool gettingInput)

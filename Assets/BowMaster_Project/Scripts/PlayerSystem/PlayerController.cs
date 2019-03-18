@@ -13,18 +13,20 @@ namespace PlayerSystem
         private PlayerService playerService;
         private IWeaponService weaponService;
         private Vector2 spawnCharacterPos;
-        private string turnID;
         private Vector2 fixedPos;
         private GameObject playerHolder;
         PlayerCharacterController currentCharacterController;
+        private string localPlayerID;
 
         public PlayerController(PlayerSpawnData playerSpawnData, PlayerService playerService
-        , IWeaponService weaponSystem)
+        , IWeaponService weaponSystem, string localPlayerID)
         {
             playerHolder = new GameObject();
             this.playerService = playerService;
             this.weaponService = weaponSystem;
             this.playerID = playerSpawnData.playerID;
+            this.localPlayerID = localPlayerID;
+            playerHolder.name = playerID;
             spawnCharacterPos = playerSpawnData.playerPosition;
             fixedPos = playerSpawnData.playerPosition;
             playerCharacterControllerList = new Dictionary<int,PlayerCharacterController>();
@@ -41,7 +43,7 @@ namespace PlayerSystem
                 {
                     PlayerCharacterController playerCharacterController = new CharacterAirController(
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Air)
-                            , weaponService, spawnCharacterPos, playerHolder
+                            , weaponService, spawnCharacterPos, playerHolder, localPlayerID
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char1Health);
                     playerCharacterControllerList.Add(i,playerCharacterController);
@@ -50,7 +52,7 @@ namespace PlayerSystem
                 {
                     PlayerCharacterController playerCharacterController = new CharacterWaterController(
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Water)
-                            , weaponService, spawnCharacterPos, playerHolder
+                            , weaponService, spawnCharacterPos, playerHolder, localPlayerID
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char2Health);
                     playerCharacterControllerList.Add(i,playerCharacterController);
@@ -59,18 +61,18 @@ namespace PlayerSystem
                 {
                     PlayerCharacterController playerCharacterController = new CharacterFireController(
                             i, this, playerService.ReturnPlayerScriptableObj(PlayerCharacterType.Fire)
-                            , weaponService, spawnCharacterPos, playerHolder
+                            , weaponService, spawnCharacterPos, playerHolder, localPlayerID
                         );
                     playerCharacterController.SetHealthBarFirst(playerSpawnData.char3Health);
                     playerCharacterControllerList.Add(i,playerCharacterController);
                 }
-                spawnCharacterPos.x += 2;
-            }
-        }
+                if (playerHolder.transform.position.x > 0)
+                    spawnCharacterPos.x += 2;
+                else
+                    spawnCharacterPos.x -= 2;
 
-        public void SetTurnId(string turnID)
-        {
-            this.turnID = turnID;
+                spawnCharacterPos.y += 1.95f;
+            }
         }
 
         public string ReturnPlayerID()
@@ -127,5 +129,10 @@ namespace PlayerSystem
             return playerService;
         }
 
+        public bool IsLocalPlayer()
+        {
+            Debug.Log("[PlayerController] IsLocalPlayer:" + playerService.IsCurrentPlayerTurn());
+            return playerService.IsCurrentPlayerTurn();
+        }
     }
 }

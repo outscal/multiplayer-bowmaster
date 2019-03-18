@@ -28,10 +28,12 @@ namespace PlayerSystem
             this.weaponService = weaponService;
         }
 
+
         public void SetLocalPlayerID(string localPlayerID, IMultiplayerService multiplayerService)
         {
             this.multiplayerService = multiplayerService;
             this.localPlayerID = localPlayerID;
+            Debug.Log("[PlayerService] LocalPlayerID:" + localPlayerID);
             turnID = localPlayerID;
         }
 
@@ -53,7 +55,7 @@ namespace PlayerSystem
         void SpawnPlayer(PlayerSpawnData playerSpawnData)
         {
             PlayerController playerController = new PlayerController(playerSpawnData, this
-            , weaponService);
+            , weaponService, localPlayerID);
 
             playerControllerDictionary.Add(playerSpawnData.playerID, playerController);
         }
@@ -120,6 +122,29 @@ namespace PlayerSystem
                 }
                 playerControllerDictionary.Clear();
             }
+        }
+
+        public bool IsCurrentPlayerTurn()
+        {
+            if (turnID == localPlayerID)
+                return true;
+
+            return false;
+        }
+
+        public List<Vector3> GetCameraPositions()
+        {
+            List<Vector3> cameraPos = new List<Vector3>();
+
+            foreach (PlayerController controller in playerControllerDictionary.Values)
+            {
+                cameraPos.Add(controller.GetSpawnPos());
+            }
+
+            //cameraPos.Add(new Vector3(-10, 0, 0));
+            //cameraPos.Add(new Vector3(10, 0, 0));
+
+            return cameraPos;
         }
     }
 }

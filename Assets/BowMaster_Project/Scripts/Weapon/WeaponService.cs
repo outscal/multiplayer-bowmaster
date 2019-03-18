@@ -18,17 +18,21 @@ namespace WeaponSystem
             signalBus.Subscribe<SignalDestroyWeapon>(DestroyWeapon);
         }
 
-        public void SpawnWeapon(float power, float angle, Vector2 spawnPos, WeaponType weaponType)
+        public void SpawnWeapon(float power, float angle, Vector2 spawnPos, WeaponType weaponType
+        , bool localPlayer)
         {
             Vector2 direction = new Vector2((float)Mathf.Cos((angle) * Mathf.Deg2Rad),
                                             (float)Mathf.Sin((angle) * Mathf.Deg2Rad));
 
             if (weaponType == WeaponType.Air)
-                weaponController = new WeaponAirController(this, power, direction, spawnPos);
+                weaponController = new WeaponAirController(this, power, direction, spawnPos
+                , signalBus, localPlayer);
             else if (weaponType == WeaponType.Water)
-                weaponController = new WeaponWaterController(this, power, direction, spawnPos);
+                weaponController = new WeaponWaterController(this, power, direction, spawnPos
+                , signalBus, localPlayer);
             else if (weaponType == WeaponType.Fire)
-                weaponController = new WeaponFireController(this, power, direction, spawnPos);
+                weaponController = new WeaponFireController(this, power, direction, spawnPos
+                , signalBus, localPlayer);
         }
 
         public ScriptableObjWeapon ReturnWeaponScriptable()
@@ -43,7 +47,7 @@ namespace WeaponSystem
 
         public void DestroyWeapon(SignalDestroyWeapon weaponDestroy)
         {
-            weaponDestroy.weaponController = null;
+            weaponDestroy.weaponInfo.weaponController = null;
         }
     }
 }

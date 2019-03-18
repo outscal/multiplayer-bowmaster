@@ -5,12 +5,12 @@ using Zenject;
 
 namespace WeaponSystem
 {
-    public class WeaponController
+    public class WeaponController : IWeaponController
     {
         protected WeaponService weaponService;
         protected WeaponView weaponView;
         protected WeaponType weaponType;
-        readonly SignalBus signalBus;
+        protected bool LocalPlayer;
 
         protected virtual void SetWeaponType()
         {
@@ -28,9 +28,19 @@ namespace WeaponSystem
             return null;
         }
 
-        public void DestroyWeapon()
+        public virtual void DestroyWeapon()
         {
-            weaponService.GetSignalBus().TryFire(new SignalDestroyWeapon() { weaponController = this });
+            WeaponInfo weaponInfo;
+            weaponInfo.isLocalPlayer = LocalPlayer;
+            weaponInfo.weaponController = this;
+            weaponService.GetSignalBus().TryFire(new SignalDestroyWeapon() { weaponInfo = weaponInfo });
+            //Debug.Log("[WeaponController] LocalPlayer:" + LocalPlayer
+            //+ " WeaponName:" + weaponView.gameObject.name);
+        }
+
+        public GameObject GetWeaponGameObject()
+        {
+            return weaponView.gameObject;
         }
     }
 }

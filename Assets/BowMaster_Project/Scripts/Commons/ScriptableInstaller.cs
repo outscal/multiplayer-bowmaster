@@ -5,6 +5,7 @@ using Zenject;
 using PlayerSystem;
 using WeaponSystem;
 using UISystem;
+using CameraSystem;
 
 namespace Common
 {
@@ -14,12 +15,14 @@ namespace Common
         public ScriptableObjCharacterList scriptableObjPlayer;
         public ScriptableObjWeapon scriptableObjWeapon;
         public UIScriptableObj uIScriptableObj;
+        //public CameraScriptableObj cameraScriptableObj;
 
         public override void InstallBindings()
         {
             Container.BindInstances(scriptableObjPlayer);
             Container.BindInstances(scriptableObjWeapon);
             Container.BindInstances(uIScriptableObj);
+           // Container.BindInstances(cameraScriptableObj);
         }
     }
 }

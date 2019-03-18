@@ -4,7 +4,9 @@ using Zenject;
 using UnityEngine;
 using InputSystem;
 using PlayerSystem;
+using WeaponSystem;
 using GameSystem;
+using CameraSystem;
 using UISystem;
 
 namespace MultiplayerSystem
@@ -13,6 +15,7 @@ namespace MultiplayerSystem
     {
         IPlayerService playerService;
         IGameService gameService;
+        ICameraService cameraService;
         GameRoomManager gameRoomManager;
         PlayerName playerServerName;
         bool connected = false;
@@ -20,15 +23,29 @@ namespace MultiplayerSystem
         CommunicationManager communicationManager;
         IUIService uiService;
        
-        public MultiplayerService(IPlayerService playerService,IGameService gameService,IUIService uiService)
+        public MultiplayerService(IPlayerService playerService,IGameService gameService,IUIService uiService, ICameraService cameraService,SignalBus signalBus)
         {
             launcher = GameObject.FindObjectOfType<LauncherManager>();
             this.uiService = uiService;
             this.gameService = gameService;
+            this.cameraService = cameraService;
             playerServerName = new PlayerName();
+            signalBus.Subscribe<SignalDestroyWeapon>(ChangeTurn);
             gameRoomManager = GameObject.FindObjectOfType<GameRoomManager>();
             this.playerService = playerService;
+            
             //this.inputService = inputService;
+        }
+        void ChangeTurn(SignalDestroyWeapon weapon)
+        {
+            if (playerService.IsCurrentPlayerTurn())
+            {
+                Debug.Log("[change turn signal] True");
+                communicationManager.NotifyTurnChange();
+            }
+            else
+                Debug.Log("[change turn signal] false");
+
         }
         public void PlayerHit(string hitPlayerID, int characterID, float damage)
         {
@@ -69,12 +86,16 @@ namespace MultiplayerSystem
         }
         public void SendInputDataToPlayer(InputData inputData)
         {
-            Debug.Log("[MultiplaerService] Sending WeaponInfo to Player");
+            Debug.Log("[MultiplaerService] Sending InputInfo to server");
             playerService.SetPlayerData(inputData, false);
+            //cameraService.ResetCameraOrthoSize();
+            cameraService.FollowProjectile();
+
         }
         public void SetCurrentTurn(string nextTurnID)
         {
             playerService.SetTurnId(nextTurnID);
+            cameraService.SwitchCamera();
         }
         public void SetLocalPlayerID(string localID)
         {
@@ -89,6 +110,7 @@ namespace MultiplayerSystem
         {
             Debug.Log(playerSpawnData.char1Health);
             playerService.PlayerConnected(playerSpawnData);
+            //cameraService.OnGameStart();
         }
         public void ChangeToGameOverState(GameOverInfo gameOverInfo)
         {

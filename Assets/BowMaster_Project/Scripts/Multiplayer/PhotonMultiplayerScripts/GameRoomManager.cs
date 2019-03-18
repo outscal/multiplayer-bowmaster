@@ -57,6 +57,7 @@ namespace MultiplayerSystem
             if (inRoomplayers == null)
             {
                 currentTurnId = ID;
+                communicationManager.NotifyTurnChange();
                 inRoomplayers = new Dictionary<string, Dictionary<int, float>>();
             }
             else

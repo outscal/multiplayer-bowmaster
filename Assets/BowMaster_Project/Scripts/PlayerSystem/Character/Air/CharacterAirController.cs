@@ -9,8 +9,9 @@ namespace PlayerSystem
     {
         public CharacterAirController(int characterID, PlayerController playerController,
         ScriptableObjCharacter scriptableObjPlayer, IWeaponService weaponService,
-            Vector2 spawnPos, GameObject parentObj)
+            Vector2 spawnPos, GameObject parentObj, string localPlayerID)
         {
+            this.localPlayerID = localPlayerID;
             this.scriptableObjPlayer = scriptableObjPlayer;
             this.characterID = characterID;
             this.weaponService = weaponService;
@@ -33,7 +34,8 @@ namespace PlayerSystem
             if (gettingInput == false)
                 weaponService.SpawnWeapon(power, angle
                 , playerCharacterView.ShootPos
-                    , scriptableObjPlayer.weaponType);
+                    , scriptableObjPlayer.weaponType
+                , playerController.IsLocalPlayer());
         }
 
     }

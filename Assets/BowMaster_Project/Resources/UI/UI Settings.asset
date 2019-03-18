@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abec376b5b0506f4abf326b6586dc438, type: 3}
+  m_Name: UI Settings
+  m_EditorClassIdentifier: 
+  mainUICanvas: {fileID: 6077401986772035615, guid: 6fde6eeab27b4a949bdf4c6430e92042,
+    type: 3}
+  playerCard: {fileID: 8204626909972474927, guid: 2ec8d30dbd1ec4bb29859027e4d72a7e,
+    type: 3}
+  popUpPrefab: {fileID: 7523878772810727828, guid: cb015ed90b8335d4cb795aee9a66e328,
+    type: 3}
